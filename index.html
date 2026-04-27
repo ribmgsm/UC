@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UCoin (UC)</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-
-<style>
+<title>UCoin (UC)</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"><style>
 body{
   margin:0;
   font-family:Poppins;
@@ -56,6 +51,8 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   border-radius:8px;
   text-decoration:none;
   font-weight:bold;
+  display:inline-block;
+  margin:5px;
 }
 
 /* SECTION */
@@ -75,7 +72,7 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   margin:10px;
   padding:25px;
   border-radius:12px;
-  width:250px;
+  width:260px;
   transition:0.3s;
 }
 
@@ -84,7 +81,32 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   box-shadow:0 0 20px gold;
 }
 
-/* PRICE FAKE TICKER */
+/* COPY BUTTON */
+.copy-btn{
+  margin-top:10px;
+  padding:6px 12px;
+  background:gold;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:bold;
+}
+
+/* TOAST */
+#toast{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:gold;
+  color:black;
+  padding:10px 20px;
+  border-radius:6px;
+  display:none;
+}
+
+/* TICKER */
 .ticker{
   background:black;
   padding:10px;
@@ -93,13 +115,11 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   overflow:hidden;
   white-space:nowrap;
 }
-
 .ticker span{
   display:inline-block;
   padding-left:100%;
   animation:scroll 10s linear infinite;
 }
-
 @keyframes scroll{
   0%{transform:translateX(0)}
   100%{transform:translateX(-100%)}
@@ -110,60 +130,93 @@ footer{
   padding:20px;
   background:#02040a;
 }
-</style>
-</head>
-
-<body>
-
-<div class="ticker">
-  <span>UCoin (UC) • Solana • Launching Soon • Stay Tuned 🚀</span>
-</div>
-
-<nav>
+</style></head><body><div class="ticker">
+  <span>🔥 UCoin Live • Solana • Early Phase • Don’t Miss 🚀</span>
+</div><nav>
   <div><b>UCoin</b></div>
   <div>
     <a href="#about">About</a>
     <a href="#token">Token</a>
     <a href="#roadmap">Roadmap</a>
+    <a href="https://x.com/UCoin_live" target="_blank">X</a>
   </div>
-</nav>
-
-<div class="hero">
-  <!-- 🔥 IMAGE LINK DAAL -->
+</nav><div class="hero">
   <img class="logo" src="https://files.catbox.moe/z1qsmn.png">
-
   <h1>UCoin (UC)</h1>
   <p>Premium Digital Asset on Solana</p>
   <br>
-  <a class="btn" href="https://t.me/ucoin_live">Join Telegram</a>
-</div>
-
-<div id="about" class="section">
+  <a class="btn" href="https://t.me/ucoin_live">Telegram</a>
+  <a class="btn" href="https://x.com/UCoin_live" target="_blank">X</a>
+</div><!-- LIVE PRICE --><div class="section">
+  <h2>Live Price</h2>
+  <h1 id="price">Loading...</h1>
+</div><!-- CHART --><div class="section">
+  <h2>Live Chart</h2>
+  <iframe 
+    src="https://dexscreener.com/solana/6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr"
+    width="100%" 
+    height="500">
+  </iframe>
+</div><!-- ABOUT --><div id="about" class="section">
   <h2>About</h2>
-  <p>UCoin is a next-generation digital asset built for speed, scalability and modern financial ecosystems.</p>
-</div>
-
-<div id="token" class="section">
+  <p>UCoin is a next-generation digital asset built for speed, scalability and modern finance.</p>
+</div><!-- TOKEN --><div id="token" class="section">
   <h2>Token Info</h2>
-  <div class="cards">
-    <div class="card">Ticker: UC</div>
-    <div class="card">Network: Solana</div>
-    <div class="card">Supply: 1,000,000</div>
-  </div>
+  <div class="cards"><div class="card">Ticker: UC</div>
+<div class="card">Network: Solana</div>
+<div class="card">Supply: 1,000,000</div>
+
+<div class="card">
+  Token Address:<br>
+  <small id="tokenAddress">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</small><br>
+  <button class="copy-btn" onclick="copyText('tokenAddress')">Copy</button>
 </div>
 
-<div id="roadmap" class="section">
+<div class="card">
+  UC-USDC Pool:<br>
+  <small id="poolAddress">6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr</small><br>
+  <button class="copy-btn" onclick="copyText('poolAddress')">Copy</button>
+</div>
+
+  </div>
+</div><!-- ROADMAP --><div id="roadmap" class="section">
   <h2>Roadmap</h2>
   <div class="cards">
     <div class="card">Launch 🚀</div>
     <div class="card">Growth 📈</div>
     <div class="card">Listings 💰</div>
   </div>
-</div>
-
-<footer>
+</div><footer>
 © 2026 UCoin • All Rights Reserved
-</footer>
+</footer><div id="toast">Copied ✅</div><script>
+function copyText(id){
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text);
 
-</body>
+  const toast = document.getElementById("toast");
+  toast.style.display="block";
+  setTimeout(()=>toast.style.display="none",2000);
+}
+
+/* COINGECKO PRICE */
+async function getPrice(){
+  try{
+    const res = await fetch(
+      "https://api.coingecko.com/api/v3/simple/token_price/solana?contract_addresses=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&vs_currencies=usd"
+    );
+    const data = await res.json();
+
+    const key = Object.keys(data)[0];
+    const price = data[key]?.usd;
+
+    document.getElementById("price").innerText =
+      price ? "$" + price : "Not Live Yet";
+  }catch{
+    document.getElementById("price").innerText = "Error";
+  }
+}
+
+getPrice();
+setInterval(getPrice,10000);
+</script></body>
 </html>
