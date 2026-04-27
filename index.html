@@ -1,12 +1,17 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UCoin (UC)</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"><style>
+<title>UCoin (UC)</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
 body{
   margin:0;
   font-family:Poppins;
-  background:#05070d;
+  background:linear-gradient(180deg,#05070d,#02040a);
   color:white;
 }
 
@@ -15,6 +20,7 @@ nav{
   display:flex;
   justify-content:space-between;
   padding:20px 40px;
+  backdrop-filter: blur(10px);
 }
 nav a{color:white;text-decoration:none;margin:0 10px}
 
@@ -27,7 +33,11 @@ nav a{color:white;text-decoration:none;margin:0 10px}
 .logo{
   width:160px;
   border-radius:50%;
-  box-shadow:0 0 25px gold;
+  box-shadow:0 0 30px gold;
+  transition:0.4s;
+}
+.logo:hover{
+  transform:scale(1.1) rotate(5deg);
 }
 
 .hero h1{
@@ -45,8 +55,12 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   border-radius:8px;
   text-decoration:none;
   font-weight:bold;
-  display:inline-block;
   margin:5px;
+  transition:0.3s;
+}
+.btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 15px gold;
 }
 
 /* SECTION */
@@ -55,6 +69,7 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   text-align:center;
 }
 
+/* CARDS */
 .cards{
   display:flex;
   flex-wrap:wrap;
@@ -69,13 +84,12 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   width:260px;
   transition:0.3s;
 }
-
 .card:hover{
   transform:translateY(-5px);
   box-shadow:0 0 20px gold;
 }
 
-/* COPY BUTTON */
+/* COPY */
 .copy-btn{
   margin-top:10px;
   padding:6px 12px;
@@ -100,64 +114,119 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   display:none;
 }
 
+/* PRICE ANIMATION */
+.price{
+  font-size:32px;
+  font-weight:bold;
+  color:gold;
+}
+
+/* LOADER */
+.loader{
+  border:4px solid #222;
+  border-top:4px solid gold;
+  border-radius:50%;
+  width:30px;
+  height:30px;
+  animation:spin 1s linear infinite;
+  margin:auto;
+}
+@keyframes spin{
+  0%{transform:rotate(0)}
+  100%{transform:rotate(360deg)}
+}
+
 /* FOOTER */
 footer{
   text-align:center;
   padding:20px;
   background:#02040a;
 }
-</style></head><body><nav>
+</style>
+</head>
+
+<body>
+
+<nav>
   <div><b>UCoin</b></div>
   <div>
     <a href="#about">About</a>
     <a href="#token">Token</a>
     <a href="#roadmap">Roadmap</a>
   </div>
-</nav><div class="hero">
-  <img class="logo" src="https://files.catbox.moe/mva4qj.jpg">
-  <h1>UCoin (UC)</h1>
-  <p>Stay Unknown. Stay Powerful.</p>  <br><a class="btn" href="https://t.me/ucoin_live">Telegram</a>
-<a class="btn" href="https://x.com/UCoin_live" target="_blank">X</a>
+</nav>
 
-</div><div class="section">
+<div class="hero">
+  <img class="logo" 
+       src="https://files.catbox.moe/mva4qj.jpg"
+       onerror="this.src='https://via.placeholder.com/160?text=UC'">
+
+  <h1>UCoin (UC)</h1>
+  <p>Stay Unknown. Stay Powerful.</p>
+
+  <a class="btn" href="https://t.me/ucoin_live">Telegram</a>
+  <a class="btn" href="https://x.com/UCoin_live" target="_blank">X</a>
+</div>
+
+<div class="section">
   <h2>Live Price</h2>
-  <h1 id="price">Loading...</h1>
-</div><div class="section">
+  <div id="price" class="price">
+    <div class="loader"></div>
+  </div>
+</div>
+
+<div class="section">
   <h2>Live Chart</h2>
   <iframe 
     src="https://dexscreener.com/solana/6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr"
     width="100%" height="500">
   </iframe>
-</div><div id="about" class="section">
+</div>
+
+<div id="about" class="section">
   <h2>About</h2>
-  <p>UCoin is a fast, low-cost Solana-based token designed for scalable growth and community-driven innovation.</p>
-</div><div id="token" class="section">
-  <h2>Token Info</h2>  <div class="cards">
+  <p>UCoin is a fast, low-cost Solana token built for speed, scalability, and community power.</p>
+</div>
+
+<div id="token" class="section">
+  <h2>Token Info</h2>
+  <div class="cards">
+
     <div class="card">Ticker: UC</div>
     <div class="card">Network: Solana</div>
-    <div class="card">Supply: 1,000,000</div><div class="card">
-  Token Address:<br>
-  <small id="tokenAddress">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</small><br>
-  <button class="copy-btn" onclick="copyText('tokenAddress')">Copy</button>
-</div>
+    <div class="card">Supply: 1,000,000</div>
 
-<div class="card">
-  Pool Address:<br>
-  <small id="poolAddress">6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr</small><br>
-  <button class="copy-btn" onclick="copyText('poolAddress')">Copy</button>
-</div>
+    <div class="card">
+      Token Address:<br>
+      <small id="tokenAddress">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</small><br>
+      <button class="copy-btn" onclick="copyText('tokenAddress')">Copy</button>
+    </div>
+
+    <div class="card">
+      Pool Address:<br>
+      <small id="poolAddress">6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr</small><br>
+      <button class="copy-btn" onclick="copyText('poolAddress')">Copy</button>
+    </div>
 
   </div>
-</div><div id="roadmap" class="section">
+</div>
+
+<div id="roadmap" class="section">
   <h2>Roadmap</h2>
   <div class="cards">
     <div class="card">Launch 🚀</div>
     <div class="card">Growth 📈</div>
     <div class="card">Listings 💰</div>
   </div>
-</div><footer>
+</div>
+
+<footer>
 © 2026 UCoin • All Rights Reserved
-</footer><div id="toast">Copied ✅</div><script>
+</footer>
+
+<div id="toast">Copied ✅</div>
+
+<script>
 function copyText(id){
   const text = document.getElementById(id).innerText;
   navigator.clipboard.writeText(text);
@@ -186,5 +255,7 @@ async function getPrice(){
 
 getPrice();
 setInterval(getPrice,10000);
-</script></body>
+</script>
+
+</body>
 </html>
