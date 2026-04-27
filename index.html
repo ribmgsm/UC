@@ -20,15 +20,11 @@ nav{
   display:flex;
   justify-content:space-between;
   padding:20px 40px;
-  backdrop-filter: blur(10px);
 }
 nav a{color:white;text-decoration:none;margin:0 10px}
 
 /* HERO */
-.hero{
-  text-align:center;
-  padding:80px 20px;
-}
+.hero{text-align:center;padding:80px 20px;}
 
 .logo{
   width:160px;
@@ -36,9 +32,7 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   box-shadow:0 0 30px gold;
   transition:0.4s;
 }
-.logo:hover{
-  transform:scale(1.1) rotate(5deg);
-}
+.logo:hover{transform:scale(1.1) rotate(5deg);}
 
 .hero h1{
   font-size:45px;
@@ -56,92 +50,30 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   text-decoration:none;
   font-weight:bold;
   margin:5px;
-  transition:0.3s;
-}
-.btn:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 15px gold;
+  display:inline-block;
 }
 
 /* SECTION */
-.section{
-  padding:60px 20px;
-  text-align:center;
-}
+.section{text-align:center;padding:60px 20px;}
 
 /* CARDS */
-.cards{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
+.cards{display:flex;flex-wrap:wrap;justify-content:center;}
 .card{
   background:#0f172a;
   margin:10px;
   padding:25px;
   border-radius:12px;
   width:260px;
-  transition:0.3s;
-}
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 0 20px gold;
 }
 
-/* COPY */
-.copy-btn{
-  margin-top:10px;
-  padding:6px 12px;
-  background:gold;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  font-size:12px;
-  font-weight:bold;
-}
+/* WALLET */
+#wallet{color:gold;margin-top:10px;font-weight:bold}
 
-/* TOAST */
-#toast{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:gold;
-  color:black;
-  padding:10px 20px;
-  border-radius:6px;
-  display:none;
-}
-
-/* PRICE ANIMATION */
-.price{
-  font-size:32px;
-  font-weight:bold;
-  color:gold;
-}
-
-/* LOADER */
-.loader{
-  border:4px solid #222;
-  border-top:4px solid gold;
-  border-radius:50%;
-  width:30px;
-  height:30px;
-  animation:spin 1s linear infinite;
-  margin:auto;
-}
-@keyframes spin{
-  0%{transform:rotate(0)}
-  100%{transform:rotate(360deg)}
-}
+/* PRICE */
+.price{font-size:32px;font-weight:bold}
 
 /* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  background:#02040a;
-}
+footer{text-align:center;padding:20px;background:#02040a}
 </style>
 </head>
 
@@ -157,7 +89,7 @@ footer{
 </nav>
 
 <div class="hero">
-  <img class="logo" 
+  <img class="logo"
        src="https://files.catbox.moe/mva4qj.jpg"
        onerror="this.src='https://via.placeholder.com/160?text=UC'">
 
@@ -166,13 +98,31 @@ footer{
 
   <a class="btn" href="https://t.me/ucoin_live">Telegram</a>
   <a class="btn" href="https://x.com/UCoin_live" target="_blank">X</a>
+
+  <br><br>
+
+  <button class="btn" onclick="connectWallet()">Connect Wallet</button>
+  <p id="wallet">Not Connected</p>
+
+  <a class="btn" target="_blank"
+  href="https://jup.ag/swap/SOL-Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt">
+  Buy UCoin 💰
+  </a>
 </div>
 
 <div class="section">
   <h2>Live Price</h2>
-  <div id="price" class="price">
-    <div class="loader"></div>
-  </div>
+  <div id="price" class="price">Loading...</div>
+</div>
+
+<div class="section">
+  <h2>Holders</h2>
+  <h1 id="holders">Loading...</h1>
+</div>
+
+<div class="section">
+  <h2>Whale Activity 🐋</h2>
+  <div id="whale">Tracking...</div>
 </div>
 
 <div class="section">
@@ -185,29 +135,15 @@ footer{
 
 <div id="about" class="section">
   <h2>About</h2>
-  <p>UCoin is a fast, low-cost Solana token built for speed, scalability, and community power.</p>
+  <p>UCoin is a fast, low-cost Solana token built for speed and community.</p>
 </div>
 
 <div id="token" class="section">
   <h2>Token Info</h2>
   <div class="cards">
-
     <div class="card">Ticker: UC</div>
     <div class="card">Network: Solana</div>
     <div class="card">Supply: 1,000,000</div>
-
-    <div class="card">
-      Token Address:<br>
-      <small id="tokenAddress">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</small><br>
-      <button class="copy-btn" onclick="copyText('tokenAddress')">Copy</button>
-    </div>
-
-    <div class="card">
-      Pool Address:<br>
-      <small id="poolAddress">6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr</small><br>
-      <button class="copy-btn" onclick="copyText('poolAddress')">Copy</button>
-    </div>
-
   </div>
 </div>
 
@@ -224,37 +160,84 @@ footer{
 © 2026 UCoin • All Rights Reserved
 </footer>
 
-<div id="toast">Copied ✅</div>
-
 <script>
-function copyText(id){
-  const text = document.getElementById(id).innerText;
-  navigator.clipboard.writeText(text);
 
-  const toast = document.getElementById("toast");
-  toast.style.display="block";
-  setTimeout(()=>toast.style.display="none",2000);
+/* WALLET */
+async function connectWallet(){
+  const provider = window.solana;
+  if(provider && provider.isPhantom){
+    const res = await provider.connect();
+    document.getElementById("wallet").innerText =
+      "Connected: " + res.publicKey.toString().slice(0,6)+"...";
+  }else{
+    window.open("https://phantom.app/");
+  }
+}
+
+/* AUTO CONNECT */
+window.onload = async ()=>{
+  if(window.solana && window.solana.isPhantom){
+    try{
+      const res = await window.solana.connect({onlyIfTrusted:true});
+      document.getElementById("wallet").innerText =
+        "Connected: " + res.publicKey.toString().slice(0,6)+"...";
+    }catch{}
+  }
 }
 
 /* PRICE */
+let lastPrice=0;
 async function getPrice(){
   try{
-    const res = await fetch(
-      "https://api.coingecko.com/api/v3/simple/token_price/solana?contract_addresses=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&vs_currencies=usd"
-    );
+    const res = await fetch("https://api.coingecko.com/api/v3/simple/token_price/solana?contract_addresses=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&vs_currencies=usd");
     const data = await res.json();
     const key = Object.keys(data)[0];
     const price = data[key]?.usd;
 
-    document.getElementById("price").innerText =
-      price ? "$" + price : "Not Live Yet";
+    const el=document.getElementById("price");
+
+    if(price>lastPrice) el.style.color="lime";
+    else if(price<lastPrice) el.style.color="red";
+
+    el.innerText=price ? "$"+price : "Not Live Yet";
+    lastPrice=price;
+
   }catch{
-    document.getElementById("price").innerText = "Error";
+    document.getElementById("price").innerText="Error";
   }
 }
-
 getPrice();
 setInterval(getPrice,10000);
+
+/* HOLDERS */
+async function getHolders(){
+  try{
+    const res=await fetch("https://public-api.solscan.io/token/holders?tokenAddress=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&limit=1");
+    const data=await res.json();
+    document.getElementById("holders").innerText=data.total||"N/A";
+  }catch{
+    document.getElementById("holders").innerText="Error";
+  }
+}
+getHolders();
+
+/* WHALE */
+async function whale(){
+  try{
+    const res=await fetch("https://public-api.solscan.io/token/txs?tokenAddress=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&limit=1");
+    const data=await res.json();
+    const amt=data[0]?.changeAmount;
+
+    if(amt>100000)
+      document.getElementById("whale").innerText="🐋 Whale Detected!";
+    else
+      document.getElementById("whale").innerText="No big moves";
+  }catch{
+    document.getElementById("whale").innerText="Error";
+  }
+}
+setInterval(whale,15000);
+
 </script>
 
 </body>
