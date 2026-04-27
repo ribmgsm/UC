@@ -15,7 +15,6 @@ body{
   color:white;
 }
 
-/* NAV */
 nav{
   display:flex;
   justify-content:space-between;
@@ -23,7 +22,6 @@ nav{
 }
 nav a{color:white;text-decoration:none;margin:0 10px}
 
-/* HERO */
 .hero{text-align:center;padding:80px 20px;}
 
 .logo{
@@ -41,7 +39,6 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   color:transparent;
 }
 
-/* BUTTON */
 .btn{
   background:gold;
   color:black;
@@ -53,10 +50,8 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   display:inline-block;
 }
 
-/* SECTION */
 .section{text-align:center;padding:60px 20px;}
 
-/* CARDS */
 .cards{display:flex;flex-wrap:wrap;justify-content:center;}
 .card{
   background:#0f172a;
@@ -66,13 +61,8 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   width:260px;
 }
 
-/* WALLET */
-#wallet{color:gold;margin-top:10px;font-weight:bold}
-
-/* PRICE */
 .price{font-size:32px;font-weight:bold}
 
-/* FOOTER */
 footer{text-align:center;padding:20px;background:#02040a}
 </style>
 </head>
@@ -100,9 +90,6 @@ footer{text-align:center;padding:20px;background:#02040a}
   <a class="btn" href="https://x.com/UCoin_live" target="_blank">X</a>
 
   <br><br>
-
-  <button class="btn" onclick="connectWallet()">Connect Wallet</button>
-  <p id="wallet">Not Connected</p>
 
   <a class="btn" target="_blank"
   href="https://jup.ag/swap?sell=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&buy=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt">
@@ -133,9 +120,33 @@ footer{text-align:center;padding:20px;background:#02040a}
   </iframe>
 </div>
 
+<!-- STORY SECTION -->
 <div id="about" class="section">
-  <h2>About</h2>
-  <p>UCoin is a fast, low-cost Solana token built for speed and community.</p>
+  <h2>The Idea Behind UCoin</h2>
+
+  <p>
+  At first, I wanted to create a truly anonymous coin — one with no known creator, no identity, no central figure.
+  <br><br>
+  Then I realized something: in crypto, the unknown creates curiosity… and curiosity creates hype.
+  <br><br>
+  So I built UC — UCoin.
+  <br><br>
+  Not just another token, but a project designed to grow in silence, driven by mystery and powered by its community.
+  </p>
+
+  <br><br>
+
+  <h2>Built in Silence</h2>
+
+  <p>
+  UCoin isn’t just another token — it’s a movement built in silence.
+  <br><br>
+  In a world where everything is tracked and exposed, UCoin stands for those who choose to stay unknown but powerful.
+  <br><br>
+  No leaders. No noise. Just growth.
+  <br><br>
+  Some will ignore it. Few will recognize it.
+  </p>
 </div>
 
 <div id="token" class="section">
@@ -161,29 +172,6 @@ footer{text-align:center;padding:20px;background:#02040a}
 </footer>
 
 <script>
-
-/* WALLET */
-async function connectWallet(){
-  const provider = window.solana;
-  if(provider && provider.isPhantom){
-    const res = await provider.connect();
-    document.getElementById("wallet").innerText =
-      "Connected: " + res.publicKey.toString().slice(0,6)+"...";
-  }else{
-    window.open("https://phantom.app/");
-  }
-}
-
-/* AUTO CONNECT */
-window.onload = async ()=>{
-  if(window.solana && window.solana.isPhantom){
-    try{
-      const res = await window.solana.connect({onlyIfTrusted:true});
-      document.getElementById("wallet").innerText =
-        "Connected: " + res.publicKey.toString().slice(0,6)+"...";
-    }catch{}
-  }
-}
 
 /* PRICE */
 let lastPrice=0;
