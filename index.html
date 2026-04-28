@@ -11,93 +11,65 @@
 body{
   margin:0;
   font-family:Poppins;
-  background:linear-gradient(180deg,#05070d,#02040a);
+  background:#05070d;
   color:white;
-  overflow-x:hidden;
 }
 
-/* glow */
-body::before{
-  content:"";
-  position:fixed;
-  width:400px;
-  height:400px;
-  background:radial-gradient(gold,transparent);
-  top:-100px;
-  left:-100px;
-  filter:blur(120px);
-  opacity:0.3;
-  animation:move 8s infinite alternate;
+/* NAV */
+nav{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 40px;
 }
-@keyframes move{
-  to{ top:200px; left:60%; }
-}
-
-nav{display:flex;justify-content:space-between;padding:20px 40px;}
 nav a{color:white;text-decoration:none;margin:0 10px}
 
+/* HERO */
 .hero{text-align:center;padding:80px 20px;}
-
 .logo{
-  width:160px;
+  width:140px;
   border-radius:50%;
-  box-shadow:0 0 25px gold,0 0 60px rgba(255,215,0,0.4);
-  transition:0.4s;
+  box-shadow:0 0 25px gold;
 }
-.logo:hover{transform:scale(1.1) rotate(5deg);}
-
 .hero h1{
-  font-size:48px;
-  background:linear-gradient(90deg,gold,white,gold);
-  background-size:200% auto;
+  font-size:45px;
+  background:linear-gradient(gold,white);
   -webkit-background-clip:text;
   color:transparent;
-  animation:shine 3s linear infinite;
 }
-@keyframes shine{to{background-position:200% center;}}
-
 .tagline{
-  font-size:18px;
-  max-width:600px;
-  margin:15px auto;
   color:#cbd5e1;
+  max-width:600px;
+  margin:10px auto;
 }
 
+/* BUTTON */
 .btn{
   background:gold;
   color:black;
-  padding:12px 25px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
+  padding:10px 20px;
   margin:5px;
   display:inline-block;
-  transition:0.3s;
+  border-radius:8px;
+  text-decoration:none;
 }
-.btn:hover{transform:scale(1.08);box-shadow:0 0 15px gold;}
 
+/* SECTION */
 .section{text-align:center;padding:60px 20px;}
-
 .cards{display:flex;flex-wrap:wrap;justify-content:center;}
 .card{
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.1);
+  background:#0f172a;
   margin:10px;
-  padding:25px;
-  border-radius:12px;
-  width:260px;
-  transition:0.3s;
+  padding:20px;
+  border-radius:10px;
+  width:250px;
 }
-.card:hover{transform:translateY(-5px);box-shadow:0 0 20px rgba(255,215,0,0.3);}
 
-.price{font-size:32px;font-weight:bold}
-
-#whale{animation:pulse 2s infinite;}
-@keyframes pulse{
-  0%{opacity:0.5}
-  50%{opacity:1}
-  100%{opacity:0.5}
+.copy{
+  background:#1e293b;
+  padding:10px;
+  border-radius:6px;
+  margin-top:10px;
+  cursor:pointer;
 }
 
 footer{text-align:center;padding:20px;background:#02040a}
@@ -106,8 +78,9 @@ footer{text-align:center;padding:20px;background:#02040a}
 
 <body>
 
+<!-- NAV -->
 <nav>
-  <div><b>UCoin</b></div>
+  <b>UCoin</b>
   <div>
     <a href="#about">About</a>
     <a href="#token">Token</a>
@@ -115,9 +88,9 @@ footer{text-align:center;padding:20px;background:#02040a}
   </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <img class="logo"
-       src="https://files.catbox.moe/todfd5.jpg">
+  <img class="logo" src="https://files.catbox.moe/todfd5.jpg">
 
   <h1>UCoin (UC)</h1>
 
@@ -125,98 +98,96 @@ footer{text-align:center;padding:20px;background:#02040a}
   Community driven token built on trust, powered by growth, and designed for long-term value creation.
   </p>
 
-  <a class="btn" href="https://t.me/ucoin_live">Telegram</a>
+  <a class="btn" href="https://jup.ag/swap?sell=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&buy=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" target="_blank">Buy 💰</a>
+  <a class="btn" href="https://t.me/ucoin_live" target="_blank">Telegram</a>
   <a class="btn" href="https://x.com/UCoin_live" target="_blank">X</a>
-
-  <br><br>
-
-  <a class="btn" target="_blank"
-  href="https://jup.ag/swap?sell=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&buy=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt">
-  Buy UCoin 💰
-  </a>
+  <a class="btn" href="https://instagram.com/UCoin_live" target="_blank">Instagram</a>
 </div>
 
+<!-- STATS -->
 <div class="section">
-  <h2>Live Price</h2>
-  <div id="price" class="price">Loading...</div>
+  <h2>Live Stats</h2>
+  <div id="price">Loading...</div>
+  <div id="holders">Loading...</div>
 </div>
 
-<div class="section">
-  <h2>Holders</h2>
-  <h1 id="holders">Loading...</h1>
+<!-- ABOUT -->
+<div id="about" class="section">
+  <h2>About UCoin</h2>
+  <p>
+  UCoin is built in silence, powered by its community, and designed to grow over time.
+  A token for those who believe in long-term value and strong momentum.
+  </p>
 </div>
 
-<div class="section">
-  <h2>Whale Activity 🐋</h2>
-  <div id="whale">Tracking...</div>
+<!-- TOKEN -->
+<div id="token" class="section">
+  <h2>Token Info</h2>
+
+  <div class="cards">
+    <div class="card">Ticker: UC</div>
+    <div class="card">Network: Solana</div>
+    <div class="card">Supply: 1,000,000</div>
+  </div>
+
+  <div class="copy" onclick="copyCA()">
+    CA: Gt92GsKA2T...xszt (Click to Copy)
+  </div>
 </div>
 
+<!-- CHART -->
 <div class="section">
-  <h2>Live Chart</h2>
-  <iframe 
-    src="https://dexscreener.com/solana/6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr"
-    width="100%" height="500">
-  </iframe>
+  <h2>Chart</h2>
+  <iframe src="https://dexscreener.com/solana/6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr"
+  width="100%" height="400"></iframe>
+</div>
+
+<!-- ROADMAP -->
+<div id="roadmap" class="section">
+  <h2>Roadmap</h2>
+  <div class="cards">
+    <div class="card">Launch 🚀</div>
+    <div class="card">Growth 📈</div>
+    <div class="card">Listings 💰</div>
+  </div>
 </div>
 
 <footer>
-© 2026 UCoin • All Rights Reserved
+© 2026 UCoin
 </footer>
 
 <script>
 
 /* PRICE */
-let lastPrice=0;
 async function getPrice(){
   try{
-    const res = await fetch("https://api.coingecko.com/api/v3/simple/token_price/solana?contract_addresses=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&vs_currencies=usd");
-    const data = await res.json();
-    const key = Object.keys(data)[0];
-    const price = data[key]?.usd;
-
-    const el=document.getElementById("price");
-
-    if(price>lastPrice) el.style.color="lime";
-    else if(price<lastPrice) el.style.color="red";
-
-    el.innerText=price ? "$"+price : "Not Live Yet";
-    lastPrice=price;
-
+    let res = await fetch("https://api.coingecko.com/api/v3/simple/token_price/solana?contract_addresses=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&vs_currencies=usd");
+    let data = await res.json();
+    let key = Object.keys(data)[0];
+    document.getElementById("price").innerText = "Price: $" + (data[key]?.usd || "N/A");
   }catch{
     document.getElementById("price").innerText="Error";
   }
 }
 getPrice();
-setInterval(getPrice,10000);
 
 /* HOLDERS */
 async function getHolders(){
   try{
-    const res=await fetch("https://public-api.solscan.io/token/holders?tokenAddress=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&limit=1");
-    const data=await res.json();
-    document.getElementById("holders").innerText=data.total||"N/A";
+    let res = await fetch("https://public-api.solscan.io/token/holders?tokenAddress=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&limit=1");
+    let data = await res.json();
+    document.getElementById("holders").innerText = "Holders: " + (data.total || "N/A");
   }catch{
     document.getElementById("holders").innerText="Error";
   }
 }
 getHolders();
 
-/* WHALE */
-async function whale(){
-  try{
-    const res=await fetch("https://public-api.solscan.io/token/txs?tokenAddress=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&limit=1");
-    const data=await res.json();
-    const amt=data[0]?.changeAmount;
-
-    if(amt>100000)
-      document.getElementById("whale").innerText="🐋 Whale Detected!";
-    else
-      document.getElementById("whale").innerText="No big moves";
-  }catch{
-    document.getElementById("whale").innerText="Error";
-  }
+/* COPY */
+function copyCA(){
+  navigator.clipboard.writeText("Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt");
+  alert("Contract Address Copied!");
 }
-setInterval(whale,15000);
 
 </script>
 
