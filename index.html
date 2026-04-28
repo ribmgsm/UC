@@ -24,7 +24,10 @@ nav{
 nav a{color:white;text-decoration:none;margin:0 10px}
 
 /* HERO */
-.hero{text-align:center;padding:80px 20px;}
+.hero{
+  text-align:center;
+  padding:100px 20px;
+}
 .logo{
   width:140px;
   border-radius:50%;
@@ -52,27 +55,6 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   border-radius:8px;
   text-decoration:none;
 }
-
-/* SECTION */
-.section{text-align:center;padding:60px 20px;}
-.cards{display:flex;flex-wrap:wrap;justify-content:center;}
-.card{
-  background:#0f172a;
-  margin:10px;
-  padding:20px;
-  border-radius:10px;
-  width:250px;
-}
-
-.copy{
-  background:#1e293b;
-  padding:10px;
-  border-radius:6px;
-  margin-top:10px;
-  cursor:pointer;
-}
-
-footer{text-align:center;padding:20px;background:#02040a}
 </style>
 </head>
 
@@ -84,7 +66,6 @@ footer{text-align:center;padding:20px;background:#02040a}
   <div>
     <a href="/about.html">About</a>
     <a href="/token.html">Token</a>
-    <a href="#roadmap">Roadmap</a>
   </div>
 </nav>
 
@@ -98,98 +79,11 @@ footer{text-align:center;padding:20px;background:#02040a}
   Community driven token built on trust, powered by growth, and designed for long-term value creation.
   </p>
 
-  <a class="btn" href="https://jup.ag/swap?sell=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&buy=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" target="_blank">Buy 💰</a>
+  <a class="btn" href="https://jup.ag/swap?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&outputMint=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" target="_blank">Buy 💰</a>
   <a class="btn" href="https://t.me/ucoin_live" target="_blank">Telegram</a>
   <a class="btn" href="https://x.com/UCoin_live" target="_blank">X</a>
   <a class="btn" href="https://instagram.com/UCoin_live" target="_blank">Instagram</a>
 </div>
-
-<!-- STATS -->
-<div class="section">
-  <h2>Live Stats</h2>
-  <div id="price">Loading...</div>
-  <div id="holders">Loading...</div>
-</div>
-
-<!-- ABOUT -->
-<div id="about" class="section">
-  <h2>About UCoin</h2>
-  <p>
-  UCoin is built in silence, powered by its community, and designed to grow over time.
-  A token for those who believe in long-term value and strong momentum.
-  </p>
-</div>
-
-<!-- TOKEN -->
-<div id="token" class="section">
-  <h2>Token Info</h2>
-
-  <div class="cards">
-    <div class="card">Ticker: UC</div>
-    <div class="card">Network: Solana</div>
-    <div class="card">Supply: 1,000,000</div>
-  </div>
-
-  <div class="copy" onclick="copyCA()">
-    CA: Gt92GsKA2T...xszt (Click to Copy)
-  </div>
-</div>
-
-<!-- CHART -->
-<div class="section">
-  <h2>Chart</h2>
-  <iframe src="https://dexscreener.com/solana/6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr"
-  width="100%" height="400"></iframe>
-</div>
-
-<!-- ROADMAP -->
-<div id="roadmap" class="section">
-  <h2>Roadmap</h2>
-  <div class="cards">
-    <div class="card">Launch 🚀</div>
-    <div class="card">Growth 📈</div>
-    <div class="card">Listings 💰</div>
-  </div>
-</div>
-
-<footer>
-© 2026 UCoin
-</footer>
-
-<script>
-
-/* PRICE */
-async function getPrice(){
-  try{
-    let res = await fetch("https://api.coingecko.com/api/v3/simple/token_price/solana?contract_addresses=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&vs_currencies=usd");
-    let data = await res.json();
-    let key = Object.keys(data)[0];
-    document.getElementById("price").innerText = "Price: $" + (data[key]?.usd || "N/A");
-  }catch{
-    document.getElementById("price").innerText="Error";
-  }
-}
-getPrice();
-
-/* HOLDERS */
-async function getHolders(){
-  try{
-    let res = await fetch("https://public-api.solscan.io/token/holders?tokenAddress=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&limit=1");
-    let data = await res.json();
-    document.getElementById("holders").innerText = "Holders: " + (data.total || "N/A");
-  }catch{
-    document.getElementById("holders").innerText="Error";
-  }
-}
-getHolders();
-
-/* COPY */
-function copyCA(){
-  navigator.clipboard.writeText("Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt");
-  alert("Contract Address Copied!");
-}
-
-</script>
 
 </body>
 </html>
