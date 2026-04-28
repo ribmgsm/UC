@@ -13,6 +13,24 @@ body{
   font-family:Poppins;
   background:linear-gradient(180deg,#05070d,#02040a);
   color:white;
+  overflow-x:hidden;
+}
+
+/* glow background */
+body::before{
+  content:"";
+  position:fixed;
+  width:400px;
+  height:400px;
+  background:radial-gradient(gold,transparent);
+  top:-100px;
+  left:-100px;
+  filter:blur(120px);
+  opacity:0.3;
+  animation:move 8s infinite alternate;
+}
+@keyframes move{
+  to{ top:200px; left:60%; }
 }
 
 nav{
@@ -27,16 +45,29 @@ nav a{color:white;text-decoration:none;margin:0 10px}
 .logo{
   width:160px;
   border-radius:50%;
-  box-shadow:0 0 30px gold;
+  box-shadow:0 0 25px gold, 0 0 60px rgba(255,215,0,0.4);
   transition:0.4s;
 }
 .logo:hover{transform:scale(1.1) rotate(5deg);}
 
 .hero h1{
-  font-size:45px;
-  background:linear-gradient(gold,white);
+  font-size:48px;
+  background:linear-gradient(90deg,gold,white,gold);
+  background-size:200% auto;
   -webkit-background-clip:text;
   color:transparent;
+  animation:shine 3s linear infinite;
+}
+@keyframes shine{
+  to{background-position:200% center;}
+}
+
+.tagline{
+  font-size:18px;
+  max-width:600px;
+  margin:15px auto;
+  color:#cbd5e1;
+  line-height:1.6;
 }
 
 .btn{
@@ -48,20 +79,42 @@ nav a{color:white;text-decoration:none;margin:0 10px}
   font-weight:bold;
   margin:5px;
   display:inline-block;
+  transition:0.3s;
+}
+.btn:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 15px gold;
 }
 
 .section{text-align:center;padding:60px 20px;}
 
 .cards{display:flex;flex-wrap:wrap;justify-content:center;}
 .card{
-  background:#0f172a;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.1);
   margin:10px;
   padding:25px;
   border-radius:12px;
   width:260px;
+  transition:0.3s;
+}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 20px rgba(255,215,0,0.3);
 }
 
 .price{font-size:32px;font-weight:bold}
+
+#whale{
+  font-size:18px;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%{opacity:0.5}
+  50%{opacity:1}
+  100%{opacity:0.5}
+}
 
 footer{text-align:center;padding:20px;background:#02040a}
 </style>
@@ -80,11 +133,14 @@ footer{text-align:center;padding:20px;background:#02040a}
 
 <div class="hero">
   <img class="logo"
-       src="https://files.catbox.moe/mva4qj.jpg"
+       src="https://files.catbox.moe/todfd5.jpg"
        onerror="this.src='https://via.placeholder.com/160?text=UC'">
 
   <h1>UCoin (UC)</h1>
-  <p>Stay Unknown. Stay Powerful.</p>
+
+  <p class="tagline">
+  Community driven token built on trust, powered by growth, and designed for long-term value creation.
+  </p>
 
   <a class="btn" href="https://t.me/ucoin_live">Telegram</a>
   <a class="btn" href="https://x.com/UCoin_live" target="_blank">X</a>
@@ -120,113 +176,9 @@ footer{text-align:center;padding:20px;background:#02040a}
   </iframe>
 </div>
 
-<!-- STORY SECTION -->
-<div id="about" class="section">
-  <h2>The Idea Behind UCoin</h2>
-
-  <p>
-  At first, I wanted to create a truly anonymous coin — one with no known creator, no identity, no central figure.
-  <br><br>
-  Then I realized something: in crypto, the unknown creates curiosity… and curiosity creates hype.
-  <br><br>
-  So I built UC — UCoin.
-  <br><br>
-  Not just another token, but a project designed to grow in silence, driven by mystery and powered by its community.
-  </p>
-
-  <br><br>
-
-  <h2>Built in Silence</h2>
-
-  <p>
-  UCoin isn’t just another token — it’s a movement built in silence.
-  <br><br>
-  In a world where everything is tracked and exposed, UCoin stands for those who choose to stay unknown but powerful.
-  <br><br>
-  No leaders. No noise. Just growth.
-  <br><br>
-  Some will ignore it. Few will recognize it.
-  </p>
-</div>
-
-<div id="token" class="section">
-  <h2>Token Info</h2>
-  <div class="cards">
-    <div class="card">Ticker: UC</div>
-    <div class="card">Network: Solana</div>
-    <div class="card">Supply: 1,000,000</div>
-  </div>
-</div>
-
-<div id="roadmap" class="section">
-  <h2>Roadmap</h2>
-  <div class="cards">
-    <div class="card">Launch 🚀</div>
-    <div class="card">Growth 📈</div>
-    <div class="card">Listings 💰</div>
-  </div>
-</div>
-
 <footer>
 © 2026 UCoin • All Rights Reserved
 </footer>
-
-<script>
-
-/* PRICE */
-let lastPrice=0;
-async function getPrice(){
-  try{
-    const res = await fetch("https://api.coingecko.com/api/v3/simple/token_price/solana?contract_addresses=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&vs_currencies=usd");
-    const data = await res.json();
-    const key = Object.keys(data)[0];
-    const price = data[key]?.usd;
-
-    const el=document.getElementById("price");
-
-    if(price>lastPrice) el.style.color="lime";
-    else if(price<lastPrice) el.style.color="red";
-
-    el.innerText=price ? "$"+price : "Not Live Yet";
-    lastPrice=price;
-
-  }catch{
-    document.getElementById("price").innerText="Error";
-  }
-}
-getPrice();
-setInterval(getPrice,10000);
-
-/* HOLDERS */
-async function getHolders(){
-  try{
-    const res=await fetch("https://public-api.solscan.io/token/holders?tokenAddress=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&limit=1");
-    const data=await res.json();
-    document.getElementById("holders").innerText=data.total||"N/A";
-  }catch{
-    document.getElementById("holders").innerText="Error";
-  }
-}
-getHolders();
-
-/* WHALE */
-async function whale(){
-  try{
-    const res=await fetch("https://public-api.solscan.io/token/txs?tokenAddress=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt&limit=1");
-    const data=await res.json();
-    const amt=data[0]?.changeAmount;
-
-    if(amt>100000)
-      document.getElementById("whale").innerText="🐋 Whale Detected!";
-    else
-      document.getElementById("whale").innerText="No big moves";
-  }catch{
-    document.getElementById("whale").innerText="Error";
-  }
-}
-setInterval(whale,15000);
-
-</script>
 
 </body>
 </html>
