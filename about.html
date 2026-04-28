@@ -1,175 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>About UCoin</title>
+<meta name="description" content="Learn about UCoin — a community-driven token focused on steady growth, transparency, and long-term value." />
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<!-- Open Graph -->
+<meta property="og:title" content="About UCoin" />
+<meta property="og:description" content="Community-driven token focused on steady growth and long-term value." />
+<meta property="og:type" content="website" />
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:Poppins;
-  background:linear-gradient(180deg,#05070d,#02040a);
-  color:white;
+:root{
+  --bg:#05070d; --bg2:#02040a; --text:#e5e7eb; --muted:#94a3b8;
+  --gold:#FFD700; --card:rgba(255,255,255,.06); --border:rgba(255,255,255,.12);
 }
+@media (prefers-color-scheme: light){
+  :root{ --bg:#f8fafc; --bg2:#eef2f7; --text:#0f172a; --muted:#475569; --card:rgba(0,0,0,.04); --border:rgba(0,0,0,.08);}
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text); background:linear-gradient(180deg,var(--bg),var(--bg2));
+}
+
+/* Skip link (A11y) */
+.skip{position:absolute;left:-999px;top:auto}
+.skip:focus{left:12px;top:12px;background:var(--gold);color:#000;padding:8px 12px;border-radius:8px}
 
 /* NAV */
-nav{
-  display:flex;
-  justify-content:space-between;
-  padding:20px 40px;
-}
-nav a{color:white;text-decoration:none;margin:0 10px}
+header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(0,0,0,.3)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1100px;margin:auto}
+nav a{color:var(--text);text-decoration:none;margin:0 10px;opacity:.9}
+nav a:hover{opacity:1}
 
 /* HERO */
-.hero{
-  text-align:center;
-  padding:80px 20px;
-}
+.hero{max-width:1100px;margin:auto;padding:64px 20px 24px;text-align:center}
 .hero h1{
-  font-size:48px;
-  background:linear-gradient(90deg,gold,white,gold);
-  -webkit-background-clip:text;
-  color:transparent;
+  margin:0 0 10px;font-size:44px;line-height:1.1;
+  background:linear-gradient(90deg,var(--gold),#fff,var(--gold));
+  -webkit-background-clip:text;color:transparent; background-size:200% auto; animation:shine 3.5s linear infinite;
 }
+@keyframes shine{to{background-position:200% center}}
+.hero p{color:var(--muted);max-width:720px;margin:0 auto}
 
 /* SECTION */
-.section{
-  max-width:900px;
-  margin:auto;
-  padding:60px 20px;
-  line-height:1.7;
-}
-
-h2{
-  color:gold;
-  margin-top:40px;
-  font-size:28px;
-}
+main{max-width:1100px;margin:auto;padding:10px 20px 60px}
+.section{margin-top:28px}
+.section h2{color:var(--gold);font-size:26px;margin:24px 0 10px}
 
 /* CARD */
 .card{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
-  padding:25px;
-  border-radius:12px;
-  margin:20px 0;
-  backdrop-filter:blur(10px);
-  transition:0.3s;
+  background:var(--card); border:1px solid var(--border); border-radius:14px;
+  padding:22px; margin:16px 0; backdrop-filter:blur(10px);
+  transform:translateY(10px); opacity:0; transition:all .5s ease;
 }
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 0 20px rgba(255,215,0,0.2);
-}
+.card.show{transform:translateY(0); opacity:1}
+.card p{color:var(--text);opacity:.95}
 
-/* GRID */
-.grid{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
+/* GRID (Why) */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.badge{
+  padding:16px;border-radius:12px;border:1px solid var(--border);background:var(--card);
+  transition:.25s; text-align:center
 }
-.grid .card{
-  width:250px;
-}
+.badge:hover{transform:translateY(-4px); box-shadow:0 0 20px rgba(255,215,0,.18)}
 
-/* BUTTON */
+/* CTA */
+.cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
 .btn{
-  background:gold;
-  color:black;
-  padding:10px 20px;
-  border-radius:8px;
-  text-decoration:none;
-  display:inline-block;
-  margin-top:20px;
+  background:var(--gold);color:#000;padding:10px 18px;border-radius:10px;
+  text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:8px
 }
+.btn.secondary{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn:active{transform:scale(.98)}
 
 /* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  background:#02040a;
+footer{text-align:center;padding:20px;background:var(--bg2);color:var(--muted)}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .hero h1{animation:none}
+  .card{transition:none}
 }
 </style>
+
+<!-- Structured Data (SEO) -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"UCoin",
+  "url":"https://your-domain.vercel.app",
+  "sameAs":[
+    "https://t.me/ucoin_live",
+    "https://x.com/UCoin_live",
+    "https://instagram.com/UCoin_live"
+  ]
+}
+</script>
 </head>
 
 <body>
+<a href="#content" class="skip">Skip to content</a>
 
-<nav>
-  <b>UCoin</b>
-  <div>
-    <a href="/index.html">Home</a>
-    <a href="/token.html">Token</a>
-  </div>
-</nav>
+<header>
+  <nav aria-label="Primary">
+    <strong>UCoin</strong>
+    <div>
+      <a href="/index.html">Home</a>
+      <a href="/token.html">Token</a>
+    </div>
+  </nav>
+</header>
 
-<div class="hero">
+<section class="hero">
   <h1>About UCoin</h1>
-</div>
+  <p>Community-driven token focused on steady growth, transparency, and long-term value.</p>
+</section>
 
-<div class="section">
+<main id="content">
+  <!-- IDEA -->
+  <section class="section" aria-labelledby="idea">
+    <div class="card reveal">
+      <h2 id="idea">The Idea Behind UCoin</h2>
+      <p>UCoin was created to build a token shaped by its community rather than a single authority.</p>
+      <p>It is based on the belief that consistent participation and collective momentum can create lasting value over time.</p>
+      <p>The focus is on a strong foundation that grows naturally with its community.</p>
+    </div>
+  </section>
 
-<!-- IDEA -->
-<div class="card">
-<h2>The Idea Behind UCoin</h2>
-<p>
-UCoin was created with a clear purpose — to build a token shaped by its community rather than controlled by a central authority.
-</p>
-<p>
-It is based on the belief that consistent participation and collective momentum can create lasting value over time.
-</p>
-<p>
-From the start, the focus has been on building a strong foundation that grows naturally with its community.
-</p>
-</div>
+  <!-- DIFFERENT -->
+  <section class="section" aria-labelledby="different">
+    <div class="card reveal">
+      <h2 id="different">What Makes UCoin Different</h2>
+      <p>UCoin takes a measured approach to growth, focusing on stability and gradual progress.</p>
+      <p>It is driven by its holders, where activity and engagement contribute directly to its development.</p>
+      <p>This creates a balanced ecosystem built on consistency rather than sudden spikes.</p>
+    </div>
+  </section>
 
-<!-- DIFFERENT -->
-<div class="card">
-<h2>What Makes UCoin Different</h2>
-<p>
-UCoin takes a measured approach to growth. Instead of relying on short-term attention, it focuses on stability and gradual progress.
-</p>
-<p>
-It is driven by its holders, where activity and engagement contribute directly to its development.
-</p>
-<p>
-This approach creates a more balanced ecosystem built on consistency rather than sudden spikes.
-</p>
-</div>
+  <!-- VISION -->
+  <section class="section" aria-labelledby="vision">
+    <div class="card reveal">
+      <h2 id="vision">Our Vision</h2>
+      <p>The vision is to establish a sustainable ecosystem supported by an active community.</p>
+      <p>UCoin aims to expand steadily while maintaining a strong foundation based on trust and long-term thinking.</p>
+      <p>As adoption grows, UCoin evolves into a more recognized and stable presence.</p>
+    </div>
+  </section>
 
-<!-- VISION -->
-<div class="card">
-<h2>Our Vision</h2>
-<p>
-The vision of UCoin is to establish a sustainable and growing ecosystem supported by an active community.
-</p>
-<p>
-It aims to expand steadily while maintaining a strong foundation based on trust and long-term thinking.
-</p>
-<p>
-As adoption increases, UCoin is positioned to evolve into a more recognized and stable presence.
-</p>
-</div>
+  <!-- WHY -->
+  <section class="section" aria-labelledby="why">
+    <div class="card reveal">
+      <h2 id="why">Why UCoin</h2>
+      <div class="grid">
+        <div class="badge">Community-Driven</div>
+        <div class="badge">Stable Growth</div>
+        <div class="badge">Long-Term Value</div>
+        <div class="badge">Simple & Transparent</div>
+      </div>
 
-<!-- WHY -->
-<div class="card">
-<h2>Why UCoin</h2>
-<div class="grid">
-  <div class="card">Community Driven</div>
-  <div class="card">Stable Growth</div>
-  <div class="card">Long-Term Value</div>
-  <div class="card">Simple & Transparent</div>
-</div>
-</div>
-
-<a href="/index.html" class="btn">← Back to Home</a>
-
-</div>
+      <div class="cta">
+        <a class="btn" href="/index.html">← Back to Home</a>
+        <a class="btn secondary" href="https://jup.ag/swap?sell=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&buy=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" target="_blank" rel="noopener">Buy UCoin 💰</a>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer>
-© 2026 UCoin • All Rights Reserved
+  © 2026 UCoin • All Rights Reserved
 </footer>
 
+<script>
+/* Reveal on scroll (lightweight) */
+const els = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('show');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:0.15});
+els.forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
