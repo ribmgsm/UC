@@ -13,9 +13,9 @@ body{
   font-family:Poppins;
   background:linear-gradient(180deg,#05070d,#02040a);
   color:white;
-  text-align:center;
 }
 
+/* NAV */
 nav{
   display:flex;
   justify-content:space-between;
@@ -23,22 +23,58 @@ nav{
 }
 nav a{color:white;text-decoration:none;margin:0 10px}
 
+/* HERO */
+.hero{
+  text-align:center;
+  padding:80px 20px;
+}
+.hero h1{
+  font-size:48px;
+  background:linear-gradient(90deg,gold,white,gold);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* SECTION */
 .section{
-  max-width:800px;
+  max-width:900px;
   margin:auto;
   padding:60px 20px;
   line-height:1.7;
 }
 
-h1{
-  font-size:40px;
-  background:linear-gradient(gold,white);
-  -webkit-background-clip:text;
-  color:transparent;
+h2{
+  color:gold;
+  margin-top:40px;
+  font-size:28px;
 }
 
-h2{margin-top:40px;color:gold}
+/* CARD */
+.card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:25px;
+  border-radius:12px;
+  margin:20px 0;
+  backdrop-filter:blur(10px);
+  transition:0.3s;
+}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 20px rgba(255,215,0,0.2);
+}
 
+/* GRID */
+.grid{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.grid .card{
+  width:250px;
+}
+
+/* BUTTON */
 .btn{
   background:gold;
   color:black;
@@ -49,7 +85,9 @@ h2{margin-top:40px;color:gold}
   margin-top:20px;
 }
 
+/* FOOTER */
 footer{
+  text-align:center;
   padding:20px;
   background:#02040a;
 }
@@ -61,58 +99,71 @@ footer{
 <nav>
   <b>UCoin</b>
   <div>
-    <a href="index.html">Home</a>
-    <a href="token.html">Token</a>
+    <a href="/index.html">Home</a>
+    <a href="/token.html">Token</a>
   </div>
 </nav>
 
+<div class="hero">
+  <h1>About UCoin</h1>
+</div>
+
 <div class="section">
 
-<h1>The Idea Behind UCoin</h1>
-
+<!-- IDEA -->
+<div class="card">
+<h2>The Idea Behind UCoin</h2>
 <p>
-UCoin was created with a simple but powerful idea — to build a token that doesn’t rely on noise, hype, or identity, but instead grows through belief, consistency, and community strength.
+UCoin was created with a clear purpose — to build a token shaped by its community rather than controlled by a central authority.
 </p>
-
 <p>
-In a world where most projects compete for attention, UCoin takes a different path. It is built in silence, allowing curiosity and organic interest to drive its growth.
+It is based on the belief that consistent participation and collective momentum can create lasting value over time.
 </p>
-
 <p>
-There is no central figure, no loud promises — only a growing community that shapes its direction and defines its value over time.
+From the start, the focus has been on building a strong foundation that grows naturally with its community.
 </p>
+</div>
 
-<h2>Built in Silence</h2>
-
+<!-- DIFFERENT -->
+<div class="card">
+<h2>What Makes UCoin Different</h2>
 <p>
-UCoin stands for those who understand that true power doesn’t always need visibility. In a space filled with constant noise, UCoin represents a quiet force — steady, resilient, and evolving.
+UCoin takes a measured approach to growth. Instead of relying on short-term attention, it focuses on stability and gradual progress.
 </p>
-
 <p>
-It is not designed to follow trends, but to create its own path through momentum and belief.
+It is driven by its holders, where activity and engagement contribute directly to its development.
 </p>
-
-<h2>Vision</h2>
-
 <p>
-The vision behind UCoin is to build long-term value driven by trust and sustained growth.
+This approach creates a more balanced ecosystem built on consistency rather than sudden spikes.
 </p>
+</div>
 
+<!-- VISION -->
+<div class="card">
+<h2>Our Vision</h2>
 <p>
-Instead of chasing short-term hype, the focus remains on creating a strong foundation that can grow naturally over time, supported by its community.
+The vision of UCoin is to establish a sustainable and growing ecosystem supported by an active community.
 </p>
+<p>
+It aims to expand steadily while maintaining a strong foundation based on trust and long-term thinking.
+</p>
+<p>
+As adoption increases, UCoin is positioned to evolve into a more recognized and stable presence.
+</p>
+</div>
 
+<!-- WHY -->
+<div class="card">
 <h2>Why UCoin</h2>
+<div class="grid">
+  <div class="card">Community Driven</div>
+  <div class="card">Stable Growth</div>
+  <div class="card">Long-Term Value</div>
+  <div class="card">Simple & Transparent</div>
+</div>
+</div>
 
-<p>
-Community driven at its core — every holder contributes to its journey  
-<br><br>
-Focused on growth, not noise — value built over time  
-<br><br>
-Designed for long-term sustainability and expansion  
-</p>
-
-<a href="index.html" class="btn">← Back to Home</a>
+<a href="/index.html" class="btn">← Back to Home</a>
 
 </div>
 
