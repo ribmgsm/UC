@@ -60,7 +60,52 @@ nav a{
   text-decoration:none;
 }
 
-/* FOOTER (premium dark) */
+/* CONTRACT BOX */
+.contract-box{
+  margin-top:30px;
+  padding:20px;
+  border:1px dashed rgba(255,255,255,0.2);
+  border-radius:12px;
+  display:inline-block;
+  background:rgba(255,255,255,0.03);
+  box-shadow:0 0 15px rgba(255,215,0,0.2);
+}
+
+#contract{
+  display:block;
+  margin:10px 0;
+  font-size:14px;
+  color:#cbd5e1;
+  word-break:break-all;
+}
+
+/* COPY BUTTON */
+.copy-btn{
+  padding:10px 25px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.4);
+  background:rgba(255,255,255,0.05);
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.copy-btn:hover{
+  background:white;
+  color:black;
+  box-shadow:0 0 20px white;
+}
+
+.copy-btn.copied{
+  background:#00ff9d;
+  color:black;
+  box-shadow:0 0 20px #00ff9d;
+}
+
+/* FOOTER */
 footer{
   text-align:center;
   padding:25px;
@@ -74,7 +119,6 @@ footer{
 
 <body>
 
-<!-- NAV -->
 <nav>
   <b>UCoin</b>
   <div>
@@ -83,7 +127,6 @@ footer{
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <img class="logo" src="https://files.catbox.moe/todfd5.jpg">
 
@@ -93,19 +136,44 @@ footer{
   Community driven token built on trust, powered by growth, and designed for long-term value creation.
   </p>
 
+  <!-- CONTRACT -->
+  <div class="contract-box">
+    <p>Contract Address:</p>
+    <span id="contract">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</span>
+    <button onclick="copyText()" class="copy-btn">📋 COPY</button>
+  </div>
+
+  <br><br>
+
   <a class="btn" href="https://jup.ag/swap?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&outputMint=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" target="_blank">
   Buy 💰
   </a>
 
   <a class="btn" href="https://t.me/ucoin_live" target="_blank">Telegram</a>
   <a class="btn" href="https://x.com/UCoin_live" target="_blank">X</a>
-  <a class="btn" href="https://www.instagram.com/ucoin_live?igsh=MTIxOG1iY3c4Z285bw==" target="_blank">Instagram</a>
+  <a class="btn" href="https://www.instagram.com/ucoin_live" target="_blank">Instagram</a>
 </div>
 
-<!-- FOOTER -->
 <footer>
 © 2026 UCoin • All Rights Reserved
 </footer>
+
+<script>
+function copyText(){
+  const text = document.getElementById("contract").innerText;
+  const btn = document.querySelector(".copy-btn");
+
+  navigator.clipboard.writeText(text);
+
+  btn.innerText = "✔ Copied";
+  btn.classList.add("copied");
+
+  setTimeout(()=>{
+    btn.innerText = "📋 COPY";
+    btn.classList.remove("copied");
+  },2000);
+}
+</script>
 
 </body>
 </html>
