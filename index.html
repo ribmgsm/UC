@@ -89,8 +89,6 @@ nav a{
   font-weight:bold;
   cursor:pointer;
   transition:0.3s;
-  position:relative;
-  overflow:hidden;
 }
 
 .copy-btn:hover{
@@ -103,6 +101,21 @@ nav a{
   background:#00ff9d;
   color:black;
   box-shadow:0 0 20px #00ff9d;
+}
+
+/* BUY BUTTON INSIDE BOX */
+.buy-btn{
+  margin-top:10px;
+  display:inline-block;
+}
+
+/* SOCIAL ROW */
+.social-row{
+  margin-top:25px;
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
 }
 
 /* FOOTER */
@@ -136,22 +149,27 @@ footer{
   Community driven token built on trust, powered by growth, and designed for long-term value creation.
   </p>
 
-  <!-- CONTRACT -->
+  <!-- CONTRACT BOX -->
   <div class="contract-box">
     <p>Contract Address:</p>
     <span id="contract">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</span>
+
     <button onclick="copyText()" class="copy-btn">📋 COPY</button>
+
+    <br><br>
+
+    <!-- BUY inside box -->
+    <a class="btn buy-btn" href="https://jup.ag/swap?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&outputMint=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" target="_blank">
+      Buy 💰
+    </a>
   </div>
 
-  <br><br>
-
-  <a class="btn" href="https://jup.ag/swap?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&outputMint=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" target="_blank">
-  Buy 💰
-  </a>
-
-  <a class="btn" href="https://t.me/ucoin_live" target="_blank">Telegram</a>
-  <a class="btn" href="https://x.com/UCoin_live" target="_blank">X</a>
-  <a class="btn" href="https://www.instagram.com/ucoin_live" target="_blank">Instagram</a>
+  <!-- SOCIAL BUTTONS -->
+  <div class="social-row">
+    <a class="btn" href="https://t.me/ucoin_live" target="_blank">Telegram</a>
+    <a class="btn" href="https://x.com/UCoin_live" target="_blank">X</a>
+    <a class="btn" href="https://www.instagram.com/ucoin_live" target="_blank">Instagram</a>
+  </div>
 </div>
 
 <footer>
