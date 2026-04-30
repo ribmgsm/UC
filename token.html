@@ -1,145 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UCoin Token</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokenomics | UCoin (UC) Official</title>
+    <link rel="icon" type="image/jpeg" href="https://files.catbox.moe/todfd5.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #FFD700;
+            --bg: #03050a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 215, 0, 0.2);
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
 
-<style>
-body{
-  margin:0;
-  font-family:Poppins;
-  background:#05070d;
-  color:white;
-}
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            background: radial-gradient(circle at 50% 0%, #10141d 0%, var(--bg) 70%);
+            min-height: 100vh;
+        }
 
-/* NAV */
-nav{
-  display:flex;
-  justify-content:space-between;
-  padding:20px 40px;
-}
-nav a{color:white;text-decoration:none;margin:0 10px}
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; background: rgba(3, 5, 10, 0.8);
+            backdrop-filter: blur(20px); position: fixed; top: 0; width: 100%; z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo { font-size: 24px; font-weight: 900; color: var(--gold); text-decoration: none; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; margin-left: 15px; font-size: 14px; }
 
-/* HERO */
-.hero{text-align:center;padding:60px 20px;}
-.hero h1{
-  font-size:42px;
-  background:linear-gradient(gold,white);
-  -webkit-background-clip:text;
-  color:transparent;
-}
+        .container { max-width: 1000px; margin: 120px auto 60px; padding: 0 20px; text-align: center; }
 
-/* GRID */
-.grid{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.card{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
-  padding:25px;
-  margin:10px;
-  border-radius:12px;
-  width:250px;
-  text-align:center;
-  backdrop-filter:blur(10px);
-}
+        h1 {
+            font-size: clamp(35px, 8vw, 55px); font-weight: 900;
+            background: linear-gradient(to right, #fff, var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 40px;
+        }
 
-/* COPY */
-.copy{
-  margin-top:10px;
-  padding:10px;
-  background:#111827;
-  border-radius:8px;
-  cursor:pointer;
-}
+        /* Stats Grid */
+        .token-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px; margin-bottom: 40px;
+        }
+        .token-card {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 25px; border-radius: 24px; backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        .token-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .label { font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .value { font-size: 24px; font-weight: 900; }
 
-/* BUTTON */
-.btn{
-  background:gold;
-  color:black;
-  padding:12px 25px;
-  border-radius:8px;
-  text-decoration:none;
-  display:inline-block;
-  margin:10px;
-}
+        /* Contract Address Box */
+        .ca-box {
+            background: rgba(255,215,0,0.05); border: 1px dashed var(--gold);
+            padding: 20px; border-radius: 16px; margin-bottom: 40px;
+            cursor: pointer; transition: 0.3s;
+        }
+        .ca-box:hover { background: rgba(255,215,0,0.1); }
+        .ca-text { font-family: monospace; font-size: 14px; color: #ccc; word-break: break-all; }
 
-/* CHART */
-iframe{
-  border:none;
-  border-radius:12px;
-}
+        /* Chart Section */
+        .chart-container {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 10px; border-radius: 24px; overflow: hidden; margin-top: 30px;
+        }
+        iframe { width: 100%; height: 500px; border: none; border-radius: 18px; }
 
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  background:#02040a;
-}
-</style>
+        .btn-buy {
+            display: inline-block; background: var(--gold); color: #000;
+            padding: 18px 40px; border-radius: 16px; font-weight: 900;
+            text-decoration: none; margin: 30px 0; transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(255,215,0,0.2);
+        }
+        .btn-buy:hover { transform: scale(1.05); }
+
+        footer { padding: 40px; color: #444; font-size: 12px; }
+    </style>
 </head>
-
 <body>
 
-<nav>
-  <b>UCoin</b>
-  <div>
-    <a href="/index.html">Home</a>
-    <a href="/about.html">About</a>
-  </div>
-</nav>
+    <nav>
+        <a href="index.html" class="nav-logo">UCOIN</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+        </div>
+    </nav>
 
-<div class="hero">
-  <h1>UCoin (UC)</h1>
-</div>
+    <div class="container">
+        <h1>Token Details</h1>
 
-<!-- TOKEN INFO -->
-<div class="grid">
+        <div class="token-grid">
+            <div class="token-card">
+                <span class="label">Network</span>
+                <span class="value">Solana</span>
+            </div>
+            <div class="token-card">
+                <span class="label">Total Supply</span>
+                <span class="value">1,000,000</span>
+            </div>
+            <div class="token-card">
+                <span class="label">Ticker</span>
+                <span class="value">$UC</span>
+            </div>
+        </div>
 
-<div class="card">Network<br><b>Solana</b></div>
-<div class="card">Supply<br><b>1,000,000</b></div>
+        <div class="ca-box" onclick="copyCA()">
+            <span class="label">Contract Address (Click to Copy)</span>
+            <div class="ca-text" id="ca">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</div>
+        </div>
 
-<div class="card">
-Contract Address
-<div class="copy" onclick="copyCA()">
-Gt92GsKA2T...xszt
-</div>
-</div>
+        <a href="https://jup.ag/swap?outputMint=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" class="btn-buy" target="_blank">BUY UCOIN ON JUPITER 💰</a>
 
-</div>
+        <h2 style="margin: 40px 0 20px; color: var(--gold);">Live Market Chart</h2>
+        <div class="chart-container">
+            <iframe 
+                src="https://dexscreener.com/solana/6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr?embed=1&theme=dark&trades=0&info=0">
+            </iframe>
+        </div>
+    </div>
 
-<!-- BUY -->
-<div style="text-align:center;">
-<a class="btn"
-href="https://jup.ag/swap?inputMint=So11111111111111111111111111111111111111112&outputMint=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt"
-target="_blank">
-Buy UCoin 💰
-</a>
-</div>
+    <footer>
+        © 2026 UCoin • Built for the Community
+    </footer>
 
-<!-- CHART -->
-<div style="padding:40px;">
-<iframe 
-src="https://dexscreener.com/solana/6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr"
-width="100%" height="400">
-</iframe>
-</div>
-
-<footer>
-© 2026 UCoin • All Rights Reserved
-</footer>
-
-<script>
-function copyCA(){
-navigator.clipboard.writeText("Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt");
-alert("Contract Address Copied!");
-}
-</script>
-
+    <script>
+        function copyCA() {
+            const caText = document.getElementById("ca").innerText;
+            navigator.clipboard.writeText(caText);
+            alert("Contract Address Copied! ✅");
+        }
+    </script>
 </body>
 </html>
