@@ -3,7 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UCoin | Official</title>
+    
+    <title>UCoin | Official Solana Community Token</title>
+    <meta name="description" content="UCoin (UC) is a community-driven token on the Solana blockchain with a 1,000,000 total supply. Join the UCoin ecosystem for secure trading and community rewards.">
+    <meta name="keywords" content="UCoin, UC, Solana Token, Crypto Community, Futi CowRie, FCR, Trading Bot, Solana DEX, Jupiter Swap">
+    <meta name="author" content="UCoin Team">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ucoin.live/">
+    <meta property="og:title" content="UCoin | Official Solana Community Token">
+    <meta property="og:description" content="1 Million Supply. Built on Solana. Join the UCoin community today.">
+    <meta property="og:image" content="https://files.catbox.moe/todfd5.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ucoin.live/">
+    <meta property="twitter:title" content="UCoin | Official Solana Community Token">
+    <meta property="twitter:description" content="1 Million Supply. Built on Solana. Join the UCoin community today.">
+    <meta property="twitter:image" content="https://files.catbox.moe/todfd5.jpg">
     <link rel="icon" type="image/jpeg" href="https://files.catbox.moe/todfd5.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -14,7 +30,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
-        
+
         body {
             background-color: var(--bg);
             color: #fff;
@@ -32,7 +48,7 @@
             z-index: -1;
         }
 
-        /* FIXED NAV - Ab mobile par bhi dikhega */
+        /* FIXED NAV */
         nav {
             display: flex;
             justify-content: space-between;
@@ -44,8 +60,8 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         .nav-logo { font-size: 20px; font-weight: 900; color: var(--gold); text-decoration: none; }
-        
-        .nav-links { display: flex; gap: 15px; } /* Row mein rahenge links */
+
+        .nav-links { display: flex; gap: 15px; } 
         .nav-links a {
             color: #fff; text-decoration: none;
             font-size: 13px; font-weight: 700; 
@@ -62,7 +78,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 140px 20px 60px; /* Thoda zyada top padding nav ke liye */
+            padding: 140px 20px 60px;
         }
 
         .logo-img {
@@ -91,87 +107,4 @@
             padding: 25px; border-radius: 24px; width: 100%; max-width: 500px;
             margin-bottom: 35px; backdrop-filter: blur(10px);
         }
-        code { display: block; font-family: monospace; font-size: clamp(12px, 3vw, 15px); color: #ddd; margin-bottom: 20px; word-break: break-all; }
-
-        /* Buttons */
-        .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; width: 100%; }
-        .btn {
-            padding: 16px 35px; border-radius: 16px; text-decoration: none;
-            font-weight: 800; font-size: 16px; transition: 0.3s; cursor: pointer; border: none;
-            width: 100%; max-width: 280px; /* Mobile par bade buttons */
-        }
-        .btn-gold { background: var(--gold); color: #000; box-shadow: 0 10px 20px rgba(255,215,0,0.2); }
-        .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #fff; }
-
-        /* FOOTER */
-        footer {
-            padding: 30px 5%;
-            background: rgba(0, 0, 0, 0.2);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            text-align: center;
-        }
-        .f-socials { margin-bottom: 15px; display: flex; justify-content: center; gap: 20px; }
-        .f-socials a { color: #888; text-decoration: none; font-weight: 700; font-size: 13px; }
-        .copy-text { color: #444; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
-
-        /* Mobile specific adjustments to keep it looking like your screenshot */
-        @media (max-width: 480px) {
-            h1 { font-size: 65px; }
-            nav { padding: 15px 5%; }
-            .nav-logo { font-size: 18px; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="glow"></div>
-
-    <nav>
-        <a href="index.html" class="nav-logo">UCOIN</a>
-        <div class="nav-links">
-            <a href="about.html">About</a>
-            <a href="token.html">Token</a>
-        </div>
-    </nav>
-
-    <main class="hero">
-        <img src="https://files.catbox.moe/todfd5.jpg" alt="Logo" class="logo-img">
-        <p class="supply-tag">1,000,000 Total Supply</p>
-        <h1>UCOIN</h1>
-        
-        <div class="ca-container">
-            <code id="caValue">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</code>
-            <button class="btn btn-outline" style="font-size: 12px; padding: 10px 20px; width: auto;" onclick="copyCA()" id="copyBtn">COPY ADDRESS</button>
-        </div>
-
-        <div class="btn-row">
-            <a href="https://jup.ag/swap?outputMint=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" class="btn btn-gold" target="_blank">BUY ON JUPITER</a>
-            <a href="https://dexscreener.com/solana/Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" class="btn btn-outline" target="_blank">VIEW CHART</a>
-        </div>
-    </main>
-
-    <footer>
-        <div class="f-socials">
-            <a href="https://t.me/ucoin_live" target="_blank">Telegram</a>
-            <a href="https://x.com/UCoin_live" target="_blank">Twitter</a>
-            <a href="https://www.instagram.com/ucoin_live" target="_blank">Instagram</a>
-        </div>
-        <div class="copy-text">© 2026 UCOIN • SOLANA</div>
-    </footer>
-
-    <script>
-        function copyCA() {
-            const text = document.getElementById("caValue").innerText;
-            const btn = document.getElementById("copyBtn");
-            navigator.clipboard.writeText(text).then(() => {
-                btn.innerText = "✔ COPIED";
-                btn.style.color = "#00ff9d";
-                setTimeout(() => {
-                    btn.innerText = "COPY ADDRESS";
-                    btn.style.color = "#fff";
-                }, 2000);
-            });
-        }
-    </script>
-</body>
-</html>
+        code { display: block; font-family: monospace; font-size: clamp(12px, 3vw, 15px); color: #ddd; margin-bottom:
