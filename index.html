@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UCoin (UC) | Official</title>
     <link rel="icon" type="image/jpeg" href="https://files.catbox.moe/todfd5.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #FFD700;
             --bg: #03050a;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
@@ -17,167 +18,170 @@
         body {
             background-color: var(--bg);
             color: #fff;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Background */
+        .glow {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 80vw; height: 80vw;
+            background: radial-gradient(circle, rgba(255,215,0,0.03) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        /* NAVIGATION BAR */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(3, 5, 10, 0.8);
+            backdrop-filter: blur(15px);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .nav-logo { font-size: 22px; font-weight: 900; color: var(--gold); text-decoration: none; }
+        .nav-links a {
+            color: #ccc; text-decoration: none; margin-left: 25px;
+            font-size: 14px; font-weight: 600; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* HERO SECTION */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* No scrolling for pure hero feel */
-        }
-
-        /* Ambient Background Glows */
-        .glow-1 {
-            position: absolute; top: 10%; left: 10%; width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
-            z-index: -1;
-        }
-        .glow-2 {
-            position: absolute; bottom: 10%; right: 10%; width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 70%);
-            z-index: -1;
-        }
-
-        .hero-container {
             text-align: center;
-            padding: 20px;
-            width: 100%;
-            max-width: 600px;
-            z-index: 10;
+            padding: 120px 20px 60px;
         }
 
-        /* Image & Animation */
-        .logo-wrap {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 20px;
+        /* Status Ticker */
+        .live-status {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(0, 255, 157, 0.1);
+            color: #00ff9d; padding: 6px 15px;
+            border-radius: 50px; font-size: 12px; font-weight: 700;
+            margin-bottom: 25px; border: 1px solid rgba(0, 255, 157, 0.2);
         }
+        .dot { width: 8px; height: 8px; background: #00ff9d; border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
         .logo-img {
-            width: 150px; height: 150px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
-            animation: float 4s ease-in-out infinite;
+            width: 140px; height: 140px; border-radius: 50%;
+            border: 2px solid var(--gold); box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            margin-bottom: 20px; animation: float 4s ease-in-out infinite;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(2deg); }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        h1 {
+            font-size: clamp(50px, 12vw, 90px); font-weight: 900;
+            line-height: 0.9; margin-bottom: 15px; letter-spacing: -2px;
+            background: linear-gradient(to bottom, #fff, var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* Text Styling */
-        h1 {
-            font-size: clamp(48px, 12vw, 85px);
-            font-weight: 900;
-            line-height: 0.9;
-            margin-bottom: 15px;
-            letter-spacing: -2px;
-            background: linear-gradient(to bottom, #fff, var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Trust Badges */
+        .trust-badges {
+            display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center;
         }
-        .supply-badge {
-            display: inline-block;
-            background: rgba(255, 215, 0, 0.1);
-            color: var(--gold);
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 14px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            margin-bottom: 20px;
+        .badge {
+            font-size: 10px; font-weight: 700; background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 50px;
+            color: #94a3b8; text-transform: uppercase;
         }
 
         /* CA Box */
-        .ca-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            border-radius: 24px;
-            margin-bottom: 30px;
-            transition: 0.3s;
+        .ca-container {
+            background: var(--glass); border: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 20px; border-radius: 24px; width: 100%; max-width: 500px;
+            margin-bottom: 35px; backdrop-filter: blur(10px);
         }
-        .ca-card:hover { border-color: var(--gold); }
-        .ca-card p { font-size: 10px; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px; font-weight: 700; }
-        code {
-            display: block;
-            font-family: monospace;
-            font-size: clamp(11px, 3.5vw, 15px);
-            color: #ddd;
-            margin-bottom: 15px;
-            word-break: break-all;
-        }
+        .ca-label { font-size: 11px; color: var(--gold); font-weight: 700; margin-bottom: 10px; letter-spacing: 1px; }
+        code { display: block; font-family: monospace; font-size: clamp(11px, 3vw, 15px); color: #fff; margin-bottom: 15px; word-break: break-all; }
 
         /* Buttons */
-        .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
         .btn {
-            padding: 12px 25px;
-            border-radius: 15px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            transition: 0.3s;
-            cursor: pointer;
-            border: none;
+            padding: 14px 35px; border-radius: 14px; text-decoration: none;
+            font-weight: 700; font-size: 16px; transition: 0.3s; cursor: pointer; border: none;
         }
-        .btn-gold { background: var(--gold); color: #000; }
-        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255,215,0,0.3); }
-        .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; }
-        .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: #fff; }
+        .btn-gold { background: var(--gold); color: #000; box-shadow: 0 5px 15px rgba(255,215,0,0.2); }
+        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255,215,0,0.4); }
+        .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #fff; }
+        .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: var(--gold); }
 
-        /* Social Icons */
-        .socials {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
+        .social-footer {
+            margin-top: 50px; display: flex; gap: 30px;
         }
-        .socials a { color: #666; text-decoration: none; font-size: 14px; font-weight: 700; transition: 0.3s; }
-        .socials a:hover { color: var(--gold); }
+        .social-footer a { color: #555; text-decoration: none; font-weight: 700; font-size: 13px; transition: 0.3s; }
+        .social-footer a:hover { color: var(--gold); }
 
-        @media (max-width: 480px) {
-            .hero-container { padding: 10px; }
-            h1 { font-size: 60px; }
+        @media (max-width: 600px) {
+            nav { padding: 15px 5%; }
+            .nav-links { display: none; } /* Mobile par links hide karke clean rakha hai */
+            .hero { padding-top: 100px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="glow-1"></div>
-    <div class="glow-2"></div>
+    <div class="glow"></div>
 
-    <div class="hero-container">
-        <div class="logo-wrap">
-            <img src="https://files.catbox.moe/todfd5.jpg" alt="UCoin Logo" class="logo-img">
+    <nav>
+        <a href="index.html" class="nav-logo">UCOIN</a>
+        <div class="nav-links">
+            <a href="about.html">About</a>
+            <a href="token.html">Token</a>
+            <a href="https://t.me/ucoin_live" target="_blank">Telegram</a>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="live-status">
+            <div class="dot"></div>
+            LIVE ON MAINNET
         </div>
 
-        <br>
-        <span class="supply-badge">1,000,000 SUPPLY</span>
+        <img src="https://files.catbox.moe/todfd5.jpg" alt="Logo" class="logo-img">
         
         <h1>UCOIN</h1>
-        <p style="color: #888; margin-bottom: 30px; font-size: 16px;">The Alpha Community Token on Solana.</p>
 
-        <div class="ca-card">
-            <p>CONTRACT ADDRESS</p>
-            <code id="ca">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</code>
+        <div class="trust-badges">
+            <span class="badge">🛡️ Mint Revoked</span>
+            <span class="badge">💎 1M Supply</span>
+            <span class="badge">🚀 Solana Chain</span>
+        </div>
+
+        <div class="ca-container">
+            <div class="ca-label">OFFICIAL CONTRACT ADDRESS</div>
+            <code id="caValue">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</code>
             <button class="btn btn-outline" style="font-size: 12px; padding: 8px 20px;" onclick="copyCA()" id="copyBtn">Copy Address</button>
         </div>
 
         <div class="btn-row">
-            <a href="https://jup.ag/swap?outputMint=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" class="btn btn-gold">Buy on Jupiter</a>
-            <a href="https://dexscreener.com/solana/Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" class="btn btn-outline">Live Chart</a>
+            <a href="https://jup.ag/swap?outputMint=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" class="btn btn-gold" target="_blank">Buy on Jupiter</a>
+            <a href="https://dexscreener.com/solana/Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" class="btn btn-outline" target="_blank">Live Chart</a>
         </div>
 
-        <div class="socials">
+        <div class="social-footer">
             <a href="https://t.me/ucoin_live" target="_blank">TELEGRAM</a>
-            <a href="https://x.com/UCoin_live" target="_blank">TWITTER / X</a>
+            <a href="https://x.com/UCoin_live" target="_blank">TWITTER</a>
             <a href="https://www.instagram.com/ucoin_live" target="_blank">INSTAGRAM</a>
         </div>
-    </div>
+    </main>
 
     <script>
         function copyCA() {
-            const text = document.getElementById("ca").innerText;
+            const caText = document.getElementById("caValue").innerText;
             const btn = document.getElementById("copyBtn");
-            navigator.clipboard.writeText(text).then(() => {
+            navigator.clipboard.writeText(caText).then(() => {
                 btn.innerText = "✔ Copied!";
                 btn.style.color = "#00ff9d";
                 setTimeout(() => {
