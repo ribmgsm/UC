@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap | UCoin (UC) Journey</title>
+    <link rel="icon" type="image/jpeg" href="https://files.catbox.moe/todfd5.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #FFD700;
+            --bg: #03050a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 215, 0, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            background: radial-gradient(circle at 50% 0%, #10141d 0%, var(--bg) 70%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; background: rgba(3, 5, 10, 0.8);
+            backdrop-filter: blur(20px); position: fixed; top: 0; width: 100%; z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo { font-size: 24px; font-weight: 900; color: var(--gold); text-decoration: none; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; margin-left: 15px; font-size: 14px; }
+
+        .container { max-width: 800px; margin: 150px auto 100px; padding: 0 25px; }
+
+        h1 {
+            font-size: clamp(40px, 8vw, 60px); font-weight: 900; text-align: center;
+            background: linear-gradient(to right, #fff, var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 60px;
+        }
+
+        /* Timeline Design */
+        .timeline { position: relative; }
+        .timeline::before {
+            content: ''; position: absolute; left: 0; top: 0; width: 2px; height: 100%;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+        }
+
+        .phase {
+            position: relative; padding-left: 40px; margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out forwards; opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .phase::before {
+            content: ''; position: absolute; left: -6px; top: 0;
+            width: 14px; height: 14px; background: var(--gold);
+            border-radius: 50%; box-shadow: 0 0 15px var(--gold);
+        }
+
+        .phase-tag {
+            color: var(--gold); font-weight: 900; font-size: 12px;
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block;
+        }
+
+        .phase-card {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 30px; border-radius: 24px; backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        .phase-card:hover { border-color: var(--gold); transform: scale(1.02); }
+
+        .phase-card h3 { font-size: 24px; margin-bottom: 15px; }
+        .phase-card ul { list-style: none; }
+        .phase-card li { 
+            color: #aaa; margin-bottom: 10px; font-size: 16px; 
+            display: flex; align-items: center; gap: 10px;
+        }
+        .phase-card li::before { content: '✔'; color: var(--gold); font-weight: 900; }
+
+        .footer-nav { text-align: center; margin-top: 50px; }
+        .footer-nav a { color: var(--gold); text-decoration: none; font-weight: 700; margin: 0 15px; font-size: 14px; }
+
+        footer { text-align: center; padding: 60px 0; color: #333; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">UCOIN</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="token.html">Token</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>The Journey</h1>
+
+        <div class="timeline">
+            <div class="phase" style="animation-delay: 0.1s;">
+                <span class="phase-tag">Phase 1: Genesis</span>
+                <div class="phase-card">
+                    <h3>Foundation</h3>
+                    <ul>
+                        <li>Smart Contract Deployment</li>
+                        <li>Website V1.0 Launch</li>
+                        <li>Community Channels (TG/X) Setup</li>
+                        <li>Initial Liquidity Injection</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase" style="animation-delay: 0.3s;">
+                <span class="phase-tag">Phase 2: Ignition</span>
+                <div class="phase-card">
+                    <h3>Momentum</h3>
+                    <ul>
+                        <li>Bonding Curve Completion</li>
+                        <li>DEX Listing (Raydium/Jupiter)</li>
+                        <li>First 1,000 Holders Goal</li>
+                        <li>Influencer & Social Marketing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase" style="animation-delay: 0.5s;">
+                <span class="phase-tag">Phase 3: Expansion</span>
+                <div class="phase-card">
+                    <h3>Scale</h3>
+                    <ul>
+                        <li>CoinMarketCap & CoinGecko Listing</li>
+                        <li>UCoin Community Bot Upgrades</li>
+                        <li>Major Strategic Partnerships</li>
+                        <li>Community Giveaways & Contests</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase" style="animation-delay: 0.7s;">
+                <span class="phase-tag">Phase 4: Zenith</span>
+                <div class="phase-card">
+                    <h3>Legacy</h3>
+                    <ul>
+                        <li>DAO Governance Implementation</li>
+                        <li>UCoin Ecosystem Expansion</li>
+                        <li>Global Marketing Push</li>
+                        <li>Future Utility Reveal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <a href="index.html">← RETURN HOME</a>
+            <a href="about.html">READ ABOUT US →</a>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 UCOIN • BUILT BY THE COMMUNITY FOR THE COMMUNITY
+    </footer>
+
+</body>
+</html>
