@@ -23,11 +23,11 @@
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 80px 20px;
+            padding: 60px 20px;
         }
 
         .section {
-            margin-bottom: 80px;
+            margin-bottom: 60px;
             border-left: 2px solid var(--gold);
             padding-left: 30px;
         }
@@ -41,22 +41,21 @@
         }
 
         h3 {
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 900;
             margin-top: 0;
             letter-spacing: -1px;
         }
 
         p {
-            font-size: 18px;
+            font-size: 17px;
             color: #bbbbbb;
-            max-width: 800px;
         }
 
         /* 1. CA COPY BOX */
         .ca-box {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 215, 0, 0.4);
+            border: 1px solid var(--gold);
             padding: 15px;
             margin: 25px 0;
             display: flex;
@@ -67,34 +66,31 @@
 
         .ca-text {
             color: var(--gold);
-            font-family: 'Courier New', monospace;
+            font-family: monospace;
             font-weight: bold;
             font-size: 14px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            margin-right: 10px;
         }
 
         .copy-btn {
             background: var(--gold);
             color: #000;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 15px;
             cursor: pointer;
             font-weight: 900;
             font-size: 12px;
             text-transform: uppercase;
-            transition: 0.2s;
+            margin-left: 10px;
         }
 
-        .copy-btn:active { transform: scale(0.95); }
-
-        /* ACTION GRID */
-        .action-grid {
+        /* ACTION LIST (ORDER: BUY -> X -> TG -> INSTA) */
+        .action-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             margin-top: 20px;
         }
 
@@ -102,33 +98,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 18px;
             text-decoration: none;
             font-weight: 900;
             font-size: 16px;
-            letter-spacing: 1px;
-            transition: 0.3s;
             text-align: center;
             border-radius: 4px;
+            transition: 0.3s;
         }
 
-        /* 2. BUY BUTTON (PRIORITY) */
         .btn-buy {
             background: var(--gold);
             color: #000;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
         }
 
-        /* SOCIAL BUTTONS */
         .btn-social {
             background: var(--card-bg);
             color: var(--gold);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
         .btn:hover {
             filter: brightness(1.2);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
         }
 
         .highlight { color: var(--gold); font-weight: bold; }
@@ -141,19 +133,19 @@
         <div class="section">
             <h2>I. WHAT IS UCOIN?</h2>
             <h3>The Standard on Solana.</h3>
-            <p>UCoin is a community-driven token built on the Solana blockchain, engineered to capture and preserve value over time. Designed for those who move before the crowd. 🚀</p>
+            <p>UCoin is a community-driven token built on the Solana blockchain, engineered to capture and preserve value over time. Designed for those who recognize value early and move before the crowd. 🚀</p>
         </div>
 
         <div class="section">
             <h2>II. THE CORE IDEA</h2>
             <h3>Logic Over Hype.</h3>
-            <p>We rely on <span class="highlight">Fixed Execution</span>. Mint renounced. Contract verified. No hidden inflation—just a transparent, developer-led infrastructure.</p>
+            <p>We rely on <span class="highlight">Fixed Execution</span>. Mint authority renounced. Contract verified. No hidden inflation—just a transparent, developer-led infrastructure.</p>
         </div>
 
         <div class="section">
             <h2>III. WHY IT MATTERS</h2>
             <h3>The Power of One Million.</h3>
-            <p>In a sea of trillion-supply noise, UCoin stands firm with a <span class="highlight">final supply of 1,000,000 $UC</span>. True scarcity for serious holders.</p>
+            <p>In a market of trillion-supply noise, UCoin stands firm with a <span class="highlight">final supply of 1,000,000 $UC</span>. True scarcity for serious holders.</p>
         </div>
 
         <div class="section">
@@ -165,11 +157,13 @@
                 <button class="copy-btn" onclick="copyCA()">Copy CA</button>
             </div>
 
-            <div class="action-grid">
+            <div class="action-list">
                 <a href="https://jup.ag/swap/SOL-PASTE_YOUR_CA_HERE" target="_blank" class="btn btn-buy">BUY ON JUPITER</a>
                 
                 <a href="https://x.com/UCoin_live" target="_blank" class="btn btn-social">FOLLOW ON X</a>
+                
                 <a href="https://t.me/UCoin_live" target="_blank" class="btn btn-social">JOIN TELEGRAM</a>
+                
                 <a href="https://instagram.com/UCoin_live" target="_blank" class="btn btn-social">INSTAGRAM</a>
             </div>
         </div>
