@@ -34,14 +34,14 @@
 
         h2 {
             color: var(--gold);
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 10px;
         }
 
         h3 {
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 900;
             margin-top: 0;
             letter-spacing: -1px;
@@ -53,43 +53,85 @@
             max-width: 800px;
         }
 
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
+        /* 1. CA COPY BOX */
+        .ca-box {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            padding: 15px;
+            margin: 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px;
         }
 
-        .social-link {
+        .ca-text {
+            color: var(--gold);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 14px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-right: 10px;
+        }
+
+        .copy-btn {
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .copy-btn:active { transform: scale(0.95); }
+
+        /* ACTION GRID */
+        .action-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
             text-decoration: none;
-            color: var(--gold);
-            font-weight: bold;
+            font-weight: 900;
             font-size: 16px;
             letter-spacing: 1px;
             transition: 0.3s;
-            background: var(--card-bg);
+            text-align: center;
+            border-radius: 4px;
         }
 
-        .social-link:hover {
+        /* 2. BUY BUTTON (PRIORITY) */
+        .btn-buy {
             background: var(--gold);
             color: #000;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
         }
 
-        .highlight {
+        /* SOCIAL BUTTONS */
+        .btn-social {
+            background: var(--card-bg);
             color: var(--gold);
-            font-weight: bold;
+            border: 1px solid rgba(255, 215, 0, 0.2);
         }
 
-        @media (max-width: 600px) {
-            h3 { font-size: 24px; }
-            .container { padding: 40px 20px; }
+        .btn:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
         }
+
+        .highlight { color: var(--gold); font-weight: bold; }
     </style>
 </head>
 <body>
@@ -99,32 +141,50 @@
         <div class="section">
             <h2>I. WHAT IS UCOIN?</h2>
             <h3>The Standard on Solana.</h3>
-            <p>UCoin is a community-driven token built on the Solana blockchain, engineered to capture and preserve value over time. Designed with a true fair-launch model and zero hidden advantages, it offers a rare entry point where early participants gain a decisive edge. UCoin isn’t for everyone — it’s for those who recognize value early and move before the crowd. 🚀</p>
+            <p>UCoin is a community-driven token built on the Solana blockchain, engineered to capture and preserve value over time. Designed for those who move before the crowd. 🚀</p>
         </div>
 
         <div class="section">
             <h2>II. THE CORE IDEA</h2>
             <h3>Logic Over Hype.</h3>
-            <p>We stripped away the noise to focus on what actually works: <span class="highlight">Fixed Execution</span>. While others rely on temporary hype, we rely on locked code. By renouncing mint authority and verifying the contract from day one, we’ve ensured the rules can never be altered. No hidden inflation, no human interference—just a transparent, developer-led infrastructure.</p>
+            <p>We rely on <span class="highlight">Fixed Execution</span>. Mint renounced. Contract verified. No hidden inflation—just a transparent, developer-led infrastructure.</p>
         </div>
 
         <div class="section">
             <h2>III. WHY IT MATTERS</h2>
             <h3>The Power of One Million.</h3>
-            <p>In a market saturated with trillion-supply tokens that dilute your value every hour, UCoin stands firm with a <span class="highlight">final supply of 1,000,000 $UC</span>. This isn't just a number; it’s true scarcity. Holding $UC means you are backing a project that values technical execution over marketing gimmicks.</p>
+            <p>In a sea of trillion-supply noise, UCoin stands firm with a <span class="highlight">final supply of 1,000,000 $UC</span>. True scarcity for serious holders.</p>
         </div>
 
         <div class="section">
-            <h2>IV. JOIN THE MOVEMENT</h2>
-            <h3>The vision is locked. The math is final.</h3>
-            <div class="social-grid">
-                <a href="https://t.me/UCoin_live" target="_blank" class="social-link">TELEGRAM</a>
-                <a href="https://x.com/UCoin_live" target="_blank" class="social-link">X (TWITTER)</a>
-                <a href="https://instagram.com/UCoin_live" target="_blank" class="social-link">INSTAGRAM</a>
+            <h2>IV. TAKE ACTION</h2>
+            <h3>Secure your position.</h3>
+            
+            <div class="ca-box">
+                <span class="ca-text" id="ca-val">PASTE_YOUR_CA_HERE</span>
+                <button class="copy-btn" onclick="copyCA()">Copy CA</button>
+            </div>
+
+            <div class="action-grid">
+                <a href="https://jup.ag/swap/SOL-PASTE_YOUR_CA_HERE" target="_blank" class="btn btn-buy">BUY ON JUPITER</a>
+                
+                <a href="https://x.com/UCoin_live" target="_blank" class="btn btn-social">FOLLOW ON X</a>
+                <a href="https://t.me/UCoin_live" target="_blank" class="btn btn-social">JOIN TELEGRAM</a>
+                <a href="https://instagram.com/UCoin_live" target="_blank" class="btn btn-social">INSTAGRAM</a>
             </div>
         </div>
 
     </div>
+
+    <script>
+        function copyCA() {
+            const text = document.getElementById('ca-val').innerText;
+            navigator.clipboard.writeText(text);
+            const btn = document.querySelector('.copy-btn');
+            btn.innerText = "COPIED!";
+            setTimeout(() => { btn.innerText = "COPY CA"; }, 2000);
+        }
+    </script>
 
 </body>
 </html>
