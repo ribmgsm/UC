@@ -44,13 +44,8 @@ background:#ab9ff2;
 color:black;
 }
 
-.refresh{
+.export{
 background:#ffaa00;
-color:black;
-}
-
-.buy{
-background:white;
 color:black;
 }
 
@@ -61,19 +56,16 @@ color:#00ff99;
 font-size:14px;
 }
 
-input, textarea{
+textarea{
 width:100%;
+height:120px;
 border:none;
 border-radius:15px;
 padding:15px;
-font-size:18px;
+font-size:16px;
 margin-top:20px;
 background:#1a1a1a;
 color:white;
-}
-
-textarea{
-height:120px;
 resize:none;
 }
 
@@ -102,7 +94,7 @@ UCoin 🚀
 <div class="card">
 
 <h2>
-Real Solana Wallet
+Solana Wallet
 </h2>
 
 <p
@@ -128,13 +120,22 @@ class="import"
 onclick="importWallet()"
 >
 
-Import Wallet
+Import Private Key
+
+</button>
+
+<button
+class="export"
+onclick="exportKey()"
+>
+
+Export Private Key
 
 </button>
 
 <textarea
-id="secretInput"
-placeholder="Paste Secret Key Array"
+id="privateKeyInput"
+placeholder="Paste Private Key JSON"
 ></textarea>
 
 </div>
@@ -142,69 +143,26 @@ placeholder="Paste Secret Key Array"
 <div class="card">
 
 <h2>
-SOL Balance
+Wallet Backup
 </h2>
-
-<div
-class="balance"
-id="solBalance"
->
-
-0 SOL
-
-</div>
-
-<button
-class="refresh"
-onclick="fetchBalance()"
->
-
-Refresh Balance
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>
-Buy UCoin
-</h2>
-
-<input
-id="amount"
-type="number"
-placeholder="Enter INR Amount"
-/>
-
-<button
-class="buy"
-onclick="buyNow()"
->
-
-Pay with UPI
-
-</button>
 
 <p class="history">
-UPI ID: ribmgsm@okaxis
+Save your private key safely 😄
 </p>
+
+<textarea
+id="backup"
+readonly
+placeholder="Private key will appear here"
+></textarea>
 
 </div>
 
 <script type="module">
 
 import {
-Keypair,
-Connection,
-PublicKey,
-LAMPORTS_PER_SOL
+Keypair
 } from 'https://esm.sh/@solana/web3.js';
-
-const connection =
-new Connection(
-'https://api.mainnet-beta.solana.com'
-);
 
 function loadWallet(){
 
@@ -223,30 +181,11 @@ document.getElementById(
 ).innerText =
 walletData.publicKey;
 
-fetchBalance();
-
 }
 
 }
 
 window.createWallet = () => {
-
-let saved =
-localStorage.getItem(
-"ucoin_wallet"
-);
-
-if(saved){
-
-loadWallet();
-
-alert(
-"Existing wallet loaded 🚀"
-);
-
-return;
-
-}
 
 const keypair =
 Keypair.generate();
@@ -270,8 +209,48 @@ JSON.stringify(walletData)
 
 loadWallet();
 
+document.getElementById(
+"backup"
+).value =
+JSON.stringify(
+walletData.secretKey
+);
+
 alert(
 "Real Wallet Created 🚀"
+);
+
+};
+
+window.exportKey = () => {
+
+let saved =
+localStorage.getItem(
+"ucoin_wallet"
+);
+
+if(!saved){
+
+alert(
+"No wallet found"
+);
+
+return;
+
+}
+
+let walletData =
+JSON.parse(saved);
+
+document.getElementById(
+"backup"
+).value =
+JSON.stringify(
+walletData.secretKey
+);
+
+alert(
+"Private Key Exported 🚀"
 );
 
 };
@@ -280,15 +259,15 @@ window.importWallet = () => {
 
 try{
 
-let secret =
+let input =
 document.getElementById(
-"secretInput"
+"privateKeyInput"
 ).value;
 
-if(secret == ""){
+if(input == ""){
 
 alert(
-"Paste secret key"
+"Paste private key"
 );
 
 return;
@@ -297,7 +276,7 @@ return;
 
 let secretArray =
 Uint8Array.from(
-JSON.parse(secret)
+JSON.parse(input)
 );
 
 const keypair =
@@ -331,78 +310,10 @@ alert(
 }catch(err){
 
 alert(
-"Invalid Secret Key"
+"Invalid Private Key"
 );
 
 }
-
-};
-
-window.fetchBalance = async () => {
-
-try{
-
-let saved =
-localStorage.getItem(
-"ucoin_wallet"
-);
-
-if(!saved){
-
-alert(
-"No wallet found"
-);
-
-return;
-
-}
-
-let walletData =
-JSON.parse(saved);
-
-const balance =
-await connection.getBalance(
-new PublicKey(
-walletData.publicKey
-)
-);
-
-document.getElementById(
-"solBalance"
-).innerText =
-(balance / LAMPORTS_PER_SOL)
-.toFixed(4) + " SOL";
-
-}catch(err){
-
-alert(
-"Failed to fetch balance"
-);
-
-}
-
-};
-
-window.buyNow = () => {
-
-let amount =
-document.getElementById(
-"amount"
-).value;
-
-if(amount == ""){
-
-alert(
-"Enter amount"
-);
-
-return;
-
-}
-
-window.open(
-`upi://pay?pa=ribmgsm@okaxis&pn=UCoin&am=${amount}&cu=INR`
-);
 
 };
 
