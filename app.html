@@ -1,57 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>UCoin Pro Max</title>
+
+<link rel="manifest" href="/manifest.json">
+
+<meta name="theme-color" content="#000000">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#000;
+color:white;
+padding:20px;
+padding-bottom:120px;
+}
+
+.logo{
+font-size:42px;
+font-weight:bold;
+margin-top:20px;
+}
+
+.card{
+background:#111;
+padding:20px;
+border-radius:25px;
+margin-top:20px;
+}
+
+.balance{
+font-size:42px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.green{
+color:#00ff99;
+}
+
+.wallet{
+word-break:break-all;
+font-size:14px;
+margin-top:15px;
+color:#00ff99;
+}
+
+button{
+width:100%;
+height:60px;
+border:none;
+border-radius:18px;
+font-size:18px;
+font-weight:bold;
+margin-top:15px;
+}
+
+.primary{
+background:white;
+color:black;
+}
+
+.secondary{
+background:#ab9ff2;
+color:black;
+}
+
+.dark{
+background:#222;
+color:white;
+}
+
+input, textarea{
+width:100%;
+background:#1a1a1a;
+border:none;
+border-radius:15px;
+padding:15px;
+color:white;
+font-size:16px;
+margin-top:15px;
+}
+
+textarea{
+height:110px;
+resize:none;
+}
+
+.row{
+display:flex;
+gap:10px;
+}
+
+.small{
+font-size:14px;
+color:#aaa;
+margin-top:10px;
+line-height:1.5;
+}
+
+.nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#111;
+display:flex;
+justify-content:space-around;
+padding:15px 0;
+border-top:1px solid #222;
+}
+
+.nav div{
+font-size:13px;
+color:#aaa;
+text-align:center;
+}
+
+.qr{
+width:100%;
+background:white;
+padding:10px;
+border-radius:20px;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="logo">
+UCoin 🚀
+</div>
+
 <div class="card">
 
 <h2>
-Import Wallet
+Wallet
 </h2>
 
-<button
-class="import"
-onclick="showSecretKey()"
+<div
+class="wallet"
+id="walletAddress"
 >
 
-Import using Secret Key
-
-</button>
-
-<button
-class="import"
-onclick="showPhrase()"
->
-
-Import using Recovery Phrase
-
-</button>
-
-<div id="importArea"></div>
+No Wallet
 
 </div>
 
-<script>
+<div class="row">
 
-function showSecretKey(){
+<button
+class="secondary"
+onclick="createWallet()"
+>
+
+Create
+
+</button>
+
+<button
+class="dark"
+onclick="showImport()"
+>
+
+Import
+
+</button>
+
+</div>
+
+<div id="importUI"></div>
+
+</div>
+
+<div class="card">
+
+<h2>
+Balances
+</h2>
+
+<div
+class="balance"
+id="solBalance"
+>
+
+0 SOL
+
+</div>
+
+<div class="green">
+1250 UCoin
+</div>
+
+<button
+class="primary"
+onclick="refreshBalance()"
+>
+
+Refresh Balance
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>
+Receive
+</h2>
+
+<img
+class="qr"
+id="qr"
+src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=UCoin"
+/>
+
+<p class="small">
+Share your wallet address to receive SOL or UCoin 😄
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>
+Buy UCoin with UPI
+</h2>
+
+<input
+id="amount"
+type="number"
+placeholder="Enter INR Amount"
+/>
+
+<button
+class="primary"
+onclick="buyNow()"
+>
+
+Pay with UPI
+
+</button>
+
+<p class="small">
+UPI ID: ribmgsm@okaxis
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>
+Security
+</h2>
+
+<button
+class="dark"
+onclick="exportKey()"
+>
+
+Export Private Key
+
+</button>
+
+<textarea
+id="backup"
+readonly
+placeholder="Private key appears here"
+></textarea>
+
+</div>
+
+<div class="nav">
+
+<div>
+🏠<br>Home
+</div>
+
+<div>
+💰<br>Wallet
+</div>
+
+<div>
+📈<br>Market
+</div>
+
+<div>
+⚙️<br>Settings
+</div>
+
+</div>
+
+<script type="module">
+
+import {
+Keypair,
+Connection,
+PublicKey,
+LAMPORTS_PER_SOL
+} from 'https://esm.sh/@solana/web3.js';
+
+const connection =
+new Connection(
+'https://api.mainnet-beta.solana.com'
+);
+
+function updateWalletUI(walletData){
 
 document.getElementById(
-"importArea"
+"walletAddress"
+).innerText =
+walletData.publicKey;
+
+document.getElementById(
+"qr"
+).src =
+`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${walletData.publicKey}`;
+
+refreshBalance();
+
+}
+
+window.createWallet = () => {
+
+let existing =
+localStorage.getItem(
+"ucoin_wallet"
+);
+
+if(existing){
+
+updateWalletUI(
+JSON.parse(existing)
+);
+
+alert(
+"Existing Wallet Loaded 🚀"
+);
+
+return;
+
+}
+
+const keypair =
+Keypair.generate();
+
+const walletData = {
+
+publicKey:
+keypair.publicKey.toString(),
+
+secretKey:
+Array.from(
+keypair.secretKey
+)
+
+};
+
+localStorage.setItem(
+"ucoin_wallet",
+JSON.stringify(walletData)
+);
+
+updateWalletUI(walletData);
+
+alert(
+"Real Wallet Created 🚀"
+);
+
+};
+
+window.showImport = () => {
+
+document.getElementById(
+"importUI"
 ).innerHTML = `
 
 <textarea
-id="secretKey"
+id="privateKeyInput"
 placeholder="Paste Secret Key"
-style="
-width:100%;
-height:120px;
-margin-top:20px;
-border:none;
-border-radius:15px;
-padding:15px;
-background:#1a1a1a;
-color:white;
-"
 ></textarea>
 
 <button
-onclick="importSecretKey()"
-class="import"
+class="secondary"
+onclick="importWallet()"
 >
 
 Import Wallet
@@ -60,56 +409,174 @@ Import Wallet
 
 `;
 
+};
+
+window.importWallet = () => {
+
+try{
+
+let input =
+document.getElementById(
+"privateKeyInput"
+).value;
+
+let secretArray =
+Uint8Array.from(
+JSON.parse(input)
+);
+
+const keypair =
+Keypair.fromSecretKey(
+secretArray
+);
+
+const walletData = {
+
+publicKey:
+keypair.publicKey.toString(),
+
+secretKey:
+Array.from(
+keypair.secretKey
+)
+
+};
+
+localStorage.setItem(
+"ucoin_wallet",
+JSON.stringify(walletData)
+);
+
+updateWalletUI(walletData);
+
+alert(
+"Wallet Imported 🚀"
+);
+
+}catch(err){
+
+alert(
+"Invalid Secret Key"
+);
+
 }
 
-function showPhrase(){
+};
+
+window.exportKey = () => {
+
+let saved =
+localStorage.getItem(
+"ucoin_wallet"
+);
+
+if(!saved){
+
+alert(
+"No wallet found"
+);
+
+return;
+
+}
+
+let walletData =
+JSON.parse(saved);
 
 document.getElementById(
-"importArea"
-).innerHTML = `
+"backup"
+).value =
+JSON.stringify(
+walletData.secretKey
+);
 
-<textarea
-id="phrase"
-placeholder="Enter Recovery Phrase"
-style="
-width:100%;
-height:120px;
-margin-top:20px;
-border:none;
-border-radius:15px;
-padding:15px;
-background:#1a1a1a;
-color:white;
-"
-></textarea>
+};
 
-<button
-onclick="importPhrase()"
-class="import"
->
+window.refreshBalance = async () => {
 
-Import Wallet
+try{
 
-</button>
+let saved =
+localStorage.getItem(
+"ucoin_wallet"
+);
 
-`;
+if(!saved){
+
+return;
 
 }
 
-function importSecretKey(){
+let walletData =
+JSON.parse(saved);
+
+const balance =
+await connection.getBalance(
+new PublicKey(
+walletData.publicKey
+)
+);
+
+document.getElementById(
+"solBalance"
+).innerText =
+(balance / LAMPORTS_PER_SOL)
+.toFixed(4) + " SOL";
+
+}catch(err){
+
+console.log(err);
+
+}
+
+};
+
+window.buyNow = () => {
+
+let amount =
+document.getElementById(
+"amount"
+).value;
+
+if(amount == ""){
 
 alert(
-"Secret Key Import Coming Soon 🚀"
+"Enter Amount"
+);
+
+return;
+
+}
+
+window.open(
+`upi://pay?pa=ribmgsm@okaxis&pn=UCoin&am=${amount}&cu=INR`
+);
+
+};
+
+window.onload = () => {
+
+let saved =
+localStorage.getItem(
+"ucoin_wallet"
+);
+
+if(saved){
+
+updateWalletUI(
+JSON.parse(saved)
 );
 
 }
 
-function importPhrase(){
+};
 
-alert(
-"Recovery Phrase Import Coming Soon 🚀"
-);
-
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('/service-worker.js');
 }
 
 </script>
+
+</body>
+
+</html>
