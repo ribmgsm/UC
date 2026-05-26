@@ -1,330 +1,115 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-<title>UCoin Wallet</title>
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<style>
-
-body{
-background:black;
-color:white;
-font-family:Arial;
-padding:20px;
-}
-
-.card{
-background:#111;
-padding:20px;
-border-radius:20px;
-margin-top:20px;
-}
-
-button{
-width:100%;
-height:60px;
-border:none;
-border-radius:15px;
-font-size:20px;
-font-weight:bold;
-margin-top:15px;
-}
-
-.create{
-background:#00ff99;
-color:black;
-}
-
-.import{
-background:#ab9ff2;
-color:black;
-}
-
-.export{
-background:#ffaa00;
-color:black;
-}
-
-.wallet{
-margin-top:15px;
-word-break:break-all;
-color:#00ff99;
-font-size:14px;
-}
-
-textarea{
-width:100%;
-height:120px;
-border:none;
-border-radius:15px;
-padding:15px;
-font-size:16px;
-margin-top:20px;
-background:#1a1a1a;
-color:white;
-resize:none;
-}
-
-.balance{
-font-size:38px;
-font-weight:bold;
-margin-top:10px;
-}
-
-.history{
-margin-top:10px;
-color:#aaa;
-line-height:1.5;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<h1>
-UCoin 🚀
-</h1>
-
 <div class="card">
 
 <h2>
-Solana Wallet
+Import Wallet
 </h2>
 
-<p
-class="wallet"
-id="wallet"
->
-
-Wallet not created
-
-</p>
-
 <button
-class="create"
-onclick="createWallet()"
+class="import"
+onclick="showSecretKey()"
 >
 
-Create Wallet
+Import using Secret Key
 
 </button>
 
 <button
 class="import"
-onclick="importWallet()"
+onclick="showPhrase()"
 >
 
-Import Private Key
+Import using Recovery Phrase
 
 </button>
+
+<div id="importArea"></div>
+
+</div>
+
+<script>
+
+function showSecretKey(){
+
+document.getElementById(
+"importArea"
+).innerHTML = `
+
+<textarea
+id="secretKey"
+placeholder="Paste Secret Key"
+style="
+width:100%;
+height:120px;
+margin-top:20px;
+border:none;
+border-radius:15px;
+padding:15px;
+background:#1a1a1a;
+color:white;
+"
+></textarea>
 
 <button
-class="export"
-onclick="exportKey()"
+onclick="importSecretKey()"
+class="import"
 >
 
-Export Private Key
+Import Wallet
 
 </button>
 
-<textarea
-id="privateKeyInput"
-placeholder="Paste Private Key JSON"
-></textarea>
+`;
 
-</div>
+}
 
-<div class="card">
+function showPhrase(){
 
-<h2>
-Wallet Backup
-</h2>
-
-<p class="history">
-Save your private key safely 😄
-</p>
+document.getElementById(
+"importArea"
+).innerHTML = `
 
 <textarea
-id="backup"
-readonly
-placeholder="Private key will appear here"
+id="phrase"
+placeholder="Enter Recovery Phrase"
+style="
+width:100%;
+height:120px;
+margin-top:20px;
+border:none;
+border-radius:15px;
+padding:15px;
+background:#1a1a1a;
+color:white;
+"
 ></textarea>
 
-</div>
+<button
+onclick="importPhrase()"
+class="import"
+>
 
-<script type="module">
+Import Wallet
 
-import {
-Keypair
-} from 'https://esm.sh/@solana/web3.js';
+</button>
 
-function loadWallet(){
-
-let saved =
-localStorage.getItem(
-"ucoin_wallet"
-);
-
-if(saved){
-
-let walletData =
-JSON.parse(saved);
-
-document.getElementById(
-"wallet"
-).innerText =
-walletData.publicKey;
+`;
 
 }
 
-}
-
-window.createWallet = () => {
-
-const keypair =
-Keypair.generate();
-
-const walletData = {
-
-publicKey:
-keypair.publicKey.toString(),
-
-secretKey:
-Array.from(
-keypair.secretKey
-)
-
-};
-
-localStorage.setItem(
-"ucoin_wallet",
-JSON.stringify(walletData)
-);
-
-loadWallet();
-
-document.getElementById(
-"backup"
-).value =
-JSON.stringify(
-walletData.secretKey
-);
+function importSecretKey(){
 
 alert(
-"Real Wallet Created 🚀"
-);
-
-};
-
-window.exportKey = () => {
-
-let saved =
-localStorage.getItem(
-"ucoin_wallet"
-);
-
-if(!saved){
-
-alert(
-"No wallet found"
-);
-
-return;
-
-}
-
-let walletData =
-JSON.parse(saved);
-
-document.getElementById(
-"backup"
-).value =
-JSON.stringify(
-walletData.secretKey
-);
-
-alert(
-"Private Key Exported 🚀"
-);
-
-};
-
-window.importWallet = () => {
-
-try{
-
-let input =
-document.getElementById(
-"privateKeyInput"
-).value;
-
-if(input == ""){
-
-alert(
-"Paste private key"
-);
-
-return;
-
-}
-
-let secretArray =
-Uint8Array.from(
-JSON.parse(input)
-);
-
-const keypair =
-Keypair.fromSecretKey(
-secretArray
-);
-
-const walletData = {
-
-publicKey:
-keypair.publicKey.toString(),
-
-secretKey:
-Array.from(
-keypair.secretKey
-)
-
-};
-
-localStorage.setItem(
-"ucoin_wallet",
-JSON.stringify(walletData)
-);
-
-loadWallet();
-
-alert(
-"Wallet Imported 🚀"
-);
-
-}catch(err){
-
-alert(
-"Invalid Private Key"
+"Secret Key Import Coming Soon 🚀"
 );
 
 }
 
-};
+function importPhrase(){
 
-window.onload = () => {
+alert(
+"Recovery Phrase Import Coming Soon 🚀"
+);
 
-loadWallet();
-
-};
+}
 
 </script>
-
-</body>
-
-</html>
