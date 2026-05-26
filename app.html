@@ -1,400 +1,52 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
-<title>UCoin P2P</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UCoin</title>
 
-<link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="/manifest.json">
 
-<script>
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register('/service-worker.js');
-}
-</script>
+  <meta name="theme-color" content="#000000">
 
-<style>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+    body {
+      position: fixed;
+      inset: 0;
+    }
 
-body{
-background:#000;
-color:white;
-font-family:Arial;
-padding-bottom:100px;
-}
-
-.header{
-padding:25px;
-}
-
-.logo{
-font-size:40px;
-font-weight:bold;
-}
-
-.balanceBox{
-background:#111;
-padding:25px;
-border-radius:25px;
-margin-top:20px;
-}
-
-.balanceTitle{
-color:#aaa;
-font-size:18px;
-}
-
-.balance{
-font-size:45px;
-font-weight:bold;
-margin-top:10px;
-}
-
-.inr{
-margin-top:10px;
-color:#00ff99;
-font-size:20px;
-}
-
-.actions{
-display:flex;
-gap:15px;
-margin-top:25px;
-}
-
-button{
-width:100%;
-height:60px;
-border:none;
-border-radius:18px;
-font-size:20px;
-font-weight:bold;
-margin-top:15px;
-}
-
-.buy{
-background:white;
-color:black;
-}
-
-.sell{
-background:#222;
-color:white;
-}
-
-.card{
-background:#111;
-padding:20px;
-border-radius:20px;
-margin:20px;
-}
-
-.history{
-color:#aaa;
-margin-top:10px;
-}
-
-input{
-width:100%;
-height:55px;
-border:none;
-border-radius:15px;
-padding:15px;
-font-size:20px;
-margin-top:20px;
-}
-
-.order{
-background:#1a1a1a;
-padding:20px;
-border-radius:20px;
-margin-top:15px;
-}
-
-.qr{
-width:100%;
-border-radius:20px;
-margin-top:20px;
-background:white;
-padding:10px;
-}
-
-.upi{
-margin-top:15px;
-color:#00ff99;
-font-size:18px;
-word-break:break-all;
-}
-
-.nav{
-position:fixed;
-bottom:0;
-width:100%;
-background:#111;
-display:flex;
-justify-content:space-around;
-padding:15px 0;
-}
-
-.nav div{
-text-align:center;
-color:#aaa;
-font-size:14px;
-}
-
-</style>
-
+    iframe {
+      border: none;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="header">
-
-<div class="logo">
-UCoin 🚀
-</div>
-
-<div class="balanceBox">
-
-<div class="balanceTitle">
-Wallet Balance
-</div>
-
-<div class="balance">
-1250 UCoin
-</div>
-
-<div class="inr">
-≈ ₹15,420
-</div>
-
-<div class="actions">
-
-<button class="buy" onclick="scrollToP2P()">
-Buy
-</button>
-
-<button class="sell" onclick="sellToken()">
-Sell
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>
-P2P Marketplace 🚀
-</h2>
-
-<p class="history">
-Buy directly using UPI
-</p>
-
-<input
-id="amount"
-type="number"
-placeholder="Enter INR Amount"
-/>
-
-<button class="buy" onclick="createOrder()">
-Create Buy Order
-</button>
-
-<div id="orders"></div>
-
-</div>
-
-<div class="card">
-
-<h2>
-Pay Using UPI 🚀
-</h2>
-
-<img
-class="qr"
-src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi://pay?pa=ribmgsm@okaxis&pn=UCoin&cu=INR"
-/>
-
-<div class="upi">
-UPI ID: ribmgsm@okaxis
-</div>
-
-<p class="history">
-After payment you will receive UCoin 😄
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>
-P2P Trading 🚀
-</h2>
-
-<p class="history">
-This feature is currently on hold.
-More upgrades coming soon 😄
-</p>
-
-<button class="sell">
-Coming Soon
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>
-Transaction History
-</h2>
-
-<p class="history">
-Bought 250 UCoin
-</p>
-
-<p class="history">
-Received 100 UCoin
-</p>
-
-<p class="history">
-Swapped SOL → UCoin
-</p>
-
-</div>
-
-<div class="nav">
-
-<div>
-🏠<br>Home
-</div>
-
-<div>
-💰<br>Wallet
-</div>
-
-<div>
-📈<br>Market
-</div>
-
-<div>
-⚙️<br>Settings
-</div>
-
-</div>
-
-<script>
-
-let orders = [];
-
-function scrollToP2P(){
-
-window.scrollTo({
-top:400,
-behavior:"smooth"
-});
-
-}
-
-function sellToken(){
-
-alert(
-"Sell feature coming soon 🚀"
-);
-
-}
-
-function createOrder(){
-
-let inr =
-document.getElementById(
-"amount"
-).value;
-
-if(inr == ""){
-
-alert("Enter amount");
-
-return;
-
-}
-
-let liveRate = 10;
-
-let buyRate =
-liveRate * 1.05;
-
-let tokenAmount =
-(inr / buyRate).toFixed(2);
-
-let order = {
-id: Date.now(),
-amount: inr,
-tokens: tokenAmount,
-rate: buyRate.toFixed(2),
-status: "PAY USING UPI"
-};
-
-orders.push(order);
-
-renderOrders();
-
-window.open(
-`upi://pay?pa=ribmgsm@okaxis&pn=UCoin&am=${inr}&cu=INR`
-);
-
-}
-
-function renderOrders(){
-
-let html = "";
-
-orders.forEach(order => {
-
-html += `
-
-<div class="order">
-
-<h3>
-₹${order.amount}
-</h3>
-
-<p class="history">
-Rate: ₹${order.rate}
-</p>
-
-<p class="history">
-Tokens: ${order.tokens} UCoin
-</p>
-
-<p class="history">
-Status: ${order.status}
-</p>
-
-</div>
-
-`;
-
-});
-
-document.getElementById(
-"orders"
-).innerHTML = html;
-
-}
-
-</script>
+  <iframe src="https://example.com"></iframe>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js');
+    }
+  </script>
 
 </body>
-
 </html>
