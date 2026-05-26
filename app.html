@@ -8,7 +8,7 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>UCoin Solana</title>
+<title>UCoin</title>
 
 <style>
 
@@ -23,7 +23,6 @@ body{
 background:#000;
 color:white;
 padding:20px;
-padding-bottom:100px;
 }
 
 .logo{
@@ -39,16 +38,10 @@ border-radius:25px;
 margin-top:20px;
 }
 
-.balance{
-font-size:48px;
-font-weight:bold;
-margin-top:10px;
-}
-
-.inr{
-margin-top:10px;
+.wallet{
+margin-top:15px;
+word-break:break-all;
 color:#00ff99;
-font-size:20px;
 }
 
 button{
@@ -71,9 +64,12 @@ background:white;
 color:black;
 }
 
-.sell{
-background:#222;
-color:white;
+.qr{
+width:100%;
+background:white;
+padding:10px;
+border-radius:20px;
+margin-top:20px;
 }
 
 input{
@@ -86,20 +82,6 @@ font-size:20px;
 margin-top:20px;
 background:#1a1a1a;
 color:white;
-}
-
-.wallet{
-margin-top:15px;
-word-break:break-all;
-color:#00ff99;
-}
-
-.qr{
-width:100%;
-background:white;
-padding:10px;
-border-radius:20px;
-margin-top:20px;
 }
 
 .history{
@@ -121,7 +103,7 @@ UCoin 🚀
 <div class="card">
 
 <h2>
-Solana Wallet
+Phantom Wallet
 </h2>
 
 <p
@@ -135,10 +117,10 @@ Wallet not connected
 
 <button
 class="connect"
-onclick="connectWallet()"
+onclick="connectPhantom()"
 >
 
-Connect Solana Wallet
+Connect Phantom
 
 </button>
 
@@ -147,41 +129,7 @@ Connect Solana Wallet
 <div class="card">
 
 <h2>
-Wallet Balance
-</h2>
-
-<div class="balance">
-1250 UCoin
-</div>
-
-<div class="inr">
-≈ ₹15,420
-</div>
-
-<button
-class="buy"
-onclick="buyToken()"
->
-
 Buy UCoin
-
-</button>
-
-<button
-class="sell"
-onclick="sellToken()"
->
-
-Sell UCoin
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>
-Buy using UPI
 </h2>
 
 <input
@@ -192,10 +140,10 @@ placeholder="Enter INR Amount"
 
 <button
 class="buy"
-onclick="openUPI()"
+onclick="payUPI()"
 >
 
-Pay Now
+Buy with UPI
 
 </button>
 
@@ -210,35 +158,11 @@ UPI ID: ribmgsm@okaxis
 
 </div>
 
-<div class="card">
-
-<h2>
-Supported Wallets
-</h2>
-
-<p class="history">
-✅ Phantom
-</p>
-
-<p class="history">
-✅ Solflare
-</p>
-
-<p class="history">
-✅ Backpack
-</p>
-
-<p class="history">
-✅ Binance Solana Wallet
-</p>
-
-</div>
-
 <script>
 
-async function connectWallet(){
+async function connectPhantom(){
 
-if(window.solana){
+if(window.solana && window.solana.isPhantom){
 
 try{
 
@@ -251,7 +175,7 @@ document.getElementById(
 response.publicKey.toString();
 
 alert(
-"Solana Wallet Connected 🚀"
+"Phantom Connected 🚀"
 );
 
 }catch(err){
@@ -264,10 +188,6 @@ alert(
 
 }else{
 
-alert(
-"No Solana wallet found"
-);
-
 window.open(
 "https://phantom.app/",
 "_blank"
@@ -277,7 +197,7 @@ window.open(
 
 }
 
-function openUPI(){
+function payUPI(){
 
 let amount =
 document.getElementById(
@@ -287,7 +207,7 @@ document.getElementById(
 if(amount == ""){
 
 alert(
-"Enter amount"
+"Enter Amount"
 );
 
 return;
@@ -296,23 +216,6 @@ return;
 
 window.open(
 `upi://pay?pa=ribmgsm@okaxis&pn=UCoin&am=${amount}&cu=INR`
-);
-
-}
-
-function buyToken(){
-
-window.scrollTo({
-top:500,
-behavior:"smooth"
-});
-
-}
-
-function sellToken(){
-
-alert(
-"Sell feature coming soon 🚀"
 );
 
 }
