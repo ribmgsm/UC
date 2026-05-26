@@ -1,391 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-<title>UCoin Pro Max</title>
-
-<link rel="manifest" href="/manifest.json">
-
-<meta name="theme-color" content="#000000">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
-body{
-background:#000;
-color:white;
-padding:20px;
-padding-bottom:120px;
-}
-
-.logo{
-font-size:42px;
-font-weight:bold;
-margin-top:20px;
-}
-
-.card{
-background:#111;
-padding:20px;
-border-radius:25px;
-margin-top:20px;
-}
-
-.balance{
-font-size:42px;
-font-weight:bold;
-margin-top:10px;
-}
-
-.green{
-color:#00ff99;
-}
-
-.wallet{
-word-break:break-all;
-font-size:14px;
-margin-top:15px;
-color:#00ff99;
-}
-
-button{
-width:100%;
-height:60px;
-border:none;
-border-radius:18px;
-font-size:18px;
-font-weight:bold;
-margin-top:15px;
-}
-
-.primary{
-background:white;
-color:black;
-}
-
-.secondary{
-background:#ab9ff2;
-color:black;
-}
-
-.dark{
-background:#222;
-color:white;
-}
-
-input, textarea{
-width:100%;
-background:#1a1a1a;
-border:none;
-border-radius:15px;
-padding:15px;
-color:white;
-font-size:16px;
-margin-top:15px;
-}
-
-textarea{
-height:110px;
-resize:none;
-}
-
-.row{
-display:flex;
-gap:10px;
-}
-
-.small{
-font-size:14px;
-color:#aaa;
-margin-top:10px;
-line-height:1.5;
-}
-
-.nav{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#111;
-display:flex;
-justify-content:space-around;
-padding:15px 0;
-border-top:1px solid #222;
-}
-
-.nav div{
-font-size:13px;
-color:#aaa;
-text-align:center;
-}
-
-.qr{
-width:100%;
-background:white;
-padding:10px;
-border-radius:20px;
-margin-top:20px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="logo">
-UCoin 🚀
-</div>
-
-<div class="card">
-
-<h2>
-Wallet
-</h2>
-
-<div
-class="wallet"
-id="walletAddress"
->
-
-No Wallet
-
-</div>
-
-<div class="row">
-
-<button
-class="secondary"
-onclick="createWallet()"
->
-
-Create
-
-</button>
-
-<button
-class="dark"
-onclick="showImport()"
->
-
-Import
-
-</button>
-
-</div>
-
-<div id="importUI"></div>
-
-</div>
-
-<div class="card">
-
-<h2>
-Balances
-</h2>
-
-<div
-class="balance"
-id="solBalance"
->
-
-0 SOL
-
-</div>
-
-<div class="green">
-1250 UCoin
-</div>
-
-<button
-class="primary"
-onclick="refreshBalance()"
->
-
-Refresh Balance
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>
-Receive
-</h2>
-
-<img
-class="qr"
-id="qr"
-src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=UCoin"
-/>
-
-<p class="small">
-Share your wallet address to receive SOL or UCoin 😄
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>
-Buy UCoin with UPI
-</h2>
-
-<input
-id="amount"
-type="number"
-placeholder="Enter INR Amount"
-/>
-
-<button
-class="primary"
-onclick="buyNow()"
->
-
-Pay with UPI
-
-</button>
-
-<p class="small">
-UPI ID: ribmgsm@okaxis
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>
-Security
-</h2>
-
-<button
-class="dark"
-onclick="exportKey()"
->
-
-Export Private Key
-
-</button>
-
-<textarea
-id="backup"
-readonly
-placeholder="Private key appears here"
-></textarea>
-
-</div>
-
-<div class="nav">
-
-<div>
-🏠<br>Home
-</div>
-
-<div>
-💰<br>Wallet
-</div>
-
-<div>
-📈<br>Market
-</div>
-
-<div>
-⚙️<br>Settings
-</div>
-
-</div>
-
 <script type="module">
 
 import {
-Keypair,
-Connection,
-PublicKey,
-LAMPORTS_PER_SOL
+Keypair
 } from 'https://esm.sh/@solana/web3.js';
 
-const connection =
-new Connection(
-'https://api.mainnet-beta.solana.com'
-);
-
-function updateWalletUI(walletData){
-
-document.getElementById(
-"walletAddress"
-).innerText =
-walletData.publicKey;
-
-document.getElementById(
-"qr"
-).src =
-`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${walletData.publicKey}`;
-
-refreshBalance();
-
-}
-
-window.createWallet = () => {
-
-let existing =
-localStorage.getItem(
-"ucoin_wallet"
-);
-
-if(existing){
-
-updateWalletUI(
-JSON.parse(existing)
-);
-
-alert(
-"Existing Wallet Loaded 🚀"
-);
-
-return;
-
-}
-
-const keypair =
-Keypair.generate();
-
-const walletData = {
-
-publicKey:
-keypair.publicKey.toString(),
-
-secretKey:
-Array.from(
-keypair.secretKey
-)
-
-};
-
-localStorage.setItem(
-"ucoin_wallet",
-JSON.stringify(walletData)
-);
-
-updateWalletUI(walletData);
-
-alert(
-"Real Wallet Created 🚀"
-);
-
-};
+import bs58 from 'https://esm.sh/bs58';
 
 window.showImport = () => {
 
@@ -395,7 +14,17 @@ document.getElementById(
 
 <textarea
 id="privateKeyInput"
-placeholder="Paste Secret Key"
+placeholder="Paste Phantom Private Key"
+style="
+width:100%;
+height:120px;
+background:#1a1a1a;
+border:none;
+border-radius:15px;
+padding:15px;
+color:white;
+margin-top:15px;
+"
 ></textarea>
 
 <button
@@ -415,19 +44,27 @@ window.importWallet = () => {
 
 try{
 
-let input =
+let privateKey =
 document.getElementById(
 "privateKeyInput"
-).value;
+).value.trim();
 
-let secretArray =
-Uint8Array.from(
-JSON.parse(input)
+if(privateKey == ""){
+
+alert(
+"Paste Private Key"
 );
+
+return;
+
+}
+
+const secretKey =
+bs58.decode(privateKey);
 
 const keypair =
 Keypair.fromSecretKey(
-secretArray
+secretKey
 );
 
 const walletData = {
@@ -435,10 +72,8 @@ const walletData = {
 publicKey:
 keypair.publicKey.toString(),
 
-secretKey:
-Array.from(
-keypair.secretKey
-)
+privateKey:
+privateKey
 
 };
 
@@ -447,83 +82,20 @@ localStorage.setItem(
 JSON.stringify(walletData)
 );
 
-updateWalletUI(walletData);
-
-alert(
-"Wallet Imported 🚀"
-);
-
-}catch(err){
-
-alert(
-"Invalid Secret Key"
-);
-
-}
-
-};
-
-window.exportKey = () => {
-
-let saved =
-localStorage.getItem(
-"ucoin_wallet"
-);
-
-if(!saved){
-
-alert(
-"No wallet found"
-);
-
-return;
-
-}
-
-let walletData =
-JSON.parse(saved);
-
 document.getElementById(
-"backup"
-).value =
-JSON.stringify(
-walletData.secretKey
-);
-
-};
-
-window.refreshBalance = async () => {
-
-try{
-
-let saved =
-localStorage.getItem(
-"ucoin_wallet"
-);
-
-if(!saved){
-
-return;
-
-}
-
-let walletData =
-JSON.parse(saved);
-
-const balance =
-await connection.getBalance(
-new PublicKey(
-walletData.publicKey
-)
-);
-
-document.getElementById(
-"solBalance"
+"walletAddress"
 ).innerText =
-(balance / LAMPORTS_PER_SOL)
-.toFixed(4) + " SOL";
+walletData.publicKey;
+
+alert(
+"Phantom Wallet Imported 🚀"
+);
 
 }catch(err){
+
+alert(
+"Invalid Phantom Private Key"
+);
 
 console.log(err);
 
@@ -531,52 +103,4 @@ console.log(err);
 
 };
 
-window.buyNow = () => {
-
-let amount =
-document.getElementById(
-"amount"
-).value;
-
-if(amount == ""){
-
-alert(
-"Enter Amount"
-);
-
-return;
-
-}
-
-window.open(
-`upi://pay?pa=ribmgsm@okaxis&pn=UCoin&am=${amount}&cu=INR`
-);
-
-};
-
-window.onload = () => {
-
-let saved =
-localStorage.getItem(
-"ucoin_wallet"
-);
-
-if(saved){
-
-updateWalletUI(
-JSON.parse(saved)
-);
-
-}
-
-};
-
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register('/service-worker.js');
-}
-
 </script>
-
-</body>
-
-</html>
