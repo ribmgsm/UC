@@ -267,7 +267,7 @@ import bs58 from 'https://esm.sh/bs58?bundle';
 
 const connection =
 new Connection(
-'https://api.mainnet-beta.solana.com'
+'https://solana-mainnet.g.alchemy.com/v2/demo'
 );
 
 function updateWallet(walletData){
@@ -525,6 +525,12 @@ JSON.parse(saved)
 }
 
 };
+
+setInterval(() => {
+
+refreshBalance();
+
+}, 30000);
 
 </script>
 
