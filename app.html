@@ -27,7 +27,7 @@ margin-top:20px;
 }
 
 .connect{
-background:#ab9ff2;
+background:#f3ba2f;
 color:black;
 }
 
@@ -40,6 +40,12 @@ color:black;
 margin-top:20px;
 word-break:break-all;
 color:#00ff99;
+}
+
+.info{
+margin-top:15px;
+color:#aaa;
+line-height:1.5;
 }
 
 </style>
@@ -58,10 +64,10 @@ Wallet not connected
 
 <button
 class="connect"
-onclick="connectPhantom()"
+onclick="connectBinance()"
 >
 
-Connect Phantom
+Connect Binance Wallet
 
 </button>
 
@@ -74,11 +80,41 @@ Buy UCoin
 
 </button>
 
+<p class="info">
+Supports Binance Web3 Wallet + Solana wallets 😄
+</p>
+
 <script>
 
-async function connectPhantom(){
+async function connectBinance(){
 
-if(window.solana && window.solana.isPhantom){
+if(window.ethereum){
+
+try{
+
+const accounts =
+await window.ethereum.request({
+method: 'eth_requestAccounts'
+});
+
+document.getElementById(
+"wallet"
+).innerText =
+"Connected: " + accounts[0];
+
+alert(
+"Binance/EVM Wallet Connected 🚀"
+);
+
+}catch(err){
+
+alert(
+"Connection Cancelled"
+);
+
+}
+
+}else if(window.solana){
 
 try{
 
@@ -88,18 +124,25 @@ await window.solana.connect();
 document.getElementById(
 "wallet"
 ).innerText =
+"Connected: " +
 response.publicKey.toString();
+
+alert(
+"Solana Wallet Connected 🚀"
+);
 
 }catch(err){
 
-alert("Connection Cancelled");
+alert(
+"Connection Cancelled"
+);
 
 }
 
 }else{
 
 window.open(
-"https://phantom.app/",
+"https://www.binance.com/en/web3wallet",
 "_blank"
 );
 
