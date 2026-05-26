@@ -1,89 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-<meta charset="UTF-8" />
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-
 <title>UCoin</title>
 
-<link rel="manifest" href="/manifest.json">
-
-<meta name="theme-color" content="#000000">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
-html,body{
-width:100%;
-height:100%;
-background:#000;
-color:white;
-overflow-x:hidden;
-}
-
 body{
-padding-bottom:100px;
-}
-
-.header{
-padding:25px;
-}
-
-.logo{
-font-size:42px;
-font-weight:bold;
-}
-
-.balanceBox{
-background:#111;
-padding:25px;
-border-radius:25px;
-margin-top:20px;
-}
-
-.balanceTitle{
-color:#888;
-font-size:18px;
-}
-
-.balance{
-font-size:48px;
-font-weight:bold;
-margin-top:10px;
-}
-
-.inr{
-margin-top:10px;
-color:#00ff99;
-font-size:20px;
-}
-
-.actions{
-display:flex;
-gap:15px;
-margin-top:25px;
+background:black;
+color:white;
+font-family:Arial;
+padding:30px;
 }
 
 button{
 width:100%;
 height:60px;
 border:none;
-border-radius:18px;
-font-size:20px;
+border-radius:15px;
+font-size:22px;
 font-weight:bold;
+margin-top:20px;
+}
+
+.connect{
+background:#ab9ff2;
+color:black;
 }
 
 .buy{
@@ -91,82 +36,10 @@ background:white;
 color:black;
 }
 
-.sell{
-background:#222;
-color:white;
-}
-
-.card{
-background:#111;
-padding:20px;
-border-radius:22px;
-margin:20px;
-}
-
-.history{
-color:#aaa;
-margin-top:10px;
-line-height:1.5;
-}
-
-input{
-width:100%;
-height:55px;
-border:none;
-border-radius:15px;
-padding:15px;
-font-size:20px;
+#wallet{
 margin-top:20px;
-background:#1a1a1a;
-color:white;
-}
-
-.order{
-background:#1a1a1a;
-padding:20px;
-border-radius:20px;
-margin-top:15px;
-}
-
-.qr{
-width:100%;
-border-radius:20px;
-margin-top:20px;
-background:white;
-padding:10px;
-}
-
-.upi{
-margin-top:15px;
-color:#00ff99;
-font-size:18px;
 word-break:break-all;
-}
-
-.walletBox{
-margin-top:20px;
-}
-
-.nav{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#111;
-display:flex;
-justify-content:space-around;
-padding:15px 0;
-border-top:1px solid #222;
-}
-
-.nav div{
-text-align:center;
-color:#aaa;
-font-size:14px;
-}
-
-w3m-button{
-width:100%;
+color:#00ff99;
 }
 
 </style>
@@ -175,293 +48,70 @@ width:100%;
 
 <body>
 
-<div class="header">
-
-<div class="logo">
+<h1>
 UCoin 🚀
-</div>
+</h1>
 
-<div class="balanceBox">
+<p id="wallet">
+Wallet not connected
+</p>
 
-<div class="balanceTitle">
-Wallet Balance
-</div>
+<button
+class="connect"
+onclick="connectPhantom()"
+>
 
-<div class="balance">
-1250 UCoin
-</div>
+Connect Phantom
 
-<div class="inr">
-≈ ₹15,420
-</div>
-
-<div class="actions">
-
-<button class="buy"
-onclick="scrollToP2P()">
-Buy
 </button>
 
-<button class="sell"
-onclick="sellToken()">
-Sell
+<button
+class="buy"
+onclick="buyToken()"
+>
+
+Buy UCoin
+
 </button>
-
-</div>
-
-<div class="walletBox">
-
-<w3m-button />
-
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>
-Buy UCoin using UPI 🚀
-</h2>
-
-<p class="history">
-Pay directly using any UPI app
-</p>
-
-<input
-id="amount"
-type="number"
-placeholder="Enter INR Amount"
-/>
-
-<button class="buy"
-onclick="createOrder()">
-Create Buy Order
-</button>
-
-<div id="orders"></div>
-
-</div>
-
-<div class="card">
-
-<h2>
-UPI Payment 🚀
-</h2>
-
-<img
-class="qr"
-src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi://pay?pa=ribmgsm@okaxis&pn=UCoin&cu=INR"
-/>
-
-<div class="upi">
-UPI ID: ribmgsm@okaxis
-</div>
-
-<p class="history">
-After payment you will receive UCoin 😄
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>
-P2P Trading 🚀
-</h2>
-
-<p class="history">
-Buyer creates order → seller completes payment manually
-</p>
-
-<button class="sell">
-Coming Soon
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>
-Transaction History
-</h2>
-
-<p class="history">
-Bought 250 UCoin
-</p>
-
-<p class="history">
-Received 100 UCoin
-</p>
-
-<p class="history">
-Swapped SOL → UCoin
-</p>
-
-</div>
-
-<div class="nav">
-
-<div>
-🏠<br>Home
-</div>
-
-<div>
-💰<br>Wallet
-</div>
-
-<div>
-📈<br>Market
-</div>
-
-<div>
-⚙️<br>Settings
-</div>
-
-</div>
-
-<script type="module">
-
-import {
-createWeb3Modal
-} from 'https://esm.sh/@web3modal/wagmi'
-
-import {
-defaultWagmiConfig
-} from 'https://esm.sh/@web3modal/wagmi'
-
-import {
-mainnet
-} from 'https://esm.sh/viem/chains'
-
-const projectId =
-'fd933139afde5d131d15ee0cd996ae58';
-
-const metadata = {
-name: 'UCoin',
-description: 'UCoin App',
-url: 'https://ucoin.live',
-icons: ['https://ucoin.live/UCoin.png']
-};
-
-const chains = [mainnet];
-
-const config = defaultWagmiConfig({
-chains,
-projectId,
-metadata
-});
-
-createWeb3Modal({
-wagmiConfig: config,
-projectId,
-chains
-});
-
-</script>
 
 <script>
 
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register('/service-worker.js');
-}
+async function connectPhantom(){
 
-let orders = [];
+if(window.solana && window.solana.isPhantom){
 
-function scrollToP2P(){
+try{
 
-window.scrollTo({
-top:400,
-behavior:"smooth"
-});
+const response =
+await window.solana.connect();
 
-}
-
-function sellToken(){
-
-alert(
-"Sell feature coming soon 🚀"
-);
-
-}
-
-function createOrder(){
-
-let inr =
 document.getElementById(
-"amount"
-).value;
+"wallet"
+).innerText =
+response.publicKey.toString();
 
-if(inr == ""){
+}catch(err){
 
-alert("Enter amount");
-
-return;
+alert("Connection Cancelled");
 
 }
 
-let liveRate = 10;
-
-let buyRate =
-liveRate * 1.05;
-
-let tokenAmount =
-(inr / buyRate).toFixed(2);
-
-let order = {
-id: Date.now(),
-amount: inr,
-tokens: tokenAmount,
-rate: buyRate.toFixed(2),
-status: "PAY USING UPI"
-};
-
-orders.push(order);
-
-renderOrders();
+}else{
 
 window.open(
-`upi://pay?pa=ribmgsm@okaxis&pn=UCoin&am=${inr}&cu=INR`
+"https://phantom.app/",
+"_blank"
 );
 
 }
 
-function renderOrders(){
+}
 
-let html = "";
+function buyToken(){
 
-orders.forEach(order => {
-
-html += `
-
-<div class="order">
-
-<h3>
-₹${order.amount}
-</h3>
-
-<p class="history">
-Rate: ₹${order.rate}
-</p>
-
-<p class="history">
-Tokens: ${order.tokens} UCoin
-</p>
-
-<p class="history">
-Status: ${order.status}
-</p>
-
-</div>
-
-`;
-
-});
-
-document.getElementById(
-"orders"
-).innerHTML = html;
+window.open(
+"upi://pay?pa=ribmgsm@okaxis&pn=UCoin&cu=INR"
+);
 
 }
 
