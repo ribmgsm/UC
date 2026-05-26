@@ -1,391 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>UCoin Pro</title>
+    <meta name="theme-color" content="#0f172a">
+    
+    <!-- Tailwind CSS for Modern UI -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Jupiter Terminal Script for In-App Swaps -->
+    <script src="https://terminal.jup.ag/main-v3.js"></script>
 
-<meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-/>
-
-<title>UCoin</title>
-
-<link
-rel="manifest"
-href="/manifest.json"
-/>
-
-<meta
-name="theme-color"
-content="#000000"
-/>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
-body{
-background:#000;
-color:white;
-padding:20px;
-padding-bottom:100px;
-}
-
-.logo{
-font-size:42px;
-font-weight:bold;
-margin-top:20px;
-}
-
-.card{
-background:#111;
-padding:20px;
-border-radius:25px;
-margin-top:20px;
-}
-
-.connectBtn{
-width:100%;
-height:60px;
-border:none;
-border-radius:18px;
-font-size:18px;
-font-weight:bold;
-background:#8b5cf6;
-color:white;
-margin-top:15px;
-}
-
-.swapBtn{
-width:100%;
-height:60px;
-border:none;
-border-radius:18px;
-font-size:18px;
-font-weight:bold;
-background:white;
-color:black;
-margin-top:15px;
-}
-
-.balance{
-font-size:42px;
-font-weight:bold;
-margin-top:10px;
-}
-
-.wallet{
-margin-top:15px;
-font-size:14px;
-word-break:break-all;
-color:#00ff99;
-}
-
-.token{
-background:#1a1a1a;
-padding:15px;
-border-radius:15px;
-margin-top:12px;
-}
-
-.tokenName{
-font-size:13px;
-word-break:break-all;
-}
-
-.tokenBalance{
-margin-top:6px;
-font-weight:bold;
-color:#00ff99;
-}
-
-.small{
-margin-top:10px;
-color:#888;
-line-height:1.5;
-}
-
-</style>
-
+    <style>
+        body { background-color: #0f172a; color: white; font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+    </style>
 </head>
-
-<body>
-
-<div class="logo">
-UCoin 🚀
-</div>
-
-<div class="card">
-
-<h2>
-Wallet
-</h2>
-
-<button
-class="connectBtn"
-onclick="connectWallet()"
-id="connectButton"
->
-
-Connect Phantom
-
-</button>
-
-<div
-class="wallet"
-id="walletAddress"
->
-
-Wallet not connected
-
-</div>
-
-<p class="small">
-Use Phantom browser for best experience 😄
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>
-SOL Balance
-</h2>
-
-<div
-class="balance"
-id="solBalance"
->
-
-0 SOL
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>
-Assets
-</h2>
-
-<div id="assets">
-
-<p class="small">
-No Assets
-</p>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>
-Swap
-</h2>
-
-<button
-class="swapBtn"
-onclick="openJupiter()"
->
-
-Open Jupiter
-
-</button>
-
-</div>
-
-<script type="module">
-
-import {
-Connection,
-PublicKey,
-LAMPORTS_PER_SOL
-}
-from
-"https://esm.sh/@solana/web3.js";
-
-const connection =
-new Connection(
-"https://api.mainnet-beta.solana.com"
-);
-
-let wallet = null;
-
-window.connectWallet =
-async () => {
-
-try {
-
-const provider =
-window.phantom?.solana;
-
-if (
-!provider ||
-!provider.isPhantom
-) {
-
-alert(
-"Open this app inside Phantom Browser 😄"
-);
-
-window.open(
-"https://phantom.app/download",
-"_blank"
-);
-
-return;
-
-}
-
-const response =
-await provider.connect();
-
-wallet =
-response.publicKey.toString();
-
-document.getElementById(
-"walletAddress"
-).innerText =
-wallet;
-
-document.getElementById(
-"connectButton"
-).innerText =
-"Wallet Connected";
-
-loadWallet();
-
-} catch(err){
-
-console.log(err);
-
-alert(
-"Connection Failed"
-);
-
-}
-
-};
-
-async function loadWallet(){
-
-try{
-
-const publicKey =
-new PublicKey(wallet);
-
-const balance =
-await connection.getBalance(
-publicKey
-);
-
-document.getElementById(
-"solBalance"
-).innerText =
-(
-balance /
-LAMPORTS_PER_SOL
-).toFixed(4)
-+ " SOL";
-
-const tokenAccounts =
-await connection.getParsedTokenAccountsByOwner(
-publicKey,
-{
-programId:
-new PublicKey(
-"TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
-)
-}
-);
-
-let html = "";
-
-tokenAccounts.value.forEach(
-token => {
-
-const info =
-token.account.data.parsed.info;
-
-const amount =
-info.tokenAmount.uiAmount;
-
-if(amount > 0){
-
-html += `
-
-<div class="token">
-
-<div class="tokenName">
-${info.mint}
-</div>
-
-<div class="tokenBalance">
-${amount}
-</div>
-
-</div>
-
-`;
-
-}
-
-}
-);
-
-if(html == ""){
-
-html = `
-<p class="small">
-No Assets
-</p>
-`;
-
-}
-
-document.getElementById(
-"assets"
-).innerHTML = html;
-
-}catch(err){
-
-console.log(err);
-
-}
-
-}
-
-window.openJupiter =
-() => {
-
-window.open(
-"https://jup.ag",
-"_blank"
-);
-
-};
-
-setInterval(() => {
-
-if(wallet){
-
-loadWallet();
-
-}
-
-}, 30000);
-
-</script>
-
+<body class="p-4 md:p-8 pb-24 min-h-screen flex flex-col items-center">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-md">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+            <div class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">
+                <i class="fa-solid fa-rocket mr-2"></i>UCoin
+            </div>
+            <button id="connectBtn" class="bg-purple-600 hover:bg-purple-700 text-sm px-4 py-2 rounded-xl font-semibold transition-all shadow-lg shadow-purple-500/30">
+                Connect Wallet
+            </button>
+        </div>
+
+        <!-- Balance Card -->
+        <div class="glass-card rounded-3xl p-6 mb-6 text-center">
+            <p class="text-slate-400 text-sm mb-1">Total Balance</p>
+            <h2 id="solBalance" class="text-4xl font-bold mb-2">0.0000 SOL</h2>
+            <p id="walletAddress" class="text-emerald-400 text-xs break-all bg-emerald-400/10 inline-block px-3 py-1 rounded-full border border-emerald-400/20">
+                Not Connected
+            </p>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="flex space-x-2 bg-slate-800 p-1 rounded-2xl mb-4">
+            <button id="tabAssets" class="flex-1 py-3 rounded-xl font-bold text-sm bg-slate-700 shadow-sm transition-all text-white">Assets</button>
+            <button id="tabSwap" class="flex-1 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-white transition-all">Swap</button>
+        </div>
+
+        <!-- Assets View -->
+        <div id="viewAssets" class="block space-y-3">
+            <div id="assetsList" class="space-y-3">
+                <div class="glass-card rounded-2xl p-4 text-center text-slate-400 text-sm">
+                    Connect wallet to see assets
+                </div>
+            </div>
+        </div>
+
+        <!-- Swap View (Jupiter Terminal) -->
+        <div id="viewSwap" class="hidden">
+            <div class="glass-card rounded-3xl p-2 h-[500px]" id="integrated-terminal">
+                <!-- Jupiter UI will load here -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Application Logic -->
+    <script type="module">
+        import { Connection, PublicKey, LAMPORTS_PER_SOL } from "https://esm.sh/@solana/web3.js";
+
+        // Constants & State
+        const connection = new Connection("https://api.mainnet-beta.solana.com");
+        let wallet = null;
+        let tokenMap = {}; // To store token metadata (names, logos)
+
+        // UI Elements
+        const connectBtn = document.getElementById("connectBtn");
+        const walletAddressUI = document.getElementById("walletAddress");
+        const solBalanceUI = document.getElementById("solBalance");
+        const assetsListUI = document.getElementById("assetsList");
+        
+        const tabAssets = document.getElementById("tabAssets");
+        const tabSwap = document.getElementById("tabSwap");
+        const viewAssets = document.getElementById("viewAssets");
+        const viewSwap = document.getElementById("viewSwap");
+
+        // 1. Fetch Token Metadata from Jupiter (To show Logos and Symbols)
+        async function loadTokenMetadata() {
+            try {
+                const res = await fetch("https://token.jup.ag/strict");
+                const tokens = await res.json();
+                tokens.forEach(t => {
+                    tokenMap[t.address] = { symbol: t.symbol, logo: t.logoURI };
+                });
+                console.log("Token metadata loaded");
+            } catch (err) {
+                console.error("Failed to load token list", err);
+            }
+        }
+
+        // 2. Tab Switching Logic
+        tabAssets.onclick = () => {
+            viewAssets.classList.remove("hidden");
+            viewSwap.classList.add("hidden");
+            tabAssets.classList.add("bg-slate-700", "text-white");
+            tabAssets.classList.remove("text-slate-400");
+            tabSwap.classList.remove("bg-slate-700", "text-white");
+            tabSwap.classList.add("text-slate-400");
+        };
+
+        tabSwap.onclick = () => {
+            viewAssets.classList.add("hidden");
+            viewSwap.classList.remove("hidden");
+            tabSwap.classList.add("bg-slate-700", "text-white");
+            tabSwap.classList.remove("text-slate-400");
+            tabAssets.classList.remove("bg-slate-700", "text-white");
+            tabAssets.classList.add("text-slate-400");
+            
+            // Initialize Jupiter Terminal on first click if not loaded
+            if (!window.Jupiter.isInitialized) {
+                window.Jupiter.init({
+                    displayMode: "integrated",
+                    integratedTargetId: "integrated-terminal",
+                    endpoint: "https://api.mainnet-beta.solana.com",
+                });
+                window.Jupiter.isInitialized = true;
+            }
+        };
+
+        // 3. Connect Wallet
+        connectBtn.onclick = async () => {
+            try {
+                const provider = window.phantom?.solana;
+                if (!provider || !provider.isPhantom) {
+                    alert("Please install Phantom Wallet! 👻");
+                    window.open("https://phantom.app/", "_blank");
+                    return;
+                }
+
+                const response = await provider.connect();
+                wallet = response.publicKey.toString();
+                
+                // Update UI
+                walletAddressUI.innerText = wallet.slice(0, 6) + "..." + wallet.slice(-4);
+                connectBtn.innerText = "Connected";
+                connectBtn.classList.replace("bg-purple-600", "bg-emerald-600");
+                connectBtn.classList.replace("shadow-purple-500/30", "shadow-emerald-500/30");
+
+                assetsListUI.innerHTML = `<div class="text-center text-slate-400 py-4"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Loading Assets...</div>`;
+                
+                loadWalletData();
+
+            } catch (err) {
+                console.error(err);
+                alert("Connection Cancelled");
+            }
+        };
+
+        // 4. Load Balances & Assets
+        async function loadWalletData() {
+            if (!wallet) return;
+            try {
+                const publicKey = new PublicKey(wallet);
+
+                // Get SOL Balance
+                const balance = await connection.getBalance(publicKey);
+                solBalanceUI.innerText = (balance / LAMPORTS_PER_SOL).toFixed(4) + " SOL";
+
+                // Get SPL Tokens
+                const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
+                    publicKey, 
+                    { programId: new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA") }
+                );
+
+                let html = "";
+                tokenAccounts.value.forEach(token => {
+                    const info = token.account.data.parsed.info;
+                    const amount = info.tokenAmount.uiAmount;
+                    const mint = info.mint;
+
+                    if (amount > 0) {
+                        // Check if we have metadata for this token
+                        const tokenData = tokenMap[mint] || { 
+                            symbol: "Unknown", 
+                            logo: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png" 
+                        };
+
+                        html += `
+                            <div class="glass-card rounded-2xl p-4 flex items-center justify-between hover:bg-slate-800 transition-all cursor-pointer">
+                                <div class="flex items-center space-x-3">
+                                    <img src="${tokenData.logo}" onerror="this.src='https://solana.com/src/img/branding/solanaLogoMark.svg'" alt="${tokenData.symbol}" class="w-10 h-10 rounded-full bg-slate-900 p-1">
+                                    <div>
+                                        <div class="font-bold">${tokenData.symbol}</div>
+                                        <div class="text-xs text-slate-400 w-24 truncate" title="${mint}">${mint}</div>
+                                    </div>
+                                </div>
+                                <div class="font-bold text-emerald-400 text-lg">
+                                    ${amount.toLocaleString()}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                if (html === "") {
+                    html = `<div class="glass-card rounded-2xl p-4 text-center text-slate-400 text-sm">No tokens found</div>`;
+                }
+                assetsListUI.innerHTML = html;
+
+            } catch (err) {
+                console.error("Error loading wallet", err);
+                assetsListUI.innerHTML = `<div class="text-red-400 text-center py-4">Error loading assets</div>`;
+            }
+        }
+
+        // Initialize App
+        loadTokenMetadata();
+        
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            if (wallet) loadWalletData();
+        }, 30000);
+
+    </script>
 </body>
-
 </html>
