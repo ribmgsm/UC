@@ -12,6 +12,11 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
 
 <title>UCoin</title>
 
+<link
+rel="manifest"
+href="/manifest.json"
+/>
+
 <meta
 name="theme-color"
 content="#000000"
@@ -104,6 +109,7 @@ color:#00ff99;
 .small{
 margin-top:10px;
 color:#888;
+line-height:1.5;
 }
 
 </style>
@@ -140,6 +146,10 @@ id="walletAddress"
 Wallet not connected
 
 </div>
+
+<p class="small">
+Use Phantom browser for best experience 😄
+</p>
 
 </div>
 
@@ -215,16 +225,20 @@ async () => {
 
 try {
 
+const provider =
+window.phantom?.solana;
+
 if (
-!window.phantom?.solana
+!provider ||
+!provider.isPhantom
 ) {
 
 alert(
-"Open inside Phantom Browser"
+"Open this app inside Phantom Browser 😄"
 );
 
 window.open(
-"https://phantom.app/",
+"https://phantom.app/download",
 "_blank"
 );
 
@@ -233,25 +247,30 @@ return;
 }
 
 const response =
-await window.phantom.solana.connect();
+await provider.connect();
 
 wallet =
 response.publicKey.toString();
 
 document.getElementById(
 "walletAddress"
-).innerText = wallet;
+).innerText =
+wallet;
 
 document.getElementById(
 "connectButton"
 ).innerText =
-"Connected";
+"Wallet Connected";
 
 loadWallet();
 
 } catch(err){
 
 console.log(err);
+
+alert(
+"Connection Failed"
+);
 
 }
 
