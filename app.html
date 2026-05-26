@@ -39,6 +39,16 @@ background:#00ff99;
 color:black;
 }
 
+.import{
+background:#ab9ff2;
+color:black;
+}
+
+.refresh{
+background:#ffaa00;
+color:black;
+}
+
 .buy{
 background:white;
 color:black;
@@ -48,11 +58,11 @@ color:black;
 margin-top:15px;
 word-break:break-all;
 color:#00ff99;
+font-size:14px;
 }
 
-input{
+input, textarea{
 width:100%;
-height:55px;
 border:none;
 border-radius:15px;
 padding:15px;
@@ -60,6 +70,23 @@ font-size:18px;
 margin-top:20px;
 background:#1a1a1a;
 color:white;
+}
+
+textarea{
+height:120px;
+resize:none;
+}
+
+.balance{
+font-size:38px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.history{
+margin-top:10px;
+color:#aaa;
+line-height:1.5;
 }
 
 </style>
@@ -92,7 +119,47 @@ class="create"
 onclick="createWallet()"
 >
 
-Create Real Wallet
+Create Wallet
+
+</button>
+
+<button
+class="import"
+onclick="importWallet()"
+>
+
+Import Wallet
+
+</button>
+
+<textarea
+id="secretInput"
+placeholder="Paste Secret Key Array"
+></textarea>
+
+</div>
+
+<div class="card">
+
+<h2>
+SOL Balance
+</h2>
+
+<div
+class="balance"
+id="solBalance"
+>
+
+0 SOL
+
+</div>
+
+<button
+class="refresh"
+onclick="fetchBalance()"
+>
+
+Refresh Balance
 
 </button>
 
@@ -119,15 +186,27 @@ Pay with UPI
 
 </button>
 
+<p class="history">
+UPI ID: ribmgsm@okaxis
+</p>
+
 </div>
 
 <script type="module">
 
 import {
-Keypair
+Keypair,
+Connection,
+PublicKey,
+LAMPORTS_PER_SOL
 } from 'https://esm.sh/@solana/web3.js';
 
-window.createWallet = async () => {
+const connection =
+new Connection(
+'https://api.mainnet-beta.solana.com'
+);
+
+function loadWallet(){
 
 let saved =
 localStorage.getItem(
@@ -136,13 +215,33 @@ localStorage.getItem(
 
 if(saved){
 
+let walletData =
+JSON.parse(saved);
+
 document.getElementById(
 "wallet"
 ).innerText =
-JSON.parse(saved).publicKey;
+walletData.publicKey;
+
+fetchBalance();
+
+}
+
+}
+
+window.createWallet = () => {
+
+let saved =
+localStorage.getItem(
+"ucoin_wallet"
+);
+
+if(saved){
+
+loadWallet();
 
 alert(
-"Wallet Loaded 🚀"
+"Existing wallet loaded 🚀"
 );
 
 return;
@@ -169,14 +268,118 @@ localStorage.setItem(
 JSON.stringify(walletData)
 );
 
-document.getElementById(
-"wallet"
-).innerText =
-walletData.publicKey;
+loadWallet();
 
 alert(
-"REAL Solana Wallet Created 🚀"
+"Real Wallet Created 🚀"
 );
+
+};
+
+window.importWallet = () => {
+
+try{
+
+let secret =
+document.getElementById(
+"secretInput"
+).value;
+
+if(secret == ""){
+
+alert(
+"Paste secret key"
+);
+
+return;
+
+}
+
+let secretArray =
+Uint8Array.from(
+JSON.parse(secret)
+);
+
+const keypair =
+Keypair.fromSecretKey(
+secretArray
+);
+
+const walletData = {
+
+publicKey:
+keypair.publicKey.toString(),
+
+secretKey:
+Array.from(
+keypair.secretKey
+)
+
+};
+
+localStorage.setItem(
+"ucoin_wallet",
+JSON.stringify(walletData)
+);
+
+loadWallet();
+
+alert(
+"Wallet Imported 🚀"
+);
+
+}catch(err){
+
+alert(
+"Invalid Secret Key"
+);
+
+}
+
+};
+
+window.fetchBalance = async () => {
+
+try{
+
+let saved =
+localStorage.getItem(
+"ucoin_wallet"
+);
+
+if(!saved){
+
+alert(
+"No wallet found"
+);
+
+return;
+
+}
+
+let walletData =
+JSON.parse(saved);
+
+const balance =
+await connection.getBalance(
+new PublicKey(
+walletData.publicKey
+)
+);
+
+document.getElementById(
+"solBalance"
+).innerText =
+(balance / LAMPORTS_PER_SOL)
+.toFixed(4) + " SOL";
+
+}catch(err){
+
+alert(
+"Failed to fetch balance"
+);
+
+}
 
 };
 
@@ -190,7 +393,7 @@ document.getElementById(
 if(amount == ""){
 
 alert(
-"Enter Amount"
+"Enter amount"
 );
 
 return;
@@ -205,19 +408,7 @@ window.open(
 
 window.onload = () => {
 
-let saved =
-localStorage.getItem(
-"ucoin_wallet"
-);
-
-if(saved){
-
-document.getElementById(
-"wallet"
-).innerText =
-JSON.parse(saved).publicKey;
-
-}
+loadWallet();
 
 };
 
