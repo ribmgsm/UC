@@ -35,7 +35,7 @@
             </button>
         </div>
 
-        <!-- Balance Card with Refresh Button -->
+        <!-- Balance Card -->
         <div class="glass-card rounded-3xl p-6 mb-6 text-center relative group">
             <button id="refreshBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-all p-2 rounded-full hover:bg-slate-800 hidden">
                 <i id="refreshIcon" class="fa-solid fa-arrow-rotate-right"></i>
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <!-- Swap View (Jupiter Terminal) -->
+        <!-- Swap View -->
         <div id="viewSwap" class="hidden">
             <div class="glass-card rounded-3xl p-2 h-[500px]" id="integrated-terminal"></div>
         </div>
@@ -72,8 +72,9 @@
     <script type="module">
         import { Connection, PublicKey, LAMPORTS_PER_SOL } from "https://esm.sh/@solana/web3.js";
 
-        // Setup connection with confirmed commitment to prevent stale data
-        const connection = new Connection("https://api.mainnet-beta.solana.com", "confirmed");
+        const RPC_ENDPOINT = "https://api.mainnet-beta.solana.com";
+        const connection = new Connection(RPC_ENDPOINT, "confirmed");
+        
         let wallet = null;
         let tokenMap = {};
 
@@ -122,7 +123,7 @@
                 window.Jupiter.init({
                     displayMode: "integrated",
                     integratedTargetId: "integrated-terminal",
-                    endpoint: "https://api.mainnet-beta.solana.com",
+                    endpoint: RPC_ENDPOINT,
                 });
                 window.Jupiter.isInitialized = true;
             }
@@ -161,7 +162,6 @@
                 const response = await provider.connect();
                 handleWalletConnect(response.publicKey);
 
-                // Setup listeners for real-time changes
                 if (!provider.hasListeners) {
                     provider.on("accountChanged", (publicKey) => {
                         if (publicKey) {
@@ -182,7 +182,6 @@
             }
         };
 
-        // Manual Trigger
         refreshBtn.onclick = () => {
             loadWalletData(true);
         };
@@ -198,18 +197,21 @@
             try {
                 const publicKey = new PublicKey(wallet);
 
-                // Fetching with confirmed commitment explicitly
                 const balance = await connection.getBalance(publicKey, "confirmed");
                 solBalanceUI.innerText = (balance / LAMPORTS_PER_SOL).toFixed(4) + " SOL";
 
-                const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
-                    publicKey, 
-                    { programId: new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA") },
-                    "confirmed"
-                );
+                const legacyProgramId = new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
+                const token2022ProgramId = new PublicKey("Tokenz2d36743QTL6r7HRL6B3A7fU6tu26SG6hWJ926");
 
+                const [legacyAccounts, token2022Accounts] = await Promise.all([
+                    connection.getParsedTokenAccountsByOwner(publicKey, { programId: legacyProgramId }, "confirmed").catch(() => ({ value: [] })),
+                    connection.getParsedTokenAccountsByOwner(publicKey, { programId: token2022ProgramId }, "confirmed").catch(() => ({ value: [] }))
+                ]);
+
+                const allAccounts = [...legacyAccounts.value, ...token2022Accounts.value];
                 let html = "";
-                tokenAccounts.value.forEach(token => {
+
+                allAccounts.forEach(token => {
                     const info = token.account.data.parsed.info;
                     const amount = info.tokenAmount.uiAmount;
                     const mint = info.mint;
@@ -245,7 +247,7 @@
             } catch (err) {
                 console.error("Fetch data error", err);
                 if (showSpinner) {
-                    assetsListUI.innerHTML = `<div class="text-red-400 text-center py-4">Network error, try again</div>`;
+                    assetsListUI.innerHTML = `<div class="text-red-400 text-center py-4">Network busy. Click Refresh icon above.</div>`;
                 }
             } finally {
                 if (showSpinner) {
@@ -256,7 +258,6 @@
 
         loadTokenMetadata();
         
-        // Polling background updates every 15 seconds
         setInterval(() => {
             if (wallet) loadWalletData(false);
         }, 15000);
