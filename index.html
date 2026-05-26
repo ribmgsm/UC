@@ -1,364 +1,103 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>UCoin | The Elite Solana Community</title>
 
-<meta name="description" content="UCoin (UC) - Community Driven Solana Token with fixed supply and long-term ecosystem vision.">
+<title>UCoin</title>
 
-<meta name="keywords" content="UCoin, UC, Solana Token, Solana Community Coin, Crypto Token">
-
-<meta property="og:title" content="UCoin | Official Solana Community Token">
-
-<meta property="og:description" content="1 Million Supply. Fixed Contract. Join the UC Army on Solana.">
-
-<meta property="og:image" content="https://ucoin.live/UCoin.png">
-
-<meta property="og:url" content="https://ucoin.live/">
-
-<meta property="og:type" content="website">
-
-<meta name="twitter:image" content="https://ucoin.live/UCoin.png">
-
-<link rel="icon" type="image/png" href="https://ucoin.live/UCoin.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-    :root {
-        --gold: #FFD700;
-        --bg: #03050a;
-        --glass: rgba(255, 255, 255, 0.03);
-        --border: rgba(255, 215, 0, 0.1);
-    }
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Outfit', sans-serif;
-    }
+body{
+background:black;
+color:white;
+font-family:Arial;
+padding:30px;
+}
 
-    body {
-        background-color: var(--bg);
-        color: #fff;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        overflow-x: hidden;
-        background: radial-gradient(circle at 50% 50%, #0a0d16 0%, var(--bg) 100%);
-    }
+button{
+width:100%;
+height:60px;
+border:none;
+border-radius:15px;
+font-size:22px;
+font-weight:bold;
+margin-top:20px;
+}
 
-    .glow {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90vw;
-        height: 90vw;
-        background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 70%);
-        z-index: -1;
-        animation: pulse 8s infinite alternate;
-    }
+.connect{
+background:#f3ba2f;
+color:black;
+}
 
-    @keyframes pulse {
-        from { opacity: 0.5; }
-        to { opacity: 1; }
-    }
+.buy{
+background:white;
+color:black;
+}
 
-    nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 5%;
-        background: rgba(3, 5, 10, 0.85);
-        backdrop-filter: blur(15px);
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-        font-size: 22px;
-        font-weight: 900;
-        color: var(--gold);
-        text-decoration: none;
-        letter-spacing: 1px;
-    }
-
-    .nav-links {
-        display: flex;
-        gap: 15px;
-    }
-
-    .nav-links a {
-        color: #ccc;
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 700;
-        text-transform: uppercase;
-        padding: 5px 8px;
-        transition: 0.3s;
-    }
-
-    .nav-links a:hover {
-        color: var(--gold);
-    }
-
-    .hero {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 140px 20px 60px;
-    }
-
-    .logo-img {
-        width: 160px;
-        height: 160px;
-        border-radius: 50%;
-        border: 2px solid var(--gold);
-        box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
-        margin-bottom: 25px;
-        animation: float 5s ease-in-out infinite;
-        object-fit: cover;
-    }
-
-    @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
-    }
-
-    h1 {
-        font-size: clamp(60px, 18vw, 110px);
-        font-weight: 900;
-        line-height: 0.85;
-        margin-bottom: 15px;
-        letter-spacing: -4px;
-        background: linear-gradient(to bottom, #fff 40%, var(--gold));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .supply-tag {
-        color: var(--gold);
-        font-weight: 800;
-        font-size: 14px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-bottom: 15px;
-        opacity: 0.8;
-    }
-
-    .ca-container {
-        background: var(--glass);
-        border: 1px solid var(--border);
-        padding: 25px;
-        border-radius: 28px;
-        width: 100%;
-        max-width: 520px;
-        margin-bottom: 35px;
-        backdrop-filter: blur(10px);
-    }
-
-    code {
-        display: block;
-        font-family: monospace;
-        font-size: 14px;
-        color: #aaa;
-        margin-bottom: 20px;
-        word-break: break-all;
-    }
-
-    .btn-row {
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-        flex-wrap: wrap;
-        width: 100%;
-        max-width: 600px;
-    }
-
-    .btn {
-        padding: 18px 35px;
-        border-radius: 20px;
-        text-decoration: none;
-        font-weight: 900;
-        font-size: 16px;
-        transition: 0.4s;
-        cursor: pointer;
-        border: none;
-        flex: 1;
-        min-width: 200px;
-        text-align: center;
-    }
-
-    .btn-gold {
-        background: var(--gold);
-        color: #000;
-        box-shadow: 0 10px 30px rgba(255,215,0,0.15);
-    }
-
-    .btn-gold:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(255,215,0,0.3);
-    }
-
-    .btn-outline {
-        background: transparent;
-        border: 1px solid rgba(255,255,255,0.1);
-        color: #fff;
-        backdrop-filter: blur(5px);
-    }
-
-    .btn-outline:hover {
-        background: rgba(255,255,255,0.05);
-        border-color: var(--gold);
-    }
-
-    footer {
-        padding: 40px 5%;
-        background: rgba(0, 0, 0, 0.3);
-        border-top: 1px solid var(--border);
-        text-align: center;
-    }
-
-    .f-socials {
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: center;
-        gap: 25px;
-        flex-wrap: wrap;
-    }
-
-    .f-socials a {
-        color: #666;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 14px;
-        transition: 0.3s;
-    }
-
-    .f-socials a:hover {
-        color: var(--gold);
-    }
-
-    .copy-text {
-        color: #333;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 2px;
-    }
-
-    @media (max-width: 480px) {
-        h1 {
-            font-size: 70px;
-            letter-spacing: -2px;
-        }
-
-        .btn {
-            width: 100%;
-            flex: none;
-        }
-
-        nav {
-            padding: 15px 5%;
-        }
-    }
 </style>
 
-</head><body><div class="glow"></div>
+</head>
 
-<nav>
-    <a href="index.html" class="nav-logo">UCoin</a>
+<body>
 
-    <div class="nav-links">
-        <a href="about.html">About</a>
-        <a href="token.html">Token</a>
-        <a href="roadmap.html">Roadmap</a>
-    </div>
-</nav>
+<h1>
+UCoin 🚀
+</h1>
 
-<main class="hero">
+<p id="status">
+Wallet not connected
+</p>
 
-    <img src="https://ucoin.live/UCoin.png" alt="UCoin Logo" class="logo-img">
+<button
+class="connect"
+onclick="connectWallet()"
+>
 
-    <p class="supply-tag">1,000,000 Max Supply</p>
+Connect Wallet
 
-    <h1>UCoin</h1>
+</button>
 
-    <div class="ca-container">
+<button
+class="buy"
+onclick="buyToken()"
+>
 
-        <code id="caValue">
+Buy UCoin
 
-Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt
-</code>
-
-        <button class="btn btn-outline" style="font-size: 12px; padding: 12px 25px; width: auto; border-radius: 12px;" onclick="copyCA()" id="copyBtn">
-            COPY CONTRACT
-        </button>
-
-    </div>
-
-    <div class="btn-row">
-
-        <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" class="btn btn-gold" target="_blank">
-            BUY $UC NOW
-        </a>
-
-        <a href="https://photon-sol.tinyastro.io/en/lp/6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr" class="btn btn-outline" target="_blank">
-            LIVE CHART
-        </a>
-
-    </div>
-
-</main>
-
-<footer>
-
-    <div class="f-socials">
-
-        <a href="https://t.me/ucoin_live" target="_blank">
-            TELEGRAM
-        </a>
-
-        <a href="https://x.com/UCoin_live" target="_blank">
-            TWITTER
-        </a>
-
-        <a href="https://www.instagram.com/ucoin_live" target="_blank">
-            INSTAGRAM
-        </a>
-
-    </div>
-
-    <div class="copy-text">
-        EST. 2026 • BUILT ON SOLANA
-    </div>
-
-</footer>
+</button>
 
 <script>
-    function copyCA() {
-        const text = document.getElementById("caValue").innerText;
-        const btn = document.getElementById("copyBtn");
 
-        navigator.clipboard.writeText(text).then(() => {
-            btn.innerText = "✔ COPIED";
-            btn.style.color = "#00ff9d";
-            btn.style.borderColor = "#00ff9d";
+function connectWallet(){
 
-            setTimeout(() => {
-                btn.innerText = "COPY CONTRACT";
-                btn.style.color = "#fff";
-                btn.style.borderColor = "rgba(255,255,255,0.1)";
-            }, 2000);
-        });
-    }
+alert(
+"WalletConnect popup would open here 😄"
+);
+
+window.open(
+"https://www.binance.com/en/web3wallet",
+"_blank"
+);
+
+document.getElementById(
+"status"
+).innerText =
+"Binance Wallet Opened 🚀";
+
+}
+
+function buyToken(){
+
+window.open(
+"upi://pay?pa=ribmgsm@okaxis&pn=UCoin&cu=INR"
+);
+
+}
+
 </script>
 
 </body>
+
 </html>
