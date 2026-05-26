@@ -1,33 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>UCoin</title>
+<meta charset="UTF-8" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>UCoin Solana</title>
 
 <style>
 
-body{
-background:black;
-color:white;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Arial;
-padding:30px;
+}
+
+body{
+background:#000;
+color:white;
+padding:20px;
+padding-bottom:100px;
+}
+
+.logo{
+font-size:42px;
+font-weight:bold;
+margin-top:20px;
+}
+
+.card{
+background:#111;
+padding:20px;
+border-radius:25px;
+margin-top:20px;
+}
+
+.balance{
+font-size:48px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.inr{
+margin-top:10px;
+color:#00ff99;
+font-size:20px;
 }
 
 button{
 width:100%;
 height:60px;
 border:none;
-border-radius:15px;
-font-size:22px;
+border-radius:18px;
+font-size:20px;
 font-weight:bold;
-margin-top:20px;
+margin-top:15px;
 }
 
 .connect{
-background:#f3ba2f;
+background:#ab9ff2;
 color:black;
 }
 
@@ -36,15 +71,40 @@ background:white;
 color:black;
 }
 
-#wallet{
+.sell{
+background:#222;
+color:white;
+}
+
+input{
+width:100%;
+height:55px;
+border:none;
+border-radius:15px;
+padding:15px;
+font-size:20px;
 margin-top:20px;
+background:#1a1a1a;
+color:white;
+}
+
+.wallet{
+margin-top:15px;
 word-break:break-all;
 color:#00ff99;
 }
 
-.info{
-margin-top:15px;
+.qr{
+width:100%;
+background:white;
+padding:10px;
+border-radius:20px;
+margin-top:20px;
+}
+
+.history{
 color:#aaa;
+margin-top:10px;
 line-height:1.5;
 }
 
@@ -54,22 +114,49 @@ line-height:1.5;
 
 <body>
 
-<h1>
+<div class="logo">
 UCoin 🚀
-</h1>
+</div>
 
-<p id="wallet">
+<div class="card">
+
+<h2>
+Solana Wallet
+</h2>
+
+<p
+class="wallet"
+id="walletAddress"
+>
+
 Wallet not connected
+
 </p>
 
 <button
 class="connect"
-onclick="connectBinance()"
+onclick="connectWallet()"
 >
 
-Connect Binance Wallet
+Connect Solana Wallet
 
 </button>
+
+</div>
+
+<div class="card">
+
+<h2>
+Wallet Balance
+</h2>
+
+<div class="balance">
+1250 UCoin
+</div>
+
+<div class="inr">
+≈ ₹15,420
+</div>
 
 <button
 class="buy"
@@ -80,41 +167,78 @@ Buy UCoin
 
 </button>
 
-<p class="info">
-Supports Binance Web3 Wallet + Solana wallets 😄
+<button
+class="sell"
+onclick="sellToken()"
+>
+
+Sell UCoin
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>
+Buy using UPI
+</h2>
+
+<input
+id="amount"
+type="number"
+placeholder="Enter INR Amount"
+/>
+
+<button
+class="buy"
+onclick="openUPI()"
+>
+
+Pay Now
+
+</button>
+
+<img
+class="qr"
+src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi://pay?pa=ribmgsm@okaxis&pn=UCoin&cu=INR"
+/>
+
+<p class="history">
+UPI ID: ribmgsm@okaxis
 </p>
+
+</div>
+
+<div class="card">
+
+<h2>
+Supported Wallets
+</h2>
+
+<p class="history">
+✅ Phantom
+</p>
+
+<p class="history">
+✅ Solflare
+</p>
+
+<p class="history">
+✅ Backpack
+</p>
+
+<p class="history">
+✅ Binance Solana Wallet
+</p>
+
+</div>
 
 <script>
 
-async function connectBinance(){
+async function connectWallet(){
 
-if(window.ethereum){
-
-try{
-
-const accounts =
-await window.ethereum.request({
-method: 'eth_requestAccounts'
-});
-
-document.getElementById(
-"wallet"
-).innerText =
-"Connected: " + accounts[0];
-
-alert(
-"Binance/EVM Wallet Connected 🚀"
-);
-
-}catch(err){
-
-alert(
-"Connection Cancelled"
-);
-
-}
-
-}else if(window.solana){
+if(window.solana){
 
 try{
 
@@ -122,9 +246,8 @@ const response =
 await window.solana.connect();
 
 document.getElementById(
-"wallet"
+"walletAddress"
 ).innerText =
-"Connected: " +
 response.publicKey.toString();
 
 alert(
@@ -141,8 +264,12 @@ alert(
 
 }else{
 
+alert(
+"No Solana wallet found"
+);
+
 window.open(
-"https://www.binance.com/en/web3wallet",
+"https://phantom.app/",
 "_blank"
 );
 
@@ -150,10 +277,42 @@ window.open(
 
 }
 
-function buyToken(){
+function openUPI(){
+
+let amount =
+document.getElementById(
+"amount"
+).value;
+
+if(amount == ""){
+
+alert(
+"Enter amount"
+);
+
+return;
+
+}
 
 window.open(
-"upi://pay?pa=ribmgsm@okaxis&pn=UCoin&cu=INR"
+`upi://pay?pa=ribmgsm@okaxis&pn=UCoin&am=${amount}&cu=INR`
+);
+
+}
+
+function buyToken(){
+
+window.scrollTo({
+top:500,
+behavior:"smooth"
+});
+
+}
+
+function sellToken(){
+
+alert(
+"Sell feature coming soon 🚀"
 );
 
 }
