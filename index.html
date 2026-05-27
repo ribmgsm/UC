@@ -1,103 +1,340 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UCoin | Unknown Coin ($UC) on Solana</title>
+  <meta name="description" content="UCoin ($UC) - Unknown Coin | The true community Solana token. 1,000,000 max supply. No rug-pull, no hidden mint, only scarcity and trust.">
+  <meta name="keywords" content="UCoin, Unknown Coin, UC, Solana, Community Token, Crypto, $UC, Token">
+  <meta property="og:title" content="UCoin | Unknown Coin ($UC) on Solana">
+  <meta property="og:description" content="UCoin ($UC): 1 million capped supply, pure Solana, pure community. Safe, fair-launch, no hidden tricks.">
+  <meta property="og:image" content="https://uc-pearl.vercel.app/UCoin.png">
+  <meta property="og:url" content="https://github.com/ribmgsm/UC">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="UCoin | Unknown Coin ($UC) on Solana">
+  <meta name="twitter:description" content="Join Unknown Coin - 1 million supply, fair community launch, built for Solana.">
+  <meta name="twitter:image" content="https://uc-pearl.vercel.app/UCoin.png">
+  <meta name="theme-color" content="#FFD700">
+  <link rel="icon" type="image/png" href="https://uc-pearl.vercel.app/UCoin.png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #FFD700;
+      --bg: #03050a;
+      --card-bg: #181820;
+      --text-main: #fff;
+      --text-muted: #d6d6d6;
+      --border: rgba(255, 215, 0, 0.15);
+      --radius: 24px;
+      --transition: 0.35s cubic-bezier(.59,-0.02,.57,1.38);
+    }
+    body {
+      background: radial-gradient(circle at 55% 35%, #181818 0%, var(--bg) 100%);
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 7vw;
+      background: rgba(0,0,0,0.87);
+      backdrop-filter: blur(15px);
+      border-bottom: 1.5px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .nav-logo {
+      font-size: 27px; font-weight: bold;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 1.2px;
+      text-shadow: 0 0 15px rgba(255,215,0,0.07);
+      transition: text-shadow var(--transition);
+    }
+    .nav-links {
+      display: flex;
+      gap: 26px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #a6a6a6;
+      font-weight: 700;
+      font-size: 15px;
+      text-transform: uppercase;
+      transition: var(--transition);
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
 
-<title>UCoin</title>
+    .glow {
+      position: fixed;
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90vw; height: 90vw;
+      background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 80%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    main {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start;
+      min-height: 76vh;
+      padding: 60px 10px 40px 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-card {
+      max-width: 490px;
+      background: rgba(0,0,0,0.18);
+      border: 2.3px solid var(--border);
+      border-radius: var(--radius);
+      padding: 56px 25px 44px 25px;
+      margin-bottom: 38px;
+      text-align: center;
+      box-shadow: 0 10px 50px 0 #0004, 0 1px 65px 0 #FFD70011;
+      animation: fadeInUp 0.83s cubic-bezier(.33,.79,.7,.96);
+    }
+    @keyframes fadeInUp {
+      from{opacity: 0; transform: translateY(35px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .logo-img {
+      width: 158px; height: 158px;
+      border-radius: 50%;
+      border: 3.2px solid var(--gold);
+      box-shadow: 0 0 60px rgba(255,215,0,0.13);
+      margin-bottom: 24px;
+      background: #111;
+      object-fit: cover;
+      transition: border var(--transition), box-shadow var(--transition);
+    }
+    h1 {
+      font-size: clamp(45px, 8vw, 85px);
+      margin: 12px 0 13px 0;
+      letter-spacing: -4px;
+      background: linear-gradient(to bottom, #fff 66%, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+      line-height: 0.88;
+    }
+    .ticker {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 15px;
+      margin-top: -6px; margin-bottom: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .desc {
+      color: var(--text-muted);
+      font-size: 20px;
+      margin: 9px 0 26px 0;
+      letter-spacing: 0;
+    }
+    .supply-tag {
+      color: var(--gold);
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      opacity: 0.75;
+    }
+    .ca-container {
+      background: var(--card-bg);
+      border: 1.7px solid var(--gold);
+      padding: 20px 16px;
+      border-radius: 15px;
+      margin: 32px auto 30px auto;
+      max-width: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      transition: border var(--transition), box-shadow var(--transition);
+      box-shadow: 0 3px 27px 0 rgba(255,215,0,0.07);
+    }
+    .ca-text {
+      color: var(--gold);
+      font-family: monospace;
+      font-size: 15px;
+      font-weight: bold;
+      overflow-x: auto;
+    }
+    .copy-btn {
+      background: var(--gold);
+      color: #111; border: none; outline: none;
+      font-weight: 900; font-size: 12px;
+      border-radius: 8px;
+      padding: 9px 22px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background var(--transition), color var(--transition);
+    }
+    .copy-btn:active { transform: scale(0.96);}
+    .btn-row {
+      display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;
+      width: 100%; max-width: 520px; margin: 36px auto 0 auto;
+    }
+    .btn {
+      padding: 19px 29px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 15px;
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1.4px solid rgba(255,255,255,0.10);
+      flex: 1;
+      min-width: 188px;
+      text-align: center;
+      outline: none;
+      margin-bottom: 0;
+      box-shadow: 0 0 0 0 transparent;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: #000;
+      box-shadow: 0 7px 28px rgba(255,215,0,0.23);
+      border: 1.4px solid var(--gold);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 13px 35px rgba(255,215,0,0.23);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1.4px solid var(--gold);
+    }
+    .btn-outline:hover {
+      background: rgba(255,215,0,0.09);
+      color: #111;
+    }
+    .toast {
+      position: fixed;
+      bottom: 23px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #111;
+      font-size: 16px;
+      padding: 14px 25px;
+      border-radius: 8px;
+      font-weight: 700;
+      z-index: 2000;
+      animation: fadeInUp 0.33s ease;
+      box-shadow: 0 4px 20px 0 rgba(255,215,0,0.13);
+    }
+    footer {
+      padding: 40px 0 18px;
+      background: rgba(0,0,0,0.11);
+      text-align: center;
+    }
+    .f-socials {
+      margin-bottom: 18px;
+      display: flex; gap: 22px;
+      justify-content: center; flex-wrap: wrap;
+    }
+    .f-socials a {
+      color: #818181;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      transition: color var(--transition);
+    }
+    .f-socials a:hover { color: var(--gold);}
+    .copy-text {
+      color: #252525;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-
-body{
-background:black;
-color:white;
-font-family:Arial;
-padding:30px;
-}
-
-button{
-width:100%;
-height:60px;
-border:none;
-border-radius:15px;
-font-size:22px;
-font-weight:bold;
-margin-top:20px;
-}
-
-.connect{
-background:#f3ba2f;
-color:black;
-}
-
-.buy{
-background:white;
-color:black;
-}
-
-</style>
-
+    @media (max-width: 600px) {
+      nav { padding: 14px 5vw;}
+      .hero-card { padding: 35px 4vw 24px 4vw; }
+      .logo-img { width: 99px; height: 99px;}
+      h1 { font-size: 35px;}
+      .ticker { font-size: 11px;}
+      .desc { font-size: 15px;}
+      .supply-tag { font-size: 10px;}
+      .btn-row { flex-direction: column; gap: 13px;}
+      .btn, .btn-gold, .btn-outline { padding: 13px 10px; min-width: 70px; font-size: 13px;}
+      .ca-text { font-size: 12px;}
+    }
+  </style>
 </head>
-
 <body>
-
-<h1>
-UCoin 🚀
-</h1>
-
-<p id="status">
-Wallet not connected
-</p>
-
-<button
-class="connect"
-onclick="connectWallet()"
->
-
-Connect Wallet
-
-</button>
-
-<button
-class="buy"
-onclick="buyToken()"
->
-
-Buy UCoin
-
-</button>
-
-<script>
-
-function connectWallet(){
-
-alert(
-"WalletConnect popup would open here 😄"
-);
-
-window.open(
-"https://www.binance.com/en/web3wallet",
-"_blank"
-);
-
-document.getElementById(
-"status"
-).innerText =
-"Binance Wallet Opened 🚀";
-
-}
-
-function buyToken(){
-
-window.open(
-"upi://pay?pa=ribmgsm@okaxis&pn=UCoin&cu=INR"
-);
-
-}
-
-</script>
-
+  <nav>
+    <a href="index.html" class="nav-logo">UCoin</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="token.html">Token</a>
+      <a href="roadmap.html">Roadmap</a>
+    </div>
+  </nav>
+  <div class="glow"></div>
+  <main>
+    <div class="hero-card">
+      <img src="https://uc-pearl.vercel.app/UCoin.png" alt="UCoin Logo" class="logo-img" />
+      <div class="supply-tag">1,000,000 Max Supply</div>
+      <div class="ticker">$UC &mdash; Unknown Coin</div>
+      <h1>UCoin</h1>
+      <div class="desc">
+        The official page for Unknown Coin <span class="highlight">($UC)</span> — true community token on Solana: <span class="highlight">no mint, no rug, only trust</span>. Capped at <b>1,000,000</b> supply.
+      </div>
+      <div class="ca-container">
+        <div class="ca-text" id="caValue">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</div>
+        <button type="button" class="copy-btn" onclick="copyCA()" id="copyBtn">COPY CA</button>
+      </div>
+      <div class="btn-row">
+        <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" class="btn btn-gold" target="_blank">💰 BUY $UC NOW</a>
+        <a href="https://photon-sol.tinyastro.io/en/lp/6HPenRbShv4CjSmqqACAakDypYxbCtaf8UckZZ9dghtr" class="btn btn-outline" target="_blank">📊 LIVE CHART</a>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="f-socials">
+      <a href="https://x.com/UCoin_live" target="_blank">𝕏 Twitter</a>
+      <a href="https://t.me/UCoin_live" target="_blank">📱 Telegram</a>
+      <a href="https://www.instagram.com/UCoin_live" target="_blank">📸 Instagram</a>
+      <!-- Aap extra link bhi add kar sakte hain -->
+    </div>
+    <div class="copy-text">
+      EST. 2026 &bull; $UC &bull; UCoin &bull; Powered by Solana 🚀
+    </div>
+  </footer>
+  <script>
+    function copyCA() {
+      const text = document.getElementById("caValue").innerText.trim();
+      const btn = document.getElementById("copyBtn");
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerText = "✔ COPIED";
+        showToast("Contract Address Copied!");
+        setTimeout(() => {
+          btn.innerText = "COPY CA";
+        }, 1700);
+      });
+    }
+    function showToast(msg) {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerText = msg;
+      document.body.appendChild(toast);
+      setTimeout(()=>toast.remove(),1750);
+    }
+  </script>
 </body>
-
 </html>
