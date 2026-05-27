@@ -4,16 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UCoin | Unknown Coin ($UC) on Solana</title>
-  <meta name="description" content="UCoin ($UC) - Unknown Coin | The true community Solana token. 1,000,000 max supply. No rug-pull, no hidden mint, only scarcity and trust.">
-  <meta name="keywords" content="UCoin, Unknown Coin, UC, Solana, Community Token, Crypto, $UC, Token">
+  <meta name="description" content="UCoin ($UC) - Unknown Coin. True community Solana token. 1,000,000 max supply. No rug-pull, just scarcity & trust.">
+  <meta name="keywords" content="UCoin, Unknown Coin, UC, Solana, Community Token, Crypto, $UC">
   <meta property="og:title" content="UCoin | Unknown Coin ($UC) on Solana">
-  <meta property="og:description" content="UCoin ($UC): 1 million capped supply, pure Solana, pure community. Safe, fair-launch, no hidden tricks.">
+  <meta property="og:description" content="UCoin ($UC): 1M capped supply, pure Solana, true community, no hidden tricks.">
   <meta property="og:image" content="https://uc-pearl.vercel.app/UCoin.png">
   <meta property="og:url" content="https://github.com/ribmgsm/UC">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="UCoin | Unknown Coin ($UC) on Solana">
-  <meta name="twitter:description" content="Join Unknown Coin - 1 million supply, fair community launch, built for Solana.">
-  <meta name="twitter:image" content="https://uc-pearl.vercel.app/UCoin.png">
   <meta name="theme-color" content="#FFD700">
   <link rel="icon" type="image/png" href="https://uc-pearl.vercel.app/UCoin.png">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
@@ -26,12 +23,13 @@
       --text-muted: #d6d6d6;
       --border: rgba(255, 215, 0, 0.15);
       --radius: 24px;
-      --transition: 0.35s cubic-bezier(.59,-0.02,.57,1.38);
+      --transition: .35s cubic-bezier(.59,-0.02,.57,1.38);
     }
+    html { scroll-behavior: smooth;}
     body {
-      background: radial-gradient(circle at 55% 35%, #181818 0%, var(--bg) 100%);
+      background: radial-gradient(circle at 65% 24%, #181818 0%, var(--bg) 100%);
       color: var(--text-main);
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Outfit',sans-serif;
       margin: 0;
       min-height: 100vh;
       display: flex; flex-direction: column;
@@ -42,236 +40,212 @@
       align-items: center;
       padding: 22px 7vw;
       background: rgba(0,0,0,0.87);
-      backdrop-filter: blur(15px);
       border-bottom: 1.5px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 20;
+      position: sticky;top: 0;z-index: 20;
     }
     .nav-logo {
-      font-size: 27px; font-weight: bold;
-      color: var(--gold);
-      text-decoration: none;
+      font-size: 27px;font-weight: bold;
+      color: var(--gold);text-decoration: none;
       letter-spacing: 1.2px;
-      text-shadow: 0 0 15px rgba(255,215,0,0.07);
-      transition: text-shadow var(--transition);
     }
     .nav-links {
-      display: flex;
-      gap: 26px;
+      display: flex; gap: 28px;
     }
     .nav-links a {
       text-decoration: none;
       color: #a6a6a6;
-      font-weight: 700;
-      font-size: 15px;
+      font-weight: 700;font-size: 15px;
       text-transform: uppercase;
       transition: var(--transition);
       border-bottom: 2px solid transparent;
+      padding: 4px 0;
     }
     .nav-links a:hover, .nav-links a.active {
       color: var(--gold);
       border-color: var(--gold);
     }
-
     .glow {
       position: fixed;
       top: 40%; left: 50%;
       transform: translate(-50%, -50%);
       width: 90vw; height: 90vw;
-      background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 80%);
-      z-index: 0;
-      pointer-events: none;
+      background: radial-gradient(circle, rgba(255,215,0,0.07) 0%, transparent 80%);
+      z-index: 0; pointer-events: none;
+      filter: blur(6px);
     }
     main {
-      flex: 1;
-      display: flex; flex-direction: column;
+      flex: 1; display: flex; flex-direction: column;
       align-items: center; justify-content: flex-start;
       min-height: 76vh;
-      padding: 60px 10px 40px 10px;
-      position: relative;
-      z-index: 1;
+      padding: 38px 10px 28px 10px;
+      position: relative; z-index: 1;
     }
     .hero-card {
-      max-width: 490px;
-      background: rgba(0,0,0,0.18);
+      max-width: 500px;
+      background: rgba(0,0,0,0.22);
       border: 2.3px solid var(--border);
       border-radius: var(--radius);
-      padding: 56px 25px 44px 25px;
+      padding: 40px 17px 30px 17px;
       margin-bottom: 38px;
+      margin-top: 15px;
       text-align: center;
       box-shadow: 0 10px 50px 0 #0004, 0 1px 65px 0 #FFD70011;
       animation: fadeInUp 0.83s cubic-bezier(.33,.79,.7,.96);
+      display: flex; flex-direction: column; align-items: center;
     }
     @keyframes fadeInUp {
       from{opacity: 0; transform: translateY(35px);}
       to {opacity: 1; transform: translateY(0);}
     }
     .logo-img {
-      width: 158px; height: 158px;
-      border-radius: 50%;
-      border: 3.2px solid var(--gold);
-      box-shadow: 0 0 60px rgba(255,215,0,0.13);
-      margin-bottom: 24px;
-      background: #111;
-      object-fit: cover;
+      width: 110px; height: 110px;
+      border-radius: 50%; border: 3.2px solid var(--gold);
+      box-shadow: 0 0 40px rgba(255,215,0,0.09);
+      margin-bottom: 12px;
+      background: #111; object-fit: cover;
       transition: border var(--transition), box-shadow var(--transition);
     }
     h1 {
-      font-size: clamp(45px, 8vw, 85px);
-      margin: 12px 0 13px 0;
-      letter-spacing: -4px;
+      font-size: clamp(32px,10vw,64px);
+      margin: 8px 0 7px 0; letter-spacing: -2.5px;
       background: linear-gradient(to bottom, #fff 66%, var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 900;
-      line-height: 0.88;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-weight: 900; line-height: 0.98;
     }
     .ticker {
-      color: var(--gold);
-      font-weight: 700;
-      font-size: 15px;
-      margin-top: -6px; margin-bottom: 18px;
-      letter-spacing: 2px;
+      color: var(--gold); font-weight: 700; font-size: 13px;
+      margin-top: -4px;margin-bottom: 12px; letter-spacing: 2px;
       text-transform: uppercase;
     }
     .desc {
       color: var(--text-muted);
-      font-size: 20px;
-      margin: 9px 0 26px 0;
+      font-size: 14.7px;
+      margin: 9px 0 20px 0;
       letter-spacing: 0;
     }
     .supply-tag {
-      color: var(--gold);
-      font-weight: 900;
-      font-size: 13px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 4px;
+      color: var(--gold); font-weight: 900;
+      font-size: 11px; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 3px;
       opacity: 0.75;
     }
     .ca-container {
       background: var(--card-bg);
       border: 1.7px solid var(--gold);
-      padding: 20px 16px;
-      border-radius: 15px;
-      margin: 32px auto 30px auto;
-      max-width: 480px;
+      padding: 13px 10px;
+      border-radius: 11px;
+      margin: 25px 0 12px 0;
+      width: 100%;
+      max-width: 390px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 18px;
+      gap: 10px;
       transition: border var(--transition), box-shadow var(--transition);
       box-shadow: 0 3px 27px 0 rgba(255,215,0,0.07);
+      overflow-x: auto;
     }
     .ca-text {
       color: var(--gold);
       font-family: monospace;
-      font-size: 15px;
+      font-size: 12px;
       font-weight: bold;
+      white-space: nowrap;
       overflow-x: auto;
+      max-width: 70vw;
     }
     .copy-btn {
       background: var(--gold);
-      color: #111; border: none; outline: none;
-      font-weight: 900; font-size: 12px;
-      border-radius: 8px;
-      padding: 9px 22px;
+      color: #111; border: none;
+      font-weight: 900;font-size: 10px;
+      border-radius: 7px;
+      padding: 7px 18px;
       cursor: pointer;
       text-transform: uppercase;
       transition: background var(--transition), color var(--transition);
+      outline: none;
     }
     .copy-btn:active { transform: scale(0.96);}
     .btn-row {
-      display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;
-      width: 100%; max-width: 520px; margin: 36px auto 0 auto;
+      width: 100%;
+      display: flex; flex-direction: column; gap: 12px; margin-top: 18px;
+      align-items: center; justify-content: center;
     }
     .btn {
-      padding: 19px 29px;
-      border-radius: 14px;
+      padding: 15px 11px;
+      border-radius: 10px;
       text-decoration: none;
-      font-weight: 900;
-      font-size: 15px;
+      font-weight: 900;font-size: 14px;
       transition: var(--transition);
       cursor: pointer;
-      border: 1.4px solid rgba(255,255,255,0.10);
-      flex: 1;
-      min-width: 188px;
-      text-align: center;
-      outline: none;
-      margin-bottom: 0;
-      box-shadow: 0 0 0 0 transparent;
+      border: 1px solid rgba(255,255,255,0.09);
+      width: 100%; min-width: 0;
+      text-align: center; outline: none;
+      margin-bottom: 0; box-shadow: none;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
     }
     .btn-gold {
       background: var(--gold);
       color: #000;
-      box-shadow: 0 7px 28px rgba(255,215,0,0.23);
-      border: 1.4px solid var(--gold);
-    }
-    .btn-gold:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 13px 35px rgba(255,215,0,0.23);
+      border-color: var(--gold);
     }
     .btn-outline {
       background: transparent;
       color: var(--gold);
-      border: 1.4px solid var(--gold);
+      border-color: var(--gold);
     }
-    .btn-outline:hover {
-      background: rgba(255,215,0,0.09);
-      color: #111;
+    .btn-gold:hover,.btn-outline:hover {
+      filter: brightness(1.07); box-shadow: 0 3px 10px rgba(255,215,0,0.15);
     }
     .toast {
-      position: fixed;
-      bottom: 23px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--gold);
-      color: #111;
-      font-size: 16px;
-      padding: 14px 25px;
-      border-radius: 8px;
-      font-weight: 700;
+      position: fixed; bottom: 18px;
+      left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: #111;
+      font-size: 14px; padding: 10px 18px;
+      border-radius: 8px; font-weight: 700;
       z-index: 2000;
       animation: fadeInUp 0.33s ease;
-      box-shadow: 0 4px 20px 0 rgba(255,215,0,0.13);
+      box-shadow: 0 3px 20px 0 rgba(255,215,0,0.13);
     }
     footer {
-      padding: 40px 0 18px;
-      background: rgba(0,0,0,0.11);
+      padding: 24px 0 12px;
+      background: rgba(0,0,0,0.10);
       text-align: center;
     }
     .f-socials {
-      margin-bottom: 18px;
-      display: flex; gap: 22px;
-      justify-content: center; flex-wrap: wrap;
+      margin-bottom: 10px;
+      display: flex;gap: 18px;justify-content: center;flex-wrap: wrap;
     }
     .f-socials a {
       color: #818181;
       text-decoration: none;
-      font-weight: 700;
-      font-size: 15px;
+      font-weight: 700;font-size: 14px;
       transition: color var(--transition);
+      padding: 7px 8px; border-radius: 6px;
     }
-    .f-socials a:hover { color: var(--gold);}
+    .f-socials a:hover {color: var(--gold);background: #1d1d21;}
     .copy-text {
       color: #252525;
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 10.8px;
+      font-weight: 600;
       letter-spacing: 2px;
     }
-
-    @media (max-width: 600px) {
-      nav { padding: 14px 5vw;}
-      .hero-card { padding: 35px 4vw 24px 4vw; }
-      .logo-img { width: 99px; height: 99px;}
-      h1 { font-size: 35px;}
-      .ticker { font-size: 11px;}
-      .desc { font-size: 15px;}
-      .supply-tag { font-size: 10px;}
-      .btn-row { flex-direction: column; gap: 13px;}
-      .btn, .btn-gold, .btn-outline { padding: 13px 10px; min-width: 70px; font-size: 13px;}
-      .ca-text { font-size: 12px;}
+    @media (min-width: 600px) {
+      .hero-card { padding: 53px 25px 35px 25px;}
+      .btn-row {flex-direction: row; gap: 16px;}
+      .btn {font-size: 15px;padding: 15px 26px;}
+      .ca-text { font-size: 14px;max-width: 310px;}
+      .copy-btn {padding: 8px 21px; font-size: 11px;}
+      .footer {padding: 38px 0 16px;}
+    }
+    @media (max-width: 420px) {
+      .nav-logo {font-size: 19px;}
+      nav {padding: 12px 4vw;}
+      .logo-img {width: 70px;height: 70px;}
+      h1 {font-size: 23px;}
+      .btn {font-size: 11.5px;padding: 11px 4px;}
+      .f-socials {gap: 6px;}
+      .ca-text {font-size: 9px;max-width: 120px;}
     }
   </style>
 </head>
@@ -310,7 +284,6 @@
       <a href="https://x.com/UCoin_live" target="_blank">𝕏 Twitter</a>
       <a href="https://t.me/UCoin_live" target="_blank">📱 Telegram</a>
       <a href="https://www.instagram.com/UCoin_live" target="_blank">📸 Instagram</a>
-      <!-- Aap extra link bhi add kar sakte hain -->
     </div>
     <div class="copy-text">
       EST. 2026 &bull; $UC &bull; UCoin &bull; Powered by Solana 🚀
@@ -323,9 +296,7 @@
       navigator.clipboard.writeText(text).then(() => {
         btn.innerText = "✔ COPIED";
         showToast("Contract Address Copied!");
-        setTimeout(() => {
-          btn.innerText = "COPY CA";
-        }, 1700);
+        setTimeout(() => { btn.innerText = "COPY CA"; }, 1700);
       });
     }
     function showToast(msg) {
@@ -333,7 +304,7 @@
       toast.className = 'toast';
       toast.innerText = msg;
       document.body.appendChild(toast);
-      setTimeout(()=>toast.remove(),1750);
+      setTimeout(()=>toast.remove(),1400);
     }
   </script>
 </body>
