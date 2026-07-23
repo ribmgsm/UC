@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | UCoin</title>
+    <meta name="description" content="Contact UCoin - Get in touch with us through social media or email.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        nav {
+            padding: 20px 6vw;
+            gap: 30px;
+        }
+        main {
+            flex: 1;
+        }
+        .page-container {
+            text-align: center;
+        }
+        .contact-section {
+            border-left: none;
+            padding-left: 0;
+            margin-bottom: 40px;
+        }
+        .contact-section h3 {
+            font-size: 28px;
+            color: var(--gold);
+            margin-bottom: 30px;
+        }
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .contact-card {
+            background: rgba(20, 27, 45, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s;
+        }
+        .contact-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+        }
+        .contact-card i {
+            font-size: 40px;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        .contact-card h4 {
+            color: var(--gold);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .contact-card a {
+            color: #d5d5d5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact-card a:hover {
+            color: var(--gold);
+        }
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .social-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            background: rgba(20, 27, 45, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--gold);
+            transition: all 0.3s;
+        }
+        .social-btn:hover {
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.1);
+        }
+        .social-btn i {
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="nav-logo">UCoin</a>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="../token.html">Token</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-container">
+            <div class="contact-section">
+                <h3>Get In Touch</h3>
+                <p style="font-size: 18px; color: #d5d5d5; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Have questions about UCoin? Want to collaborate or just want to say hello? Connect with us on any of these channels!
+                </p>
+
+                <div class="contact-methods">
+                    <div class="contact-card">
+                        <i class="fab fa-twitter"></i>
+                        <h4>Twitter / X</h4>
+                        <a href="https://x.com/UCoin_live" target="_blank" rel="noopener noreferrer">@UCoin_live</a>
+                        <p style="font-size: 14px; color: #888; margin-top: 10px;">Follow for latest updates</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <i class="fab fa-telegram"></i>
+                        <h4>Telegram</h4>
+                        <a href="https://t.me/UCoin_live" target="_blank" rel="noopener noreferrer">Join Community</a>
+                        <p style="font-size: 14px; color: #888; margin-top: 10px;">Real-time discussions</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <i class="fab fa-discord"></i>
+                        <h4>Discord</h4>
+                        <p style="margin-top: 10px; color: #888;">Coming Soon</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="color: var(--gold); margin-bottom: 20px; font-size: 20px;">Connect With Us</h4>
+                    <div class="social-grid">
+                        <a href="https://x.com/UCoin_live" target="_blank" rel="noopener noreferrer" class="social-btn" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                            <span>Twitter</span>
+                        </a>
+                        <a href="https://t.me/UCoin_live" target="_blank" rel="noopener noreferrer" class="social-btn" title="Telegram">
+                            <i class="fab fa-telegram"></i>
+                            <span>Telegram</span>
+                        </a>
+                        <a href="https://www.instagram.com/ucoin_live" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://github.com/ribmgsm/UC" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p><strong>© 2026 UCoin ($UC)</strong></p>
+        <p>Built on Solana Blockchain | Community Powered</p>
+        <div class="footer-links">
+            <a href="./privacy.html">Privacy Policy</a>
+            <a href="./terms.html">Terms of Service</a>
+            <a href="./contact.html">Contact</a>
+        </div>
+        <p style="margin-top: 30px; font-size: 12px; color: #666;">
+            Disclaimer: This is a community token. Do your own research before investing.
+        </p>
+    </footer>
+    <script src="../js/utils.js"></script>
+</body>
+</html>
