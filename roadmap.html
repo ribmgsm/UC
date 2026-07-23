@@ -3,170 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roadmap | UCoin (UC) Journey</title>
-    <link rel="icon" type="image/jpeg" href="https://files.catbox.moe/todfd5.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #FFD700;
-            --bg: #03050a;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 215, 0, 0.2);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
-
-        body {
-            background-color: var(--bg);
-            color: #fff;
-            background: radial-gradient(circle at 50% 0%, #10141d 0%, var(--bg) 70%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 8%; background: rgba(3, 5, 10, 0.8);
-            backdrop-filter: blur(20px); position: fixed; top: 0; width: 100%; z-index: 1000;
-            border-bottom: 1px solid var(--border);
-        }
-        .nav-logo { font-size: 24px; font-weight: 900; color: var(--gold); text-decoration: none; }
-        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; margin-left: 15px; font-size: 14px; }
-
-        .container { max-width: 800px; margin: 150px auto 100px; padding: 0 25px; }
-
-        h1 {
-            font-size: clamp(40px, 8vw, 60px); font-weight: 900; text-align: center;
-            background: linear-gradient(to right, #fff, var(--gold));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 60px;
-        }
-
-        /* Timeline Design */
-        .timeline { position: relative; }
-        .timeline::before {
-            content: ''; position: absolute; left: 0; top: 0; width: 2px; height: 100%;
-            background: linear-gradient(to bottom, var(--gold), transparent);
-        }
-
-        .phase {
-            position: relative; padding-left: 40px; margin-bottom: 50px;
-            animation: fadeInUp 0.8s ease-out forwards; opacity: 0;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .phase::before {
-            content: ''; position: absolute; left: -6px; top: 0;
-            width: 14px; height: 14px; background: var(--gold);
-            border-radius: 50%; box-shadow: 0 0 15px var(--gold);
-        }
-
-        .phase-tag {
-            color: var(--gold); font-weight: 900; font-size: 12px;
-            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block;
-        }
-
-        .phase-card {
-            background: var(--glass); border: 1px solid var(--border);
-            padding: 30px; border-radius: 24px; backdrop-filter: blur(10px);
-            transition: 0.3s;
-        }
-        .phase-card:hover { border-color: var(--gold); transform: scale(1.02); }
-
-        .phase-card h3 { font-size: 24px; margin-bottom: 15px; }
-        .phase-card ul { list-style: none; }
-        .phase-card li { 
-            color: #aaa; margin-bottom: 10px; font-size: 16px; 
-            display: flex; align-items: center; gap: 10px;
-        }
-        .phase-card li::before { content: '✔'; color: var(--gold); font-weight: 900; }
-
-        .footer-nav { text-align: center; margin-top: 50px; }
-        .footer-nav a { color: var(--gold); text-decoration: none; font-weight: 700; margin: 0 15px; font-size: 14px; }
-
-        footer { text-align: center; padding: 60px 0; color: #333; font-size: 12px; }
-    </style>
+    <title>Roadmap | UCoin</title>
+    <meta name="description" content="UCoin roadmap - See our plans for 2026 and 2027 with exchange listings, ecosystem development, and global expansion.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-
-    <nav>
-        <a href="index.html" class="nav-logo">UCOIN</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="token.html">Token</a>
-        </div>
-    </nav>
-
     <div class="container">
-        <h1>The Journey</h1>
+        <header>
+            <div class="logo">
+                <i class="fas fa-coins" aria-hidden="true"></i>
+                <span>UCoin</span>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="token.html">Token</a>
+                <a href="roadmap.html" class="active">Roadmap</a>
+            </nav>
+        </header>
 
-        <div class="timeline">
-            <div class="phase" style="animation-delay: 0.1s;">
-                <span class="phase-tag">Phase 1: Genesis</span>
-                <div class="phase-card">
-                    <h3>Foundation</h3>
-                    <ul>
-                        <li>Smart Contract Deployment</li>
-                        <li>Website V1.0 Launch</li>
-                        <li>Community Channels (TG/X) Setup</li>
-                        <li>Initial Liquidity Injection</li>
-                    </ul>
+        <section class="section" style="padding: 60px 20px;" aria-labelledby="roadmap-heading">
+            <h2 id="roadmap-heading">Roadmap</h2>
+            <p style="text-align: center; font-size: 18px; color: #d5d5d5; max-width: 700px; margin: auto 0 50px;">Our vision for UCoin development and community growth through 2027.</p>
+            
+            <div class="roadmap-container">
+                <div class="roadmap-item">
+                    <div class="roadmap-dot">
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                    </div>
+                    <div class="roadmap-content">
+                        <h4>Q2 2026 - Launch</h4>
+                        <p>Official token launch on Solana blockchain. Community building and initial distribution. Fair launch mechanism ensuring equal opportunity for all participants.</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-dot">
+                        <i class="fas fa-rocket" aria-hidden="true"></i>
+                    </div>
+                    <div class="roadmap-content">
+                        <h4>Q3 2026 - Exchange Listings</h4>
+                        <p>Partnerships with major DEXs and CEXs. Increased liquidity and trading volume. Making $UC accessible to more traders and investors globally.</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-dot">
+                        <i class="fas fa-tools" aria-hidden="true"></i>
+                    </div>
+                    <div class="roadmap-content">
+                        <h4>Q4 2026 - Ecosystem Development</h4>
+                        <p>Launch of utility platform and community governance. Integration with DeFi protocols. Building real use cases beyond speculation.</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-dot">
+                        <i class="fas fa-globe" aria-hidden="true"></i>
+                    </div>
+                    <div class="roadmap-content">
+                        <h4>Q1 2027 - Global Expansion</h4>
+                        <p>International partnerships and community growth. Multi-chain bridge launches. Bringing UCoin to multiple blockchain ecosystems.</p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="phase" style="animation-delay: 0.3s;">
-                <span class="phase-tag">Phase 2: Ignition</span>
-                <div class="phase-card">
-                    <h3>Momentum</h3>
-                    <ul>
-                        <li>Bonding Curve Completion</li>
-                        <li>DEX Listing (Raydium/Jupiter)</li>
-                        <li>First 1,000 Holders Goal</li>
-                        <li>Influencer & Social Marketing</li>
-                    </ul>
-                </div>
+        <section class="section" style="text-align: center;">
+            <h2>Ready to Join?</h2>
+            <p style="font-size: 18px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Be part of the UCoin journey. Follow our progress and connect with our community.
+            </p>
+            <div class="social-links">
+                <a href="https://x.com/UCoin_live" target="_blank" rel="noopener noreferrer" aria-label="UCoin on Twitter">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="https://t.me/UCoin_live" target="_blank" rel="noopener noreferrer" aria-label="UCoin on Telegram">
+                    <i class="fab fa-telegram" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.instagram.com/ucoin_live" target="_blank" rel="noopener noreferrer" aria-label="UCoin on Instagram">
+                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/ribmgsm/UC" target="_blank" rel="noopener noreferrer" aria-label="UCoin on GitHub">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                </a>
             </div>
-
-            <div class="phase" style="animation-delay: 0.5s;">
-                <span class="phase-tag">Phase 3: Expansion</span>
-                <div class="phase-card">
-                    <h3>Scale</h3>
-                    <ul>
-                        <li>CoinMarketCap & CoinGecko Listing</li>
-                        <li>UCoin Community Bot Upgrades</li>
-                        <li>Major Strategic Partnerships</li>
-                        <li>Community Giveaways & Contests</li>
-                    </ul>
-                </div>
+            <div class="buttons" style="margin-top: 50px;">
+                <a class="btn btn-primary" href="https://jup.ag/swap?outputMint=Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-rocket" aria-hidden="true"></i> Buy $UC Now
+                </a>
             </div>
+        </section>
 
-            <div class="phase" style="animation-delay: 0.7s;">
-                <span class="phase-tag">Phase 4: Zenith</span>
-                <div class="phase-card">
-                    <h3>Legacy</h3>
-                    <ul>
-                        <li>DAO Governance Implementation</li>
-                        <li>UCoin Ecosystem Expansion</li>
-                        <li>Global Marketing Push</li>
-                        <li>Future Utility Reveal</li>
-                    </ul>
-                </div>
+        <footer>
+            <p><strong>© 2026 UCoin ($UC)</strong></p>
+            <p>Built on Solana Blockchain | Community Powered</p>
+            <div class="footer-links">
+                <a href="pages/privacy.html">Privacy Policy</a>
+                <a href="pages/terms.html">Terms of Service</a>
+                <a href="pages/contact.html">Contact</a>
             </div>
-        </div>
-
-        <div class="footer-nav">
-            <a href="index.html">← RETURN HOME</a>
-            <a href="about.html">READ ABOUT US →</a>
-        </div>
+            <p style="margin-top: 30px; font-size: 12px; color: #666;">
+                Disclaimer: This is a community token. Do your own research before investing.
+            </p>
+        </footer>
     </div>
 
-    <footer>
-        © 2026 UCOIN • BUILT BY THE COMMUNITY FOR THE COMMUNITY
-    </footer>
-
+    <script src="js/utils.js"></script>
 </body>
 </html>
