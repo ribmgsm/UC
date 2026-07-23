@@ -17,244 +17,11 @@
     <meta name="twitter:image" content="https://uc-pearl.vercel.app/UCoin.png">
     <meta name="theme-color" content="#FFD700">
 
-    <link rel="icon" type="image/png" href="https://uc-pearl.vercel.app/UCoin.png">
+    <link rel="icon" type="image/png" href="UCoin.png">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --gold: #FFD700;
-            --bg: #03050a;
-            --card-bg: #191A23;
-            --text-main: #fff;
-            --text-muted: #bbb;
-            --text-highlight: #FFD700;
-            --border: rgba(255, 215, 0, 0.15);
-            --transition: 0.3s;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-            background: radial-gradient(circle at 50% 25%, #0a0d16 0%, var(--bg) 100%);
-            color: var(--text-main);
-            font-family: 'Outfit', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 6vw;
-            background: rgba(3,5,25,0.95);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 20;
-            border-bottom: 1px solid var(--border);
-        }
-        .nav-logo {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--gold);
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: var(--transition);
-        }
-        .nav-links {
-            display: flex;
-            gap: 18px;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #dedede;
-            font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-            transition: var(--transition);
-            position: relative;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--gold);
-        }
-
-        main {
-            flex: 1;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding: 60px 10px 40px 10px;
-        }
-        .container {
-            width: 100%;
-            max-width: 850px;
-            background: rgba(255,255,255,0.02);
-            box-shadow: 0 8px 40px 0 #0003;
-            border-radius: 22px;
-            border: 2px solid var(--border);
-            padding: 56px 30px 40px;
-            margin: 28px 0 24px 0;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(25px);}
-            to   { opacity: 1; transform: translateY(0);}
-        }
-        .section {
-            margin-bottom: 54px;
-            border-left: 3px solid var(--gold);
-            padding-left: 30px;
-        }
-        h2 {
-            color: var(--gold);
-            font-size: 13px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            font-weight: 800;
-        }
-        h3 {
-            font-size: 26px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            margin-top: 0; margin-bottom: 13px;
-        }
-        p {
-            font-size: 18px;
-            line-height: 1.7;
-            color: var(--text-muted);
-            max-width: 800px;
-        }
-        .highlight { color: var(--gold); font-weight: bold; }
-
-        /* Contract Address Copy */
-        .ca-box {
-            background: var(--card-bg);
-            border: 1.7px solid var(--gold);
-            padding: 18px 20px;
-            margin: 30px 0 18px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 9px;
-            box-shadow: 0 3px 27px 0 rgba(255,215,0,0.07);
-            cursor: pointer;
-            transition: border var(--transition), box-shadow var(--transition);
-        }
-        .ca-box:hover { border-color: #00ffaa; }
-        .ca-text {
-            color: var(--gold);
-            font-family: monospace;
-            font-weight: bold;
-            font-size: 16px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-        .copy-btn {
-            background: var(--gold);
-            color: #161616;
-            border: none;
-            padding: 10px 21px;
-            cursor: pointer;
-            font-weight: 900;
-            font-size: 13px;
-            text-transform: uppercase;
-            margin-left: 16px;
-            border-radius: 6px;
-            transition: background var(--transition), color var(--transition);
-        }
-        .copy-btn:active { transform: scale(0.95);}
-        .action-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-top: 18px;
-        }
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 17px 32px;
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 16px;
-            border-radius: 7px;
-            border: none;
-            transition: var(--transition);
-            letter-spacing: 1px;
-            outline: none;
-            cursor: pointer;
-            min-width: 150px;
-            box-shadow: 0 2px 10px 0 #0003;
-        }
-        .btn-buy {
-            background: var(--gold);
-            color: #000;
-        }
-        .btn-buy:hover { filter: brightness(1.04); }
-        .btn-social {
-            background: var(--card-bg);
-            color: var(--gold);
-            border: 1.2px solid rgba(255,215,0,0.3);
-        }
-        .btn-social:hover { background: #20213a; color: var(--gold);}
-        /* Footer */
-        footer {
-            padding: 33px 0 17px 0;
-            text-align: center;
-            background: rgba(0,0,0,0.11);
-            border-top: 1px solid var(--border);
-        }
-        .f-socials {
-            margin-bottom: 12px;
-            display: flex;
-            gap: 22px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .f-socials a {
-            color: #818181;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            transition: color var(--transition);
-        }
-        .f-socials a:hover { color: var(--gold);}
-        .copy-text {
-            color: #292929;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gold);
-            color: #111;
-            font-size: 16px;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-weight: 700;
-            box-shadow: 0 4px 20px 0 rgba(255,215,0,0.13);
-            z-index: 2000;
-            animation: fadeInUp 0.35s ease;
-        }
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            nav { padding: 14px 6vw; }
-            .container { padding: 30px 9px 17px; border-radius: 9px; }
-            .section { border-left-width: 2px; padding-left: 18px; margin-bottom: 32px; }
-            h3 { font-size: 22px;}
-            .btn, .btn-buy { padding: 12px 12px; font-size: 14px;}
-            .action-list { gap: 8px;}
-            .ca-text { font-size: 12px;}
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
     <nav>
@@ -267,68 +34,57 @@
         </div>
     </nav>
     <main>
-      <div class="container">
-        <div class="section">
-            <h2>I. WHAT IS UCOIN?</h2>
-            <h3>The Standard on Solana.</h3>
-            <p>UCoin is a <span class="highlight">community-driven</span> token built on the Solana blockchain, engineered to capture and preserve value over time. Designed with a true fair-launch model and zero hidden advantages. 🚀</p>
-        </div>
-
-        <div class="section">
-            <h2>II. THE CORE IDEA</h2>
-            <h3>Logic Over Hype.</h3>
-            <p>We focus on <span class="highlight">Fixed Execution</span>. By renouncing mint authority and verifying the contract from day one, we’ve ensured the rules can never be altered. No hidden mints. No rug pulls. No contract changes. What you see is what you get.</p>
-        </div>
-
-        <div class="section">
-            <h2>III. WHY IT MATTERS</h2>
-            <h3>The Power of One Million.</h3>
-            <p>In a world of trillion-supply tokens, UCoin stands firm with a <span class="highlight">final supply of 1,000,000 $UC</span>. True scarcity for serious holders. Every token has meaning. Every holder matters.</p>
-        </div>
-
-        <div class="section">
-            <h2>IV. TAKE ACTION</h2>
-            <h3>Secure your position.</h3>
-            <div class="ca-box" onclick="copyCA()">
-                <span class="ca-text" id="ca-val">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</span>
-                <button class="copy-btn" type="button">COPY CA</button>
+        <div class="page-container">
+            <div class="page-section">
+                <h2>I. WHAT IS UCOIN?</h2>
+                <h3>The Standard on Solana.</h3>
+                <p>UCoin is a <span class="highlight">community-driven</span> token built on the Solana blockchain, engineered to capture and preserve value over time. Designed with a true fair-launch model, UCoin prioritizes transparent governance and genuine community ownership over speculative hype.</p>
             </div>
 
-            <div class="action-list">
-                <a href="https://jup.ag/swap/SOL-Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" target="_blank" class="btn btn-buy">BUY ON JUPITER</a>
-                <a href="https://x.com/UCoin_live" target="_blank" class="btn btn-social">FOLLOW ON X</a>
-                <a href="https://t.me/UCoin_live" target="_blank" class="btn btn-social">JOIN TELEGRAM</a>
-                <a href="https://instagram.com/UCoin_live" target="_blank" class="btn btn-social">INSTAGRAM</a>
+            <div class="page-section">
+                <h2>II. THE CORE IDEA</h2>
+                <h3>Logic Over Hype.</h3>
+                <p>We focus on <span class="highlight">Fixed Execution</span>. By renouncing mint authority and verifying the contract from day one, we've ensured the rules can never be altered. No surprises. No sudden changes. Just pure, immutable tokenomics that reward early believers and long-term holders.</p>
+            </div>
+
+            <div class="page-section">
+                <h2>III. WHY IT MATTERS</h2>
+                <h3>The Power of One Million.</h3>
+                <p>In a world of trillion-supply tokens, UCoin stands firm with a <span class="highlight">final supply of 1,000,000 $UC</span>. True scarcity for serious holders. Every token has meaning. Every transaction counts. This isn't another meme—it's the foundation of a real movement.</p>
+            </div>
+
+            <div class="page-section">
+                <h2>IV. TAKE ACTION</h2>
+                <h3>Secure your position.</h3>
+                <div class="ca-box" onclick="copyCA()" role="button" tabindex="0" aria-label="Click to copy contract address">
+                    <span class="ca-text" id="ca-val">Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt</span>
+                    <button class="copy-btn" type="button" aria-label="Copy contract address">COPY CA</button>
+                </div>
+
+                <div class="action-list">
+                    <a href="https://jup.ag/swap/SOL-Gt92GsKA2TBudXo7uvfZsqMYu9tWHoMw21i4wRE2xszt" target="_blank" rel="noopener noreferrer" class="btn btn-primary">BUY ON JUPITER</a>
+                    <a href="https://x.com/UCoin_live" target="_blank" rel="noopener noreferrer" class="btn btn-social">FOLLOW ON X</a>
+                    <a href="https://t.me/UCoin_live" target="_blank" rel="noopener noreferrer" class="btn btn-social">JOIN TELEGRAM</a>
+                    <a href="https://www.instagram.com/ucoin_live" target="_blank" rel="noopener noreferrer" class="btn btn-social">INSTAGRAM</a>
+                </div>
             </div>
         </div>
-      </div>
     </main>
     <footer>
-        <div class="f-socials">
-            <a href="https://t.me/ucoin_live" target="_blank">📱 TELEGRAM</a>
-            <a href="https://x.com/UCoin_live" target="_blank">𝕏 TWITTER</a>
-            <a href="https://www.instagram.com/ucoin_live" target="_blank">📸 INSTAGRAM</a>
+        <div class="social-links" style="margin-bottom: 12px;">
+            <a href="https://t.me/ucoin_live" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a>
+            <a href="https://x.com/UCoin_live" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+            <a href="https://www.instagram.com/ucoin_live" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
         </div>
-        <div class="copy-text">
+        <div style="color: #292929; font-size: 12px; font-weight: 700; letter-spacing: 2px;">
             EST. 2026 • BUILT ON SOLANA 🚀
         </div>
+        <div class="footer-links" style="margin-top: 15px;">
+            <a href="pages/privacy.html">Privacy Policy</a>
+            <a href="pages/terms.html">Terms of Service</a>
+            <a href="pages/contact.html">Contact</a>
+        </div>
     </footer>
-    <script>
-      function copyCA() {
-          const text = document.getElementById('ca-val').innerText.trim();
-          navigator.clipboard.writeText(text);
-          const btn = document.querySelector('.copy-btn');
-          btn.innerText = "COPIED!";
-          showToast(\"Contract Address Copied!\");
-          setTimeout(()=>{ btn.innerText = \"COPY CA\" }, 2100);
-      }
-      function showToast(msg) {
-          const toast = document.createElement('div');
-          toast.className = 'toast';
-          toast.innerText = msg;
-          document.body.appendChild(toast);
-          setTimeout(()=>toast.remove(),1800);
-      }
-    </script>
+    <script src="js/utils.js"></script>
 </body>
 </html>
